@@ -1,5 +1,0 @@
-﻿  my_opengl.cc
-e:\zju_lesson\cg\homework2\mento-carlo-path-tracer\opengl-template\main.h(113): warning C4305: '=': truncation from 'int' to 'float'
-  Note: including lib: glut32.lib
-  
-  opengl-template.vcxproj -> E:\ZJU_LESSON\CG\Homework2\mento-carlo-path-tracer\x64\Debug\opengl-template.exe
