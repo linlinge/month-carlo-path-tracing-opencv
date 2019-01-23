@@ -1,0 +1,188 @@
+\documentclass[10pt]{article}
+\usepackage[UTF8]{ctex}
+\usepackage{picinpar,graphicx,bm}
+\usepackage{booktabs}
+\usepackage{diagbox}
+\usepackage{float}
+\usepackage{multirow}
+
+\usepackage{listings}
+\usepackage{xcolor}
+% 定义可能使用到的颜色
+\definecolor{CPPLight}  {HTML} {686868}
+\definecolor{CPPSteel}  {HTML} {888888}
+\definecolor{CPPDark}   {HTML} {262626}
+\definecolor{CPPBlue}   {HTML} {4172A3}
+\definecolor{CPPGreen}  {HTML} {487818}
+\definecolor{CPPBrown}  {HTML} {A07040}
+\definecolor{CPPRed}    {HTML} {AD4D3A}
+\definecolor{CPPViolet} {HTML} {7040A0}
+\definecolor{CPPGray}  {HTML} {B8B8B8}
+\lstset{
+    columns=fixed,    
+   % numbers=left,                                        % 在左侧显示行号
+    frame=none,                                          % 不显示背景边框
+    backgroundcolor=\color[RGB]{245,245,244},            % 设定背景颜色
+    keywordstyle=\color[RGB]{40,40,255},                 % 设定关键字颜色
+    numberstyle=\footnotesize\color{darkgray},           % 设定行号格式
+    commentstyle=\it\color[RGB]{0,96,96},                % 设置代码注释的格式
+    stringstyle=\rmfamily\slshape\color[RGB]{128,0,0},   % 设置字符串格式
+    showstringspaces=false,                              % 不显示字符串中的空格
+    language=c++,                                        % 设置语言
+    morekeywords={alignas,continute,friend,register,true,alignof,decltype,goto,
+    reinterpret_cast,try,asm,defult,if,return,typedef,auto,delete,inline,short,
+    typeid,bool,do,int,signed,typename,break,double,long,sizeof,union,case,
+    dynamic_cast,mutable,static,unsigned,catch,else,namespace,static_assert,using,
+    char,enum,new,static_cast,virtual,char16_t,char32_t,explict,noexcept,struct,
+    void,export,nullptr,switch,volatile,class,extern,operator,template,wchar_t,
+    const,false,private,this,while,constexpr,float,protected,thread_local,
+    const_cast,for,public,throw,std,size_t,__global__,__device__,__host__},
+    emph={map,set,multimap,multiset,unordered_map,unordered_set,
+    unordered_multiset,unordered_multimap,vector,string,list,deque,
+    array,stack,forwared_list,iostream,memory,shared_ptr,unique_ptr,
+    random,bitset,ostream,istream,cout,cin,endl,move,default_random_engine,
+    uniform_int_distribution,iterator,algorithm,functional,bing,numeric,},
+    emphstyle=\color{CPPViolet}, 
+    frame=shadowbox,
+    basicstyle=\footnotesize\ttfamily,
+    tabsize=4,
+}
+
+\newcommand{\tabincell}[2]{\begin{tabular}{@{}#1@{}}#2\end{tabular}}  
+
+
+%layout
+\usepackage{calc} 
+\setlength\textwidth{7in} 
+\setlength\textheight{9in} 
+\setlength\oddsidemargin{(\paperwidth-\textwidth)/2 - 1in}
+\setlength\topmargin{(\paperheight-\textheight -\headheight-\headsep-\footskip)/2 - 1.5in}
+
+
+\title{计算机图形学 \hspace{2pt}\hspace{2pt} \begin{large}----- \hspace{2pt} 蒙特卡罗光线跟踪算法 \end{large} }
+\author{11821095 葛林林}
+\begin{document}
+\maketitle
+\section{预备知识}
+\subsection{光照类型}
+\begin{itemize}
+\item[（1）]{\bm{环境光}}：环境光无处不在，无论表面的法向如何，明暗程度都是一致的。
+\item[（2）]{\bm{点光源}}：光源来自某个点，且向四面八方辐射。
+\item[（3）]{\bm{平行光}}：又称为镜面光，这种光是互相平行的。从手电筒或者太阳出来的光都可以被看做平行光。
+\item[（4）]{\bm{聚光灯}}：这种光源的光线从一个锥体中射出，在被照射的物体上产生聚光的效果。使用这种光源需要指定光的射出方向以及锥体的顶角$\alpha$。
+\end{itemize}
+\subsection{obj文件介绍}
+obj文件并不考虑物体的大小，所以不同的物体读入的坐标范围可能变化很大，因此为了显示的方便需将其转为当前绘制坐标系中。
+\begin{itemize}
+\item[（1）]{库相关}
+\begin{itemize}
+\item[•]{$\bm{mtllib}$ xxx} \mbox{} \\
+材料库。
+\item[•]{$\bm{usemtl}$ xxx} \mbox{} \\
+代表使用xxx类型的材质。
+\end{itemize}
+
+\item[（2）]{组相关} 
+\begin{itemize}
+\item[•]{$\bm{g}$ xxx} \mbox{} \\
+表示组，将xxx标签之后的多边形组成一个整体。
+\item[•]{$\bm{s}$ xxx} \mbox{} \\
+光滑组:加入光滑组之后能够让在同一组的多边形之间连接更为光滑，其中“s off”代表关闭光滑组。
+\end{itemize}
+
+\item[（3）]{坐标相关}
+\begin{itemize}
+\item[•]{$\bm{vt} \hspace{5pt}tu \hspace{5pt} tv$} \mbox{} \\
+代表纹理坐标。
+\item[•]{$\bm{vn} \hspace{5pt} nx \hspace{5pt} ny \hspace{5pt} nz$} \mbox{} \\
+法向量的表示。
+\item[•]{$\bm{f} \hspace{5pt} v/vt/vn \hspace{5pt} v/vt/vn \hspace{5pt} v/vt/vn$}\mbox{} \\
+表示多边形，格式为“f 顶点索引 / 纹理坐标索引 / 顶点法向量索引”。
+\item[•]{$\bm{v} \hspace{5pt} x\hspace{5pt}y\hspace{5pt}z$} \mbox{} \\
+顶点以$v$开头后面跟着该顶点的$x,y,z$三轴坐标。
+\end{itemize}
+
+\end{itemize}
+
+\subsection{mtl文件介绍}
+mtl文件是用来描述文件材质的一个文件，描述的是物体的材质信息，ASCII存储，任何文本编辑器可以将其打开和编辑。一个.mtl文件可以包含一个或多个材质定义，对于每个材质都有其颜色，纹理和反射贴图的描述，应用于物体的表面和顶点。描述的是物体的材质信息，ASCII存储，任何文本编辑器可以将其打开和编辑。一个.mtl文件可以包含一个或多个材质定义，对于每个材质都有其颜色，纹理和反射贴图的描述，应用于物体的表面和顶点。：
+\begin{itemize}
+\item[（4）]{\bm{格式}：\bm{$Ka} \hspace{10pt} r \hspace{10pt} g \hspace{10pt} b$} \\
+\bm{示例}：$\bm{Ks} \hspace{10pt} 0.588 \hspace{10pt} 0.588 \hspace{10pt} 0.588$\\
+\bm{描述}：环境反射，用RGB颜色值来表示，g和b两参数是可选的，如果只指定了r的值，则g和b的值都等于r的值。三个参数一般取值范围为[0.0,1.0]，在此范围外的值则相应的增加或减少反射率;
+
+\item[（5）]{\bm{格式}：\bm{$Kd} \hspace{10pt} r \hspace{10pt} g \hspace{10pt} b$}\\
+\bm{示例}：$\bm{Kd} \hspace{10pt} 0.65 \hspace{10pt} 0.65 \hspace{10pt} 0.65$\\
+\bm{描述}：漫反射，$r g b$代表了RGB值，范围为[0,1]。其中$g$和$b$是可选的，如果未设置这两个值，则$g,b$的值与$r$的值相同。
+
+\item[（6）]{\bm{格式}：\bm{$Ks} \hspace{10pt} r \hspace{10pt} g \hspace{10pt} b$}\\
+\bm{示例}：$\bm{Ks} \hspace{10pt} 0.65 \hspace{10pt} 0.65 \hspace{10pt} 0.65$\\
+\bm{描述}：镜面反射，$r g b$代表了RGB值，范围为[0,1]。其中$g$和$b$是可选的，如果未设置这两个值，则$g,b$的值与$r$的值相同。
+
+
+\item[（6）]{\bm{格式}：\bm{$Tf} \hspace{10pt} r \hspace{10pt} g \hspace{10pt} b$}\\
+\bm{示例}：$\bm{Tf} \hspace{10pt} 0.65 \hspace{10pt} 0.65 \hspace{10pt} 0.65$\\
+\bm{描述}：代表了透射滤波，任何光线穿透该物体时可以利用该参数进行透射滤波，该参数只让指定颜色的光线穿透物体。例如Tf 0 1 0，只允许所有的绿色光线穿透，而所有的红色和绿色光线则不能够穿透。$r g b$代表了RGB值，范围为[0,1]。其中$g$和$b$是可选的，如果未设置这两个值，则$g,b$的值与$r$的值相同。
+
+\item[（1）]{\bm{格式}：\bm{$illum} \hspace{10pt} number$} \\
+\bm{示例}：\bm{$illum} \hspace{10pt} 2$\\
+\bm{描述}：指定了光照模型，这些模型总共分成11种，具体的定义如下：
+\begin{itemize}
+\item[0]{这是一个常数照明模型，将Kd作为材料的颜色，即}
+$$color=Kd$$
+
+\item[1]{这是一个漫反射照明模型，}
+$$color=KaIa+ Kd { SUM j=1..ls, (N * Lj)Ij }$$
+
+\item[2]{这是}
+$$color = KaIa 
+ 	+ Kd { SUM j=1..ls, (N*Lj)Ij }
+ 	+ Ks { SUM j=1..ls, ((H*Hj)^Ns)Ij }$$
+
+\item[3]{这是}
+$$color = KaIa
+ 	+ Kd { SUM j=1..ls, (N*Lj)Ij }
+ 	+ Ks ({ SUM j=1..ls, ((H*Hj)^Ns)Ij } + Ir)$$
+
+\item[4]{漫反射和镜面反射光照模型，该模型用来仿真出玻璃的效果。}
+$$color = KaIa + Kd { SUM j=1..ls, (N*Lj)Ij } + Ks ({ SUM j=1..ls, ((H*Hj)^Ns)Ij } + Ir)$$
+$$Ir = (intensity of reflection map) + (ray trace)$$
+
+\item[5]{这是一个漫反射照明模型，}
+$$$$
+
+\item[6]{这是一个漫反射照明模型，}
+$$color=KaIa+ Kd { SUM j=1..ls, (N * Lj)Ij }$$
+
+\item[7]{这是一个漫反射照明模型，}
+$$color=KaIa+ Kd { SUM j=1..ls, (N * Lj)Ij }$$
+
+\item[8]{这是一个漫反射照明模型，}
+$$color=KaIa+ Kd { SUM j=1..ls, (N * Lj)Ij }$$
+
+\item[9]{这是一个漫反射照明模型，}
+$$color=KaIa+ Kd { SUM j=1..ls, (N * Lj)Ij }$$
+
+\item[10]{ 这是一个漫反射照明模型，}
+$$color=KaIa+ Kd { SUM j=1..ls, (N * Lj)Ij }$$
+\end{itemize}
+
+
+\item[（1）]{\bm{$Ns \hspace{10pt} 10.000000$}}\\
+指定材质的反射指数，定义了反射高光度。 exponent是反射指数值，该值越高则高光越密集，一般取值范围在$[0,1000]$。 
+
+\item[（2）]{\bm{$Ni \hspace{10pt} 1.500000$}} \\
+指定材质表面的光密度（即折射值），取值范围为$[0.001,10]$。若取值为1.0则光在通过物体的时候不发生弯曲。玻璃的折射率为1.5。取值小于1.0的时候可能会产生奇怪的结果不推荐。
+
+\item[（3）]{\bm{$d \hspace{10pt} 1.000000$}}\\
+表示物体融入背景的数量，取值范围为$[0.0,1.0]$，取值为1.0表示完全不透明，取值为0.0时表示完全透明。
+
+\end{itemize}
+
+
+\subsection{kd-tree的介绍}
+
+
+\section{步骤}
+导入obj$\to$绘制物体$\to$判断纹理文件是否存在$\to$导入纹理$\to$贴纹理$\to$建立kd-tree
+\end{document}

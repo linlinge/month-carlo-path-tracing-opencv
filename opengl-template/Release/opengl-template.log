@@ -1,0 +1,7 @@
+﻿  main.cpp
+  Note: including lib: glut32.lib
+  
+  Generating code
+  All 161 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  opengl-template.vcxproj -> E:\opengl-template\opengl-template\Release\opengl-template.exe
