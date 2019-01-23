@@ -1,0 +1,6 @@
+﻿  main.cpp
+e:\zju_lesson\cg\homework2\mento-carlo-path-tracing（opencv）\monte-carlo-path-tracing\v3.hpp(118): warning C4305: '=': truncation from 'int' to 'float'
+e:\zju_lesson\cg\homework2\mento-carlo-path-tracing（opencv）\monte-carlo-path-tracing\main.cpp(16): warning C4305: 'initializing': truncation from 'double' to 'float'
+e:\zju_lesson\cg\homework2\mento-carlo-path-tracing（opencv）\monte-carlo-path-tracing\main.cpp(21): warning C4305: 'initializing': truncation from 'double' to 'float'
+e:\zju_lesson\cg\homework2\mento-carlo-path-tracing（opencv）\monte-carlo-path-tracing\main.cpp(22): warning C4305: 'initializing': truncation from 'double' to 'float'
+  monte-carlo-path-tracing.vcxproj -> E:\ZJU_LESSON\CG\Homework2\mento-carlo-path-tracing（opencv）\x64\Debug\monte-carlo-path-tracing.exe

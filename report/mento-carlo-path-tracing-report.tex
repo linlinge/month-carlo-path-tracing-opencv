@@ -185,4 +185,15 @@ $$color=KaIa+ Kd { SUM j=1..ls, (N * Lj)Ij }$$
 
 \section{步骤}
 导入obj$\to$绘制物体$\to$判断纹理文件是否存在$\to$导入纹理$\to$贴纹理$\to$建立kd-tree
+
+导入obj和mtl$\to$建立kd-tree$\to$monte carlo采样
+
+\section{问题汇总}
+\subsection{关于光线的疑问}
+问题描述：在编程时光线如何存储？
+光线的数学表达如下所示：
+$$\bm{R}(t)=\bm{O}+t\bm{D}$$
+其中$\bm{O}$为原点，$\bm{D}$为光线的方向（默认为单位向量），而$t$为距离。
+\subsection{光照信息的存储}
+
 \end{document}
