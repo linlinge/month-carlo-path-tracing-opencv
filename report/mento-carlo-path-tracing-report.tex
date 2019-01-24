@@ -196,4 +196,13 @@ $$\bm{R}(t)=\bm{O}+t\bm{D}$$
 其中$\bm{O}$为原点，$\bm{D}$为光线的方向（默认为单位向量），而$t$为距离。
 \subsection{光照信息的存储}
 
+\subsection{蒙特卡洛用在哪里？}
+由于图片中的每一个像素点都是由来自各个方向的半球光线汇集得到的RGB值，如下图所示：
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.25]{monte_carlo_sample.png}
+\caption{蒙特卡洛采样示意图}
+\end{center}
+\end{figure}
+由于来自该半球方向的光线理论上有无线多条，因此采用蒙特卡洛方法随机的对方向进行采样。蒙特卡洛的结果可以看成是该半球光线积分的估计值。
 \end{document}

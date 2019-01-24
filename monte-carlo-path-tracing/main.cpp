@@ -29,8 +29,6 @@ int main()
 	objs1.Load("./dataset/Scene01/cup.obj");
 
 
-
-
 	Mat img = imread("./image/1.jpg");
 	imshow("wokaka", img);
 	waitKey(0);
