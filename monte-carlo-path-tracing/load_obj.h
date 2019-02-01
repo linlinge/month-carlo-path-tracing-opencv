@@ -6,7 +6,10 @@
 #include <fstream>
 #include <sstream>
 #include "V3.hpp"
+#include "AABB.h"
 using namespace std;
+
+
 void remove_adjacent_duplicate(string& dat1, string dat2);
 vector<string> split(string dat, string separator);
 
@@ -43,61 +46,60 @@ public:
 		Ns_ = 0;
 	}
 };
-class Materials
-{
-public:
-	vector<Material> materials_;
-	int get_id(string name)
-	{
-		for (int i=0;i<materials_.size();i++)
-		{
-			if (materials_[i].name_== name)
-			{
-				return i;
-			}
-		}
-	}
-	bool Load(string filename);
-};
+extern vector<V3> g_v;
+extern vector<V3> g_vt;
+extern vector<V3> g_vn;
+extern vector<Material> g_mtls;
 
 struct SmoothGroup {
 	int status_;
 	int position_;
 };
 
-struct face {
+class face {
+public:
 	vector<int> v_id_;
 	vector<int> vt_id_;
 	vector<int> vn_id_;
 	V3 normal_;
+	AABB box_;	
 };
 
-class Group {
-public:
-	string group_name_;
+class Obj {
+public:	
+	string obj_name_;
 	string usemtl_;
-	vector<face> f_;	
-	vector<SmoothGroup> s_;
+	vector<face> f_;
 	int mtl_id_;
+	vector<SmoothGroup> s_;
 
-	void clear() {
-		group_name_.clear();
+	void clear()
+	{
+		obj_name_.clear();
 		usemtl_.clear();
 		f_.clear();
+		mtl_id_ = -INT_MAX;
 		s_.clear();
+	}
+
+	int get_mtl_id(string str)
+	{
+		for (int i=0;i<g_mtls.size();i++)
+		{
+			if (g_mtls[i].name_ == str)
+			{
+				return i;
+			}
+		}
+		return -1;
 	}
 };
 
-class Objs {
-public:
-	vector<V3> v_;
-	vector<V3> vt_;
-	vector<V3> vn_;
-	vector<Group> groups_;
-	Materials mtls_;
-	void Load(string filename);
-};
 
+
+
+void LoadMaterial(string filename);
+void LoadObj(string filename, vector<Obj>& dat);
 
 
 

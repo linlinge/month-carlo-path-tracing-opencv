@@ -24,10 +24,9 @@ float camera_up[] = { 0.0,1.0,0.0 };
 
 int main()
 {
-	// load obj file
-	Objs objs1;
-	objs1.Load("./dataset/Scene01/cup.obj");
-
+	// load obj file	
+	vector<Obj> objs;
+	LoadObj("./dataset/Scene01/cup.obj",objs);
 
 	Mat img = imread("./image/1.jpg");
 	imshow("wokaka", img);

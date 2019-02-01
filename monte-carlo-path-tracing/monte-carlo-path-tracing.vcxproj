@@ -126,11 +126,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AABB.cpp" />
     <ClCompile Include="kd_tree.cpp" />
     <ClCompile Include="load_obj.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AABB.h" />
     <ClInclude Include="IlluminationModel.hpp" />
     <ClInclude Include="kd_tree.h" />
     <ClInclude Include="load_obj.h" />
