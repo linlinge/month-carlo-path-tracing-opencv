@@ -1,5 +1,4 @@
 #include "kd_tree.h"
-
 template <class T>
 void KdTree<T>::Insert(T& dat)
 {
@@ -27,8 +26,6 @@ void KdTree<T>::SearchNearstNeighbor()
 template <class T>
 int KdTree<T>::GetLevel(int pos)
 {
-
-
 
 	return 1;
 }

@@ -27,6 +27,8 @@ int main()
 	// load obj file	
 	vector<Obj> objs;
 	LoadObj("./dataset/Scene01/cup.obj",objs);
+	// create kd-tree
+
 
 	Mat img = imread("./image/1.jpg");
 	imshow("wokaka", img);

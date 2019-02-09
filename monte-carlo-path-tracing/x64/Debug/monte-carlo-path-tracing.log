@@ -1,34 +1,3 @@
-﻿  load_obj.cpp
+﻿  kd_tree.cpp
 e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\v3.hpp(118): warning C4305: '=': truncation from 'int' to 'float'
-e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\load_obj.cpp(23): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\load_obj.cpp(25): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\load_obj.cpp(27): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\load_obj.cpp(37): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\load_obj.cpp(39): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\load_obj.cpp(41): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\load_obj.cpp(51): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\load_obj.cpp(53): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\load_obj.cpp(55): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\load_obj.cpp(88): warning C4305: '=': truncation from 'int' to 'float'
-e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\load_obj.cpp(89): warning C4305: '=': truncation from 'int' to 'float'
-e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\load_obj.cpp(133): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\load_obj.cpp(139): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\load_obj.cpp(177): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\load_obj.cpp(178): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\load_obj.cpp(179): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\load_obj.cpp(183): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\load_obj.cpp(184): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\load_obj.cpp(185): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\load_obj.cpp(189): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\load_obj.cpp(190): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\load_obj.cpp(191): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\load_obj.cpp(195): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\load_obj.cpp(199): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\load_obj.cpp(200): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\load_obj.cpp(201): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\load_obj.cpp(205): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\load_obj.cpp(219): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\load_obj.cpp(226): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\load_obj.cpp(247): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\load_obj.cpp(248): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
   monte-carlo-path-tracing.vcxproj -> E:\ZJU_LESSON\CG\Homework2\month-carlo-path-tracing-opencv\x64\Debug\monte-carlo-path-tracing.exe

@@ -76,6 +76,7 @@ void LoadObj(string filename, vector<Obj>& dat)
 					p_temp.push_back(g_v[id_temp]);
 				}
 			}
+
 			// caculate normal
 			V3 v1 = p_temp[0] - p_temp[1];
 			V3 v2 = p_temp[1] - p_temp[2];
@@ -238,6 +239,7 @@ void remove_adjacent_duplicate(string& dat1, string dat2)
 		}
 	}
 }
+
 vector<string> split(string dat, string separator)
 {
 	vector<string> rst;
@@ -251,5 +253,3 @@ vector<string> split(string dat, string separator)
 	} while (start != -1);
 	return rst;
 }
-
-

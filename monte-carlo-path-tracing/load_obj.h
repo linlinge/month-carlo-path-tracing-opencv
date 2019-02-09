@@ -8,8 +8,6 @@
 #include "V3.hpp"
 #include "AABB.h"
 using namespace std;
-
-
 void remove_adjacent_duplicate(string& dat1, string dat2);
 vector<string> split(string dat, string separator);
 
@@ -94,9 +92,6 @@ public:
 		return -1;
 	}
 };
-
-
-
 
 void LoadMaterial(string filename);
 void LoadObj(string filename, vector<Obj>& dat);

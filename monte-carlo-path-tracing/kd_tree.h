@@ -4,7 +4,15 @@
 using namespace std;
 
 template <class T>
+class KdNode
+{
+public:
+	int id_;
 
+};
+
+
+template <class T>
 class KdTree
 {
 public:
@@ -20,4 +28,3 @@ public:
 	void SearchNearstNeighbor();
 	int GetLevel(int pos);
 };
-
