@@ -1,36 +1,46 @@
 \relax 
 \citation{LBVH}
 \@writefile{toc}{\contentsline {section}{\numberline {1}引言}{1}}
-\@writefile{toc}{\contentsline {section}{\numberline {2}并行加速方案}{1}}
-\citation{Hall}
+\@writefile{toc}{\contentsline {section}{\numberline {2}基于GPU的并行加速方案}{1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Lauterbach等人的GPU并行加速方案}{1}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.1.1}基本原理}{1}}
+\citation{karras}
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces 工作队列的构建，通过使用两个工作队列，可以并行运行所有激活的拆分操作。 由于拆分内核可能不会输出新的拆分，因此每次拆分步骤之后会进行压缩操作来删除队列中的空白空间。\relax }}{2}}
-\@writefile{toc}{\contentsline {section}{\numberline {3}基于深度控制的优化方案}{2}}
-\citation{Hank}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Karras和Apetrei的并行优化}{2}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.1}基本原理}{2}}
+\citation{apetrei}
+\citation{Hall}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces 并行构建二叉基数树示意图\relax }}{3}}
 \citation{LBVH}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Hank Weghorst等人改进方案}{3}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}基于层次包围盒（BVH）的改进方法}{3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}基本概念}{4}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.1}BVH}{4}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.2}LBVH}{4}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.3}表面积启发式算法（SAH）}{4}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.1.4}莫顿码（Morton Code）}{4}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}基于深度控制的优化方案}{4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}基本原理}{4}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}基于层次包围盒（BVH）的改进方法}{4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}基本概念}{4}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.1}BVH}{4}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.2}LBVH}{4}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces LBVH构建步骤示意图\relax }}{5}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.3}表面积启发式算法（SAH）}{5}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.4}莫顿码（Morton Code）}{5}}
+\citation{Hank}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces 二维4比特莫顿码示意图\relax }}{6}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces 二维6bit莫顿码示意图\relax }}{6}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Hank Weghorst等人改进方案}{7}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.1}包围盒的选取}{7}}
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces 投影空白区域示意图（红色阴影线部分）\relax }}{7}}
 \citation{HLBVH}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces 二维4比特莫顿码示意图\relax }}{5}}
-\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces 二维6bit莫顿码示意图\relax }}{5}}
-\citation{STBVH}
-\citation{accelerator2}
-\citation{cpus1}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}基于HLBVH的方法}{6}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}基于STBVH的方法}{6}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}基于扩展莫顿码的BVH方法}{6}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.4.1}扩展莫顿码（Extended Morton Code）}{6}}
-\bibcite{Hall}{1}
-\bibcite{Hank}{2}
-\bibcite{accelerator3}{3}
-\bibcite{accelerator4}{4}
-\bibcite{cpus1}{5}
-\bibcite{LBVH}{6}
-\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces 基元大小编码效果图，其中size部分能够将大小相差较大的部分分开来\relax }}{7}}
-\bibcite{HLBVH}{7}
-\bibcite{STBVH}{8}
-\bibcite{accelerator2}{9}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.2}层次结构的建立改进}{8}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.3}基于可见表面的预处理方法}{8}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}基于HLBVH的方法}{8}}
+\bibcite{LBVH}{1}
+\bibcite{karras}{2}
+\bibcite{apetrei}{3}
+\bibcite{Hall}{4}
+\bibcite{Hank}{5}
+\bibcite{accelerator3}{6}
+\bibcite{accelerator4}{7}
+\@writefile{toc}{\contentsline {section}{\numberline {5}总结}{9}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces 各种方法的耗时数量级总结\relax }}{9}}
+\bibcite{cpus1}{8}
+\bibcite{HLBVH}{9}
+\bibcite{STBVH}{10}
+\bibcite{accelerator2}{11}
