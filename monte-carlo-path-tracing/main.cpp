@@ -22,7 +22,7 @@ int main()
 						   V3(0.0, 1.0, 0.0),50,IMAGE_WIDTH,IMAGE_HEIGHT));
 	scene.AddSphereLight(SphereLight(V3(0.0, 1.589, -1.274),0.2,V3(50, 50, 40)));
 
-
+	Mat temp = imread("./image/1.jpg");
 	// Rendering
 	Mat rst=scene.Rendering();
 

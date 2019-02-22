@@ -14,4 +14,9 @@ public:
 	int mtl_id_;
 
 	AABB box_;
+
+	bool IsIntersect(Ray& ray)
+	{
+
+	}
 };

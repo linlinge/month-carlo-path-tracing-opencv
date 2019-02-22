@@ -217,7 +217,7 @@ $$P_y^{c}=(1-2P_y^{s})tan(\frac{\alpha}{2})$$
 
 $$P=(P_x^{c},P_y^{y},-1)$$
 \section{步骤}
-导入obj和mtl$\to$求解每个三角片的AABB包围盒$\to$建立kd-tree$\to$根据相机位置计算初始光线$\to$monte carlo采样
+导入obj和mtl$\to$求解每个三角片的AABB包围盒$\to$建立kd-tree$\to$根据相机位置计算初始光线$\to$光线和包围盒求交的实现$\to$monte carlo采样
 
 \section{问题汇总}
 \subsection{关于光线的疑问}
@@ -236,9 +236,9 @@ $$\bm{R}(t)=\bm{O}+t\bm{D}$$
 \end{center}
 \end{figure}
 由于来自该半球方向的光线理论上有无线多条，因此采用蒙特卡洛方法随机的对方向进行采样。蒙特卡洛的结果可以看成是该半球光线积分的估计值。
-\subsection{kd-tree面对三角片如何构建？}
+\subsection{Kd-tree面对三角片如何构建？}
 由于kd-tree分割的对象是点坐标，因此对于三角片可以用其中点代替三角片本身的位置，这样就可以很方便的确定kd-tree中心轴的位置。
-\subsection{kd-tree是如何与包围盒结合使用的？}
+\subsection{Kd-tree是如何与包围盒结合使用的？}
 kd-tree的每一个节点都包含一个包围盒，该包围盒包括了该节点下的所有子节点空间。
 
 \end{document}

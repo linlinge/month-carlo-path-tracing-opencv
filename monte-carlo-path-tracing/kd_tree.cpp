@@ -3,7 +3,7 @@ KdTree tree;
 
 KdNode* KdTree::Build(vector<Patch>& f,int depth)
 {
-	cout << depth << endl;
+	//cout << depth << endl;
 	/*if (depth == 7)
 		depth = 7;*/
 	// define

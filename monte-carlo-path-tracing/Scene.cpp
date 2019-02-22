@@ -18,7 +18,9 @@ void Scene::AddQuadLight(QuadLight dat)
 Mat Scene::Rendering()
 {
 	// Define
-	Mat result(camera_.image_width_,camera_.image_height_,CV_8UC1,cv::Scalar(0));
+	Mat result(camera_.image_width_,camera_.image_height_,CV_8UC3,cv::Scalar(0,0,0));
+	/*imshow("hi", result);
+	waitKey(0);*/
 
 	// generate rays in each pixel
 	float ratio = camera_.image_width_ * 1.0 / camera_.image_height_;
@@ -38,9 +40,7 @@ Mat Scene::Rendering()
 
 			// Ray Tracing
 			color=RayTracing(ray);
-			result.at<Vec3f>(i, j)[0] = color.r;
-			result.at<Vec3f>(i, j)[1] = color.b;
-			result.at<Vec3f>(i, j)[2] = color.g;
+			result.at<Vec3b>(i, j) = Vec3b(color.b,color.g,color.r);
 		}
 	}
 	return result;
