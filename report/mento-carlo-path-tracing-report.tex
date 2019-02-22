@@ -177,14 +177,47 @@ $$color=KaIa+ Kd { SUM j=1..ls, (N * Lj)Ij }$$
 \item[（3）]{\bm{$d \hspace{10pt} 1.000000$}}\\
 表示物体融入背景的数量，取值范围为$[0.0,1.0]$，取值为1.0表示完全不透明，取值为0.0时表示完全透明。
 \end{itemize}
+\subsection{空间包围盒的介绍}
+空间包围盒是一个物体的凸包，是为了物体与光线求交的方便而引入的概念。人们提出了很多种可用的空间包围盒，其中AABB包围盒最为简单和常用。AABB包围盒的所有边与坐标轴平行，其示意图如下所示，起哄蓝色的为物体，绿色表示的时该物体的AABB包围盒：
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.8]{AABB1.png}
+\caption{AABB包围盒示意图}
+\end{center}
+\end{figure}
+\subsection{Kd-Tree的介绍}
+Kd-tree（K-dimension tree）是一种拥有多维空间的快速最近邻查找技术，它是一种将BST扩展到多维的升级。在使用Kd-tree的过程中极其重要的两个操作是创建和查找。
+\subsubsection{Kd-Tree的构造}
+\begin{itemize}
+\item[（1）]{\bm{划分维度的选择}} \mbox{} \\
+kd-tree在举例时都会按照第一维、第二维、第三维的循环顺序进行构建，然而在实际使用当中最主要的目的是加速，也就是尽快减少检索范围。每一层使用更为分散的维度能够更好的将数据进行分离。最大方差法就是利用方差最大的维度对数据进行划分。
+\item[（2）]{}
+\item[（3）]{\bm{构造截止条件}} \mbox{} \\
+kd-tree在构造时满足一下任意条件则截止：
+\begin{itemize}
+\item{在该空间已经不存在数据点；}
+\item{超过一定的深度则划定为叶子节点，该深度的阈值可以由自己来规定。}
+\end{itemize}
 
-\subsection{Kd-tree的介绍}
-Kd-tree（K-dimension tree）是一种拥有多维空间的快速最近邻查找技术。在使用Kd-tree的过程中极其重要的两个操作是创建和查找。
+\item[（4）]{kd-tree\bm{构造结果的验证}} \mbox{} \\
+怎么验证
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.7]{kd-tree-structure.png}
+\caption{kd-tree第一层和第二层示意图}
+\end{center}
+\end{figure}
+\end{itemize}
 
+\subsection{相机光线的产生}
+由于从相机出发逆向跟踪光路能够避免计算无法被看到的部分，从而大大降低计算量。下面介绍了如何从相机出发产生初始的逆向光线。
+$$P_x^{c}=\alpha(2P_x^{s}-1) tan(\frac{\theta}{2})$$
+
+$$P_y^{c}=(1-2P_y^{s})tan(\frac{\alpha}{2})$$
+
+$$P=(P_x^{c},P_y^{y},-1)$$
 \section{步骤}
-导入obj$\to$绘制物体$\to$判断纹理文件是否存在$\to$导入纹理$\to$贴纹理$\to$建立kd-tree
-
-导入obj和mtl$\to$建立kd-tree$\to$monte carlo采样
+导入obj和mtl$\to$求解每个三角片的AABB包围盒$\to$建立kd-tree$\to$根据相机位置计算初始光线$\to$monte carlo采样
 
 \section{问题汇总}
 \subsection{关于光线的疑问}
@@ -195,7 +228,7 @@ $$\bm{R}(t)=\bm{O}+t\bm{D}$$
 \subsection{光照信息的存储}
 
 \subsection{蒙特卡洛用在哪里？}
-由于图片中的每一个像素点都是由来自各个方向的半球光线汇集得到的RGB值，如下图所示：
+光线跟踪的交叉点的光照值通过RDBF模型来计算，RDBF模型中假设了采样点的光度值都是由来自各个方向的半球光线汇集得到的RGB值，如下图所示：
 \begin{figure}[H]
 \begin{center}
 \includegraphics[scale=0.25]{monte_carlo_sample.png}
@@ -203,4 +236,9 @@ $$\bm{R}(t)=\bm{O}+t\bm{D}$$
 \end{center}
 \end{figure}
 由于来自该半球方向的光线理论上有无线多条，因此采用蒙特卡洛方法随机的对方向进行采样。蒙特卡洛的结果可以看成是该半球光线积分的估计值。
+\subsection{kd-tree面对三角片如何构建？}
+由于kd-tree分割的对象是点坐标，因此对于三角片可以用其中点代替三角片本身的位置，这样就可以很方便的确定kd-tree中心轴的位置。
+\subsection{kd-tree是如何与包围盒结合使用的？}
+kd-tree的每一个节点都包含一个包围盒，该包围盒包括了该节点下的所有子节点空间。
+
 \end{document}

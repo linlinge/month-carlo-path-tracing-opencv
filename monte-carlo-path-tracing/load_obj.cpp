@@ -1,19 +1,60 @@
 #include "load_obj.h"
-vector<V3> g_v;
-vector<V3> g_vt;
-vector<V3> g_vn;
-vector<Material> g_mtls;
 
-void LoadObj(string filename, vector<Obj>& dat)
+
+// global function definition
+void remove_adjacent_duplicate(string& dat1, string dat2)
+{
+	vector<int> pos;
+	int cur = dat1.find(dat2, 0);
+	if (cur != -1)
+	{
+		while (cur != -1)
+		{
+			if (cur != -1)
+				pos.push_back(cur);
+			cur = dat1.find(dat2, cur + 1);
+		}
+
+		// remove duplicate
+		int adjust = 0;
+		for (int i = 0; i < pos.size() - 1; i++)
+		{
+			if (pos[i] + 1 == pos[i + 1])
+			{
+				dat1.erase(pos[i] + adjust, 1);
+				adjust--;
+			}
+		}
+	}
+}
+
+vector<string> split(string dat, string separator)
+{
+	vector<string> rst;
+	int start, end;
+	do
+	{
+		start = dat.find(separator);
+		end = start + separator.size();
+		rst.push_back(dat.substr(0, start));
+		dat.erase(0, end);
+	} while (start != -1);
+	return rst;
+}
+
+// obj function definition
+void Objs::LoadObjs(string filename)
 {
 	ifstream f(filename);
 	string line;
 	int flag = 0;
-	Obj obj_temp;
+	int temp_mtl_id;
+	int temp_obj_name_id;
+
 	while (getline(f, line))
 	{
-		remove_adjacent_duplicate(line," ");
-		vector<string> ss = split(line," ");
+		remove_adjacent_duplicate(line, " ");
+		vector<string> ss = split(line, " ");
 		if (ss[0] == "v")
 		{
 			V3 temp;
@@ -26,7 +67,7 @@ void LoadObj(string filename, vector<Obj>& dat)
 			case 2:
 				temp.x = atof(ss[1].c_str());
 			}
-			g_v.push_back(temp);
+			v_.push_back(temp);
 		}
 		else if (ss[0] == "vt")
 		{
@@ -40,7 +81,7 @@ void LoadObj(string filename, vector<Obj>& dat)
 			case 2:
 				temp.x = atof(ss[1].c_str());
 			}
-			g_vt.push_back(temp);
+			vt_.push_back(temp);
 		}
 		else if (ss[0] == "vn")
 		{
@@ -54,26 +95,26 @@ void LoadObj(string filename, vector<Obj>& dat)
 			case 2:
 				temp.x = atof(ss[1].c_str());
 			}
-			g_vn.push_back(temp);
+			vn_.push_back(temp);
 		}
 		else if (ss[0] == "f")
 		{
-			face f_temp;
+			Patch f_temp;
 			vector<V3> p_temp;
 			for (int i = 1; i < ss.size(); i++)
 			{
-				vector<string> temp = split(ss[i],"/");
-				switch(temp.size())
+				vector<string> temp = split(ss[i], "/");
+				switch (temp.size())
 				{
 				case 3:
-					f_temp.vn_id_.push_back(atoi(temp[2].c_str())-1);
+					f_temp.vn_id_.push_back(atoi(temp[2].c_str()) - 1);
 				case 2:
-					f_temp.vt_id_.push_back(atoi(temp[1].c_str())-1);
+					f_temp.vt_id_.push_back(atoi(temp[1].c_str()) - 1);
 				case 1:
 					int id_temp = atoi(temp[0].c_str()) - 1;
 					f_temp.v_id_.push_back(id_temp);
 
-					p_temp.push_back(g_v[id_temp]);
+					p_temp.push_back(v_[id_temp]);
 				}
 			}
 
@@ -81,72 +122,73 @@ void LoadObj(string filename, vector<Obj>& dat)
 			V3 v1 = p_temp[0] - p_temp[1];
 			V3 v2 = p_temp[1] - p_temp[2];
 			V3 v3 = v1.Cross(v2);
-			f_temp.normal_=v3.GetNorm();
+			f_temp.normal_ = v3.GetNorm();
+			
+			// store obj_name_id_
+			f_temp.obj_name_id_ = temp_obj_name_id;
+			f_temp.mtl_id_ = temp_mtl_id;
 
-			// calculate box
-			float min_x, min_y, min_z;
-			float max_x, max_y, max_z;
-			min_x = min_y = min_z = INT_MAX;
-			max_x = max_y = max_z = -INT_MAX;
-
-			for (auto& f_id : f_temp.v_id_)
-			{
-				V3& v = g_v[f_id];				
-				min_x = min_x < v.x ? min_x : v.x;
-				min_y = min_y < v.y ? min_y : v.y;
-				min_z = min_z < v.z ? min_z : v.z;
-
-				max_x = max_x > v.x ? max_x : v.x;
-				max_y = max_y > v.y ? max_y : v.y;
-				max_z = max_z > v.z ? max_z : v.z;
-			}
-			f_temp.box_.min_ = V3(min_x, min_y, min_z);
-			f_temp.box_.max_ = V3(max_x, max_y, max_z);
-
-			// store face
-			obj_temp.f_.push_back(f_temp);
+			// store Patch
+			f_.push_back(f_temp);
 		}
 		else if (ss[0] == "g")
 		{
-			if (ss[1] == "default")
+			if (ss[1] != "default")
 			{
-				if (flag != 0)
-				{
-					dat.push_back(obj_temp);
-					obj_temp.clear();
-				}
-				flag = 1;
-			}
-			else
-			{
-				obj_temp.obj_name_ = ss[1];
-			}
+				temp_obj_name_id = objs_name_.size();
+				objs_name_.push_back(ss[1]);
+			}			
 		}
 		else if (ss[0] == "usemtl")
 		{
-			obj_temp.usemtl_ = ss[1];
-			obj_temp.mtl_id_ = obj_temp.get_mtl_id(ss[1]);
+			temp_mtl_id = GetMtlId(ss[1]);			
 		}
-		else if (ss[0] == "s")
-		{
-			SmoothGroup sg_temp;
-			sg_temp.status_ = atoi(ss[1].c_str());
-			sg_temp.position_ = obj_temp.f_.size()+1;
-			obj_temp.s_.push_back(sg_temp);
-		}
-		else if (ss[0]=="mtllib")
+		else if (ss[0] == "mtllib")
 		{
 			// find last
 			int pos = filename.size() - 1;
 			while (filename[pos] != '/') pos--;
-			string str = filename.substr(0,  pos+1) + ss[1];
+			string str = filename.substr(0, pos + 1) + ss[1];
 			LoadMaterial(str);
 		}
 	}
-	dat.push_back(obj_temp);
+
+	// get properties
+	GetProperties();
+
+	// build kd-tree
+	tree.Build(f_,0);
+
+	// test bounding box
+	ofstream file;
+	file.open("../output/bounding_box_check.txt");
+	auto temp = f_[500];
+	for (auto& temp_id : temp.v_id_)
+		file << v_[temp_id].x << " " << v_[temp_id].y << " " << v_[temp_id].z << endl;
+
+	file << temp.box_.top_left_.x << " " << temp.box_.top_left_.y << " " << temp.box_.top_left_.z << endl;
+	file << temp.box_.bottom_right_.x << " " << temp.box_.bottom_right_.y << " " << temp.box_.bottom_right_.z << endl;
+
+	file.close();
+
+	// test kd-tree
+	file.open("../output/kd-tree-test.txt");
+	V3* temp_v = &(tree.root_->box_.top_left_);
+	file << temp_v->x << " " << temp_v->y << " " << temp_v->z << endl;
+	temp_v = &(tree.root_->box_.bottom_right_);
+	file << temp_v->x << " " << temp_v->y << " " << temp_v->z << endl;
+	temp_v = &(tree.root_->left_->box_.top_left_);
+	file << temp_v->x << " " << temp_v->y << " " << temp_v->z << endl;
+	temp_v = &(tree.root_->left_->box_.bottom_right_);
+	file << temp_v->x << " " << temp_v->y << " " << temp_v->z << endl;
+	temp_v = &(tree.root_->right_->box_.top_left_);
+	file << temp_v->x << " " << temp_v->y << " " << temp_v->z << endl;
+	temp_v = &(tree.root_->right_->box_.bottom_right_);
+	file << temp_v->x << " " << temp_v->y << " " << temp_v->z << endl;
+	file.close();
 }
 
-void LoadMaterial(string filename)
+void Objs::LoadMaterial(string filename)
 {
 	ifstream f;
 	f.open(filename);
@@ -163,8 +205,8 @@ void LoadMaterial(string filename)
 			{
 				if (flag != 0)
 				{
-					g_mtls.push_back(mtl_temp);
-					mtl_temp.clear();
+					mtls_.push_back(mtl_temp);
+					mtl_temp.Clear();
 				}
 				mtl_temp.name_ = ss[1];
 				flag++;
@@ -206,50 +248,49 @@ void LoadMaterial(string filename)
 				mtl_temp.Ns_ = atoi(ss[1].c_str());
 			}
 		}
-		g_mtls.push_back(mtl_temp);
+		mtls_.push_back(mtl_temp);
 	}
 	else
 	{
 		cout << "No material file found!" << endl;
-	}	
-}
-
-void remove_adjacent_duplicate(string& dat1, string dat2)
-{
-	vector<int> pos;
-	int cur = dat1.find(dat2, 0);
-	if (cur != -1)
-	{
-		while (cur != -1)
-		{
-			if (cur != -1)
-				pos.push_back(cur);
-			cur = dat1.find(dat2, cur + 1);
-		}
-
-		// remove duplicate
-		int adjust = 0;
-		for (int i = 0; i < pos.size() - 1; i++)
-		{
-			if (pos[i] + 1 == pos[i + 1])
-			{
-				dat1.erase(pos[i] + adjust, 1);
-				adjust--;
-			}
-		}
 	}
 }
 
-vector<string> split(string dat, string separator)
+int Objs::GetMtlId(string str)
 {
-	vector<string> rst;
-	int start, end;
-	do
+	for (int i = 0; i < mtls_.size(); i++)
 	{
-		start = dat.find(separator);
-		end = start + separator.size();
-		rst.push_back(dat.substr(0, start));
-		dat.erase(0, end);
-	} while (start != -1);
-	return rst;
+		if (str == mtls_[i].name_)
+			return i;
+	}
+
+	return -1;
+}
+
+void Objs::Clear()
+{
+	v_.clear();;
+	vt_.clear();
+	vn_.clear();;
+	mtls_.clear();;
+	objs_name_.clear();;
+	f_.clear();;	
+}
+
+void Objs::GetProperties()
+{
+	for (auto& f_temp: f_)
+	{
+		// get bound box
+		/// init 
+		f_temp.box_.top_left_ = f_temp.box_.bottom_right_ = v_[f_temp.v_id_[0]];
+		/// expand
+		for (int i = 1; i < f_temp.v_id_.size(); i++)
+		{
+			f_temp.box_.Expand(v_[f_temp.v_id_[i]]);
+			f_temp.center_ = f_temp.center_ + v_[f_temp.v_id_[i]];
+		}
+		// get center
+		f_temp.center_ = f_temp.center_ / f_temp.v_id_.size();
+	}
 }

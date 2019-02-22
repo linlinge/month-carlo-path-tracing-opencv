@@ -21,7 +21,7 @@ public:
 		r = r1;
 		g = g1;
 		b = b1;
-	};
+	}
 	V3 & operator=(const V3 & obj)
 	{
 		r = obj.r;

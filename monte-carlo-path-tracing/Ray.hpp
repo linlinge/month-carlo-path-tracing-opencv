@@ -17,4 +17,10 @@ public:
 	{
 
 	}
+
+	Ray operator=(Ray& dat)
+	{
+		origin_ = dat.origin_;
+		direction_ = dat.direction_;
+	}
 };
