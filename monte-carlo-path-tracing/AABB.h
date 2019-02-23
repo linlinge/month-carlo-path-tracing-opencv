@@ -6,6 +6,14 @@ class AABB
 {
 public:
 	V3 top_left_, bottom_right_;
+
+	AABB() {};
+	AABB(V3 top_left, V3 bottom_right)
+	{
+		top_left_ = top_left;
+		bottom_right_ = bottom_right;
+	}
+
 	void Expand(V3& p)
 	{
 		// x axis
@@ -39,6 +47,7 @@ public:
 		bottom_right_ = dat.bottom_right_;
 		return *this;
 	}
+	
 
 	int GetMaxAxis()
 	{
@@ -53,93 +62,103 @@ public:
 
 	bool IsIntersect(Ray& ray)
 	{
-		float ox = ray.origin_.x; float oy = ray.origin_.y; float oz = ray.origin_.z;
-		float dx = ray.direction_.x; float dy = ray.direction_.y; float dz = ray.direction_.z;
-		float tx_min, ty_min, tz_min;
-		float tx_max, ty_max, tz_max;
-		float x0 = top_left_.x;
-		float y0 = top_left_.y;
-		float z0 = top_left_.z;
-		float x1 = bottom_right_.x;
-		float y1 = bottom_right_.y;
-		float z1 = bottom_right_.z;
+		float tmin = 0.0f;
+		float tmax = FLT_MAX;
 
-		//x0,y0,z0为包围体的最小顶点  
-		//x1,y1,z1为包围体的最大顶点  
-		if (abs(dx) < 0.000001f)
+		//The plane perpendicular to x-axie
+		if (abs(ray.direction_.x) < 0.000001f) //If the ray parallel to the plane
 		{
-			//若射线方向矢量的x轴分量为0且原点不在盒体内  
-			if (ox < x1 || ox > x0)
+			//If the ray is not within AABB box, then not intersecting
+			if (ray.origin_.x < top_left_.x || ray.origin_.x > bottom_right_.x)
 				return false;
 		}
 		else
 		{
-			if (dx >= 0)
+			//Compute the distance of ray to the near plane and far plane
+			float ood = 1.0f / ray.direction_.x;
+			float t1 = (top_left_.x - ray.origin_.x) * ood;
+			float t2 = (bottom_right_.x - ray.origin_.x) * ood;
+
+			//Make t1 be intersecting with the near plane, t2 with the far plane
+			if (t1 > t2)
 			{
-				tx_min = (x0 - ox) / dx;
-				tx_max = (x1 - ox) / dx;
-			}
-			else
-			{
-				tx_min = (x1 - ox) / dx;
-				tx_max = (x0 - ox) / dx;
+				float temp = t1;
+				t1 = t2;
+				t2 = temp;
 			}
 
-		}
+			//Compute the intersection of slab intersection intervals
+			if (t1 > tmin) tmin = t1;
+			if (t2 < tmax) tmax = t2;
 
+			//Exit with no collision as soon as slab intersection becomes empty
+			if (tmin > tmax) return false;
+		}// end for perpendicular to x-axie
 
-		if (abs(dy) < 0.000001f)
+		//The plane perpendicular to y-axie
+		if (abs(ray.direction_.y) < 0.000001f) //If the ray parallel to the plane
 		{
-			//若射线方向矢量的x轴分量为0且原点不在盒体内  
-			if (oy < y1 || oy > y0)
+			//If the ray is not within AABB box, then not intersecting
+			if (ray.origin_.y < top_left_.y || ray.origin_.y > bottom_right_.y)
 				return false;
 		}
 		else
 		{
-			if (dy >= 0)
+			//Compute the distance of ray to the near plane and far plane
+			float ood = 1.0f / ray.direction_.y;
+			float t1 = (top_left_.y - ray.origin_.y) * ood;
+			float t2 = (bottom_right_.y - ray.origin_.y) * ood;
+
+			//Make t1 be intersecting with the near plane, t2 with the far plane
+			if (t1 > t2)
 			{
-				ty_min = (y0 - oy) / dy;
-				ty_max = (y1 - oy) / dy;
-			}
-			else
-			{
-				ty_min = (y1 - oy) / dy;
-				ty_max = (y0 - oy) / dy;
+				float temp = t1;
+				t1 = t2;
+				t2 = temp;
 			}
 
-		}
+			//Compute the intersection of slab intersection intervals
+			if (t1 > tmin) tmin = t1;
+			if (t2 < tmax) tmax = t2;
 
+			//Exit with no collision as soon as slab intersection becomes empty
+			if (tmin > tmax) return false;
+		}// end for perpendicular to y-axie
 
-		if (abs(dz) < 0.000001f)
+		//The plane perpendicular to z-axie
+		if (abs(ray.direction_.z) < 0.000001f) //If the ray parallel to the plane
 		{
-			//若射线方向矢量的x轴分量为0且原点不在盒体内  
-			if (oz < z1 || oz > z0)
+			//If the ray is not within AABB box, then not intersecting
+			if (ray.origin_.z < top_left_.z|| ray.origin_.z > bottom_right_.z)
 				return false;
 		}
 		else
 		{
-			if (dz >= 0)
+			//Compute the distance of ray to the near plane and far plane
+			float ood = 1.0f / ray.direction_.z;
+			float t1 = (top_left_.z- ray.origin_.z) * ood;
+			float t2 = (bottom_right_.z - ray.origin_.z) * ood;
+
+			//Make t1 be intersecting with the near plane, t2 with the far plane
+			if (t1 > t2)
 			{
-				tz_min = (z0 - oz) / dz;
-				tz_max = (z1 - oz) / dz;
-			}
-			else
-			{
-				tz_min = (z1 - oz) / dz;
-				tz_max = (z0 - oz) / dz;
+				float temp = t1;
+				t1 = t2;
+				t2 = temp;
 			}
 
-		}
+			//Compute the intersection of slab intersection intervals
+			if (t1 > tmin) tmin = t1;
+			if (t2 < tmax) tmax = t2;
 
-		double t0, t1;
+			//Exit with no collision as soon as slab intersection becomes empty
+			if (tmin > tmax) return false;
+		}// end for perpendicular to z-axie
 
-		//光线进入平面处（最靠近的平面）的最大t值   
-		t0 = max(tz_min, max(tx_min, ty_min));
-
-		//光线离开平面处（最远离的平面）的最小t值  
-		t1 = min(tz_max, min(tx_max, ty_max));
-
-		return t0 < t1;
+		/*vcHit->x = ray.origin_.x + tmin * ray.direction_.x;
+		vcHit->y = ray.origin_.y + tmin * ray.direction_.y;
+		vcHit->z = ray.origin_.z + tmin * ray.direction_.z;*/
+		return true;	
 	}
 };
 

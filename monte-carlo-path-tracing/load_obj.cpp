@@ -1,5 +1,7 @@
 #include "load_obj.h"
-
+vector<V3> v_;
+vector<V3> vt_;
+vector<V3> vn_;
 
 // global function definition
 void remove_adjacent_duplicate(string& dat1, string dat2)

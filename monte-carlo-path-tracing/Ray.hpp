@@ -11,12 +11,7 @@ public:
 class Ray
 {
 public:
-	V3 origin_, direction_;
-
-	RayIntersection IntersectionWithBox()
-	{
-
-	}
+	V3 origin_, direction_;	
 
 	Ray operator=(Ray& dat)
 	{

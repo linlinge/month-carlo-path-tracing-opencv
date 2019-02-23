@@ -16,11 +16,10 @@ void remove_adjacent_duplicate(string& dat1, string dat2);
 vector<string> split(string dat, string separator);
 
 
+
 class Objs {
 public:	
-	vector<V3> v_;
-	vector<V3> vt_;
-	vector<V3> vn_;
+	
 	vector<Material> mtls_;
 	vector<string> objs_name_;
 	vector<Patch> f_;

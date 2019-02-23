@@ -19,10 +19,10 @@ void Material::Clear()
 {
 	name_.clear();
 	illum_ = INT_MAX;
-	Kd_.clear();
-	Ka_.clear();
-	Tf_.clear();
-	Ks_.clear();
+	Kd_.Clear();
+	Ka_.Clear();
+	Tf_.Clear();
+	Ks_.Clear();
 	Ni_ = 0;
 	Ns_ = 0;
 }

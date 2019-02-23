@@ -127,6 +127,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AABB.cpp" />
+    <ClCompile Include="BasicGeometry.cpp" />
     <ClCompile Include="kd_tree.cpp" />
     <ClCompile Include="load_obj.cpp" />
     <ClCompile Include="main.cpp" />
@@ -138,6 +139,7 @@
     <ClInclude Include="AABB.h" />
     <ClInclude Include="IlluminationModel.hpp" />
     <ClInclude Include="kd_tree.h" />
+    <ClInclude Include="BasicGeometry.h" />
     <ClInclude Include="load_obj.h" />
     <ClInclude Include="Material.h" />
     <ClInclude Include="Patch.h" />
