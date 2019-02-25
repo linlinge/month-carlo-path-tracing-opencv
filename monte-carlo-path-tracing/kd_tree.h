@@ -1,15 +1,16 @@
 #pragma once
 #include <vector>
 #include "V3.hpp"
-#include "AABB.h"
-#include "Patch.h"
+#include "AABB.hpp"
+#include "Patch.hpp"
+#include "Ray.hpp"
 #include <iostream>
 #define MAX_DEPTH 10
 using namespace std;
 
 class KdNode
 {
-public:
+public: 
 	vector<Patch> leaf_val_;
 	float internal_val_;
 
@@ -25,6 +26,7 @@ class KdTree
 public:
 	KdNode * root_;
 	KdNode* Build(vector<Patch>& f, int depth);
+	Patch NearestSearch(Ray& ray);
 };
 
 

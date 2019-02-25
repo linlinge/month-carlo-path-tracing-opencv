@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2018.12.5)  23 FEB 2019 09:38
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2018.12.5)  25 FEB 2019 14:44
 entering extended mode
 **mento-carlo-path-tracing-report.tex
 
@@ -835,35 +835,59 @@ Package: fp-eval 1995/04/03
 \diagbox@sepl=\dimen171
 \diagbox@sepr=\dimen172
 )
+(D:\CTEX\MiKTeX\tex\latex\subfigure\subfigure.sty
+Package: subfigure 2002/07/30 v2.1.4 subfigure package
+\subfigtopskip=\skip49
+\subfigcapskip=\skip50
+\subfigcaptopadj=\dimen173
+\subfigbottomskip=\skip51
+\subfigcapmargin=\dimen174
+\subfiglabelskip=\skip52
+\c@subfigure=\count191
+\c@lofdepth=\count192
+\c@subtable=\count193
+\c@lotdepth=\count194
+
+****************************************
+* Local config file subfigure.cfg used *
+****************************************
+(D:\CTEX\MiKTeX\tex\latex\subfigure\subfigure.cfg)
+\subfig@top=\skip53
+\subfig@bottom=\skip54
+)
 (D:\CTEX\MiKTeX\tex\latex\float\float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count191
+\c@float@type=\count195
 \float@exts=\toks23
 \float@box=\box52
 \@float@everytoks=\toks24
 \@floatcapt=\box53
 )
+(D:\CTEX\MiKTeX\tex\latex\cases\cases.sty
+Package: cases 2002/05/02 ver 2.5 
+)
 (D:\CTEX\MiKTeX\tex\latex\multirow\multirow.sty
-\bigstrutjot=\dimen173
+\bigstrutjot=\dimen175
 )
 (D:\CTEX\MiKTeX\tex\latex\listings\listings.sty
-\lst@mode=\count192
+\lst@mode=\count196
 \lst@gtempboxa=\box54
 \lst@token=\toks25
-\lst@length=\count193
-\lst@currlwidth=\dimen174
-\lst@column=\count194
-\lst@pos=\count195
-\lst@lostspace=\dimen175
-\lst@width=\dimen176
-\lst@newlines=\count196
-\lst@lineno=\count197
-\lst@maxwidth=\dimen177
+\lst@length=\count197
+\lst@currlwidth=\dimen176
+\lst@column=\count198
+\lst@pos=\count199
+\lst@lostspace=\dimen177
+\lst@width=\dimen178
+\lst@newlines=\count200
+\lst@lineno=\count201
+\lst@maxwidth=\dimen179
 
 (D:\CTEX\MiKTeX\tex\latex\listings\lstmisc.sty
 File: lstmisc.sty 2007/02/22 1.4 (Carsten Heinz)
-\c@lstnumber=\count198
-\lst@skipnumbers=\count199
+Normal \count register pool exhausted, switching to extended pool.
+\c@lstnumber=\count277
+\lst@skipnumbers=\count278
 \lst@framebox=\box55
 )
 (D:\CTEX\MiKTeX\tex\latex\listings\listings.cfg
@@ -900,113 +924,112 @@ File: lstmisc.sty 2007/02/22 1.4 (Carsten Heinz)
 )
 (D:\CTEX\MiKTeX\tex\latex\tools\calc.sty
 Package: calc 2007/08/22 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count200
-\calc@Bcount=\count201
-\calc@Adimen=\dimen178
-\calc@Bdimen=\dimen179
-\calc@Askip=\skip49
-\calc@Bskip=\skip50
+\calc@Acount=\count279
+\calc@Bcount=\count280
+\calc@Adimen=\dimen180
+\calc@Bdimen=\dimen181
+\calc@Askip=\skip55
+\calc@Bskip=\skip56
 LaTeX Info: Redefining \setlength on input line 76.
 LaTeX Info: Redefining \addtolength on input line 77.
-Normal \count register pool exhausted, switching to extended pool.
-\calc@Ccount=\count277
-\calc@Cskip=\skip51
+\calc@Ccount=\count281
+\calc@Cskip=\skip57
 )
 (E:\ZJU_LESSON\CG\Homework2\month-carlo-path-tracing-opencv\report\mento-carlo-
 path-tracing-report.aux)
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for C00/song/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for C05/song/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for C09/song/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for C10/song/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for C20/song/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for C19/song/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for C40/song/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for C42/song/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for C43/song/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for C50/song/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for C52/song/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for C49/song/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for C60/mj/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for C61/mj/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for C63/mj/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for C64/mj/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for C65/mj/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for C70/song/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for C31/song/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for C32/song/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for C33/song/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for C34/song/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for C35/song/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for C36/song/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for C37/song/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for C80/song/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for C81/song/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for C01/song/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for C11/song/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for C21/song/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for C41/song/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
-LaTeX Font Info:    Checking defaults for C62/song/m/n on input line 64.
-LaTeX Font Info:    ... okay on input line 64.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for C00/song/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for C05/song/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for C09/song/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for C10/song/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for C20/song/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for C19/song/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for C40/song/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for C42/song/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for C43/song/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for C50/song/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for C52/song/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for C49/song/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for C60/mj/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for C61/mj/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for C63/mj/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for C64/mj/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for C65/mj/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for C70/song/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for C31/song/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for C32/song/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for C33/song/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for C34/song/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for C35/song/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for C36/song/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for C37/song/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for C80/song/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for C81/song/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for C01/song/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for C11/song/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for C21/song/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for C41/song/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
+LaTeX Font Info:    Checking defaults for C62/song/m/n on input line 66.
+LaTeX Font Info:    ... okay on input line 66.
  (D:\CTEX\MiKTeX\tex\context\base\supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count278
-\scratchdimen=\dimen180
+\scratchcounter=\count282
+\scratchdimen=\dimen182
 \scratchbox=\box56
-\nofMPsegments=\count279
-\nofMParguments=\count280
+\nofMPsegments=\count283
+\nofMParguments=\count284
 \everyMPshowfont=\toks26
-\MPscratchCnt=\count281
-\MPscratchDim=\dimen181
-\MPnumerator=\count282
-\makeMPintoPDFobject=\count283
+\MPscratchCnt=\count285
+\MPscratchDim=\dimen183
+\MPnumerator=\count286
+\makeMPintoPDFobject=\count287
 \everyMPtoPDFconversion=\toks27
 )
-\c@lstlisting=\count284
+\c@lstlisting=\count288
  (D:\CTEX\MiKTeX\tex\latex\cjk\UTF8\UTF8.bdg
 File: UTF8.bdg 2008/12/29 4.8.2
 )
@@ -1016,123 +1039,147 @@ File: UTF8.enc 2008/12/29 4.8.2
 (D:\CTEX\MiKTeX\tex\latex\cjk\UTF8\UTF8.chr
 File: UTF8.chr 2008/12/29 4.8.2
 )
-LaTeX Font Info:    Try loading font information for C70+rm on input line 65.
+LaTeX Font Info:    Try loading font information for C70+rm on input line 67.
 
 (D:\CTEX\MiKTeX\tex\latex\ctex\fd\c70rm.fd
 File: c70rm.fd 2007/05/06 v0.8a ctexutf8 font definition file
 )
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 65.
+(Font)              <12> on input line 67.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 65.
+(Font)              <8> on input line 67.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 65.
+(Font)              <6> on input line 67.
 Package CJKpunct Info: punctuation spaces for family 'zhsong' do not exist. Use
- family 'def' instead. on input line 69.
+ family 'def' instead. on input line 71.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 69.
+(Font)              <7> on input line 71.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 69.
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 79.
+(Font)              <5> on input line 71.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 81.
 
 (D:\CTEX\MiKTeX\tex\latex\base\omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 79.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 81.
  [1
 
 ] [2]
-<AABB1.png, id=168, 421.575pt x 316.18124pt>
+<AABB1.png, id=170, 421.575pt x 316.18124pt>
 File: AABB1.png Graphic file (type png)
  <use AABB1.png>
-Package pdftex.def Info: AABB1.png used on input line 184.
-(pdftex.def)             Requested size: 337.26045pt x 252.94533pt.
- [3]
-<kd-tree-structure.png, id=179, 421.575pt x 316.18124pt>
+Package pdftex.def Info: AABB1.png used on input line 146.
+(pdftex.def)             Requested size: 210.78697pt x 158.09023pt.
+
+<kd-tree-structure.png, id=174, 421.575pt x 316.18124pt>
 File: kd-tree-structure.png Graphic file (type png)
 
 <use kd-tree-structure.png>
-Package pdftex.def Info: kd-tree-structure.png used on input line 206.
-(pdftex.def)             Requested size: 295.10048pt x 221.32535pt.
- [4 <E:/ZJU_LESSON/CG/Homework2/month-carlo-path-tracing-opencv/report/AABB1.pn
-g (PNG copy)>] [5 <E:/ZJU_LESSON/CG/Homework2/month-carlo-path-tracing-opencv/r
+Package pdftex.def Info: kd-tree-structure.png used on input line 168.
+(pdftex.def)             Requested size: 210.78697pt x 158.09023pt.
+ [3 <E:/ZJU_LESSON/CG/Homework2/month-carlo-path-tracing-opencv/report/AABB1.pn
+g (PNG copy)>] [4 <E:/ZJU_LESSON/CG/Homework2/month-carlo-path-tracing-opencv/r
 eport/kd-tree-structure.png (PNG copy)>]
-Package CJKpunct Info: punctuation spaces for family 'zhhei' do not exist. Use 
-family 'def' instead. on input line 230.
+<case1.png, id=204, 493.34312pt x 489.32813pt>
+File: case1.png Graphic file (type png)
+ <use case1.png>
+Package pdftex.def Info: case1.png used on input line 217.
+(pdftex.def)             Requested size: 172.67267pt x 171.2674pt.
 
-<monte_carlo_sample.png, id=206, 570.13pt x 322.20375pt>
+<case2.png, id=206, 494.84875pt x 488.82625pt>
+File: case2.png Graphic file (type png)
+ <use case2.png>
+Package pdftex.def Info: case2.png used on input line 219.
+(pdftex.def)             Requested size: 173.19966pt x 171.09174pt.
+
+<chart_flow.png, id=207, 820.06375pt x 282.55562pt>
+File: chart_flow.png Graphic file (type png)
+ <use chart_flow.png>
+Package pdftex.def Info: chart_flow.png used on input line 233.
+(pdftex.def)             Requested size: 246.02103pt x 84.76733pt.
+
+[5 <E:/ZJU_LESSON/CG/Homework2/month-carlo-path-tracing-opencv/report/case1.png
+> <E:/ZJU_LESSON/CG/Homework2/month-carlo-path-tracing-opencv/report/case2.png>
+ <E:/ZJU_LESSON/CG/Homework2/month-carlo-path-tracing-opencv/report/chart_flow.
+png>]
+Package CJKpunct Info: punctuation spaces for family 'zhhei' do not exist. Use 
+family 'def' instead. on input line 250.
+ <monte_carlo_sample.png, id=219, 570.13pt x 322.20375pt>
 File: monte_carlo_sample.png Graphic file (type png)
 
 <use monte_carlo_sample.png>
-Package pdftex.def Info: monte_carlo_sample.png used on input line 234.
+Package pdftex.def Info: monte_carlo_sample.png used on input line 254.
 (pdftex.def)             Requested size: 142.53215pt x 80.55074pt.
  [6 <E:/ZJU_LESSON/CG/Homework2/month-carlo-path-tracing-opencv/report/monte_ca
 rlo_sample.png>]
 (E:\ZJU_LESSON\CG\Homework2\month-carlo-path-tracing-opencv\report\mento-carlo-
 path-tracing-report.aux) ) 
 Here is how much of TeX's memory you used:
- 13138 strings out of 494045
- 195799 string characters out of 3153701
- 279176 words of memory out of 3000000
- 15856 multiletter control sequences out of 15000+200000
- 58064 words of font info for 198 fonts, out of 3000000 for 9000
+ 13410 strings out of 494045
+ 199768 string characters out of 3153701
+ 283027 words of memory out of 3000000
+ 16096 multiletter control sequences out of 15000+200000
+ 63699 words of font info for 217 fonts, out of 3000000 for 9000
  715 hyphenation exceptions out of 8191
- 40i,8n,58p,876b,1184s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simsun
-.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simhei.ttf><C:/Windows/Font
+ 40i,9n,58p,876b,1218s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun
+.ttc><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Font
 s/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Wind
-ows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf>
+ows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simsun.ttc>
 <C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/sim
-hei.ttf><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simhei.ttf><C:/Windows/F
+hei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/F
 onts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/W
-indows/Fonts/simsun.ttc><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simsun.t
-tc><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/
-simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simsun.ttc><C:/Window
-s/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simhei.ttf><C
+indows/Fonts/simhei.ttf><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simhei.t
+tf><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/
+simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Window
+s/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C
 :/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhe
-i.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fon
+i.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fon
 ts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Win
-dows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf
+dows/Fonts/simsun.ttc><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf
 ><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/si
-mhei.ttf><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/
+mhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simsun.ttc><C:/Windows/
 Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/
 Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.
 ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts
-/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simhei.ttf><C:/Windo
-ws/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simsun.ttc><
+/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windo
+ws/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><
 C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/sims
-un.ttc><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fo
+un.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fo
 nts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Wi
 ndows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.tt
-c><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/s
-imhei.ttf><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows
-/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simhei.ttf><C:
-/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun
+c><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/s
+imhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simsun.ttc><C:/Windows
+/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:
+/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simsun
 .ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/Font
 s/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Wind
 ows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc>
 <C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/sim
 sun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/F
-onts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simsun.ttc><C:/W
-indows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.t
+onts/simsun.ttc><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/W
+indows/Fonts/simsun.ttc><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.t
 tf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/
 simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Window
-s/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C
+s/Fonts/simhei.ttf><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C
 :/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simsu
 n.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fon
 ts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Win
 dows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc
 ><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/si
-msun.ttc><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><D:/CTEX/MiK
-TeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><D:/CTEX/MiKTeX/fonts/type1/publi
-c/amsfonts/cm/cmmi10.pfb><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi7.p
-fb><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmmib10.pfb><D:/CTEX/MiKTeX/f
-onts/type1/public/amsfonts/cm/cmr10.pfb><D:/CTEX/MiKTeX/fonts/type1/public/amsf
-onts/cm/cmr12.pfb><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on mento-carlo-path-tracing-report.pdf (6 pages, 737119 bytes).
+msun.ttc><C:/Windows/Fonts/simsun.ttc><D:/CTEX/MiKTeX/fonts/type1/public/amsfon
+ts/cm/cmbx10.pfb><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><D:/
+CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><D:/CTEX/MiKTeX/fonts/typ
+e1/public/amsfonts/cm/cmmi10.pfb><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm
+/cmmi7.pfb><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmmib10.pfb><D:/CTEX/
+MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb><D:/CTEX/MiKTeX/fonts/type1/pub
+lic/amsfonts/cm/cmr12.pfb><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.p
+fb><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><D:/CTEX/MiKTeX/font
+s/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on mento-carlo-path-tracing-report.pdf (6 pages, 915629 bytes).
 PDF statistics:
- 619 PDF objects out of 1000 (max. 8388607)
+ 641 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 308 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 323 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -77,20 +77,13 @@ public:
 	{
 		float arc = x * dat.x + y * dat.y + z * dat.z;
 		float cos_theta= arc / sqrt(x*x + y * y + z * z) / sqrt(dat.x*dat.x + dat.y*dat.y + dat.z*dat.z);
-		float theta=acos(cos_theta);
-		if (cos_theta < 0)
-			theta += PI/2.0;
-
+		float theta=acos(cos_theta);		
 		return theta;
 	}
 
-	V3 Dot(V3& dat)
-	{
-		V3 rst;
-		rst.x = y * dat.z - dat.y * z;
-		rst.y = dat.x * z - x * dat.z;
-		rst.z = x * dat.y - dat.x * y;
-		return rst;
+	float Dot(V3& dat)
+	{	
+		return (x*dat.x+y*dat.y+z*dat.z);
 	}
 
 	V3 Cross(V3& dat)

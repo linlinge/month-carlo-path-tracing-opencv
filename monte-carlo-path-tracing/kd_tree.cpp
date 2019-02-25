@@ -102,3 +102,9 @@ KdNode* KdTree::Build(vector<Patch>& f,int depth)
 	}
 	return node;
 }
+
+Patch KdTree::NearestSearch(Ray& ray)
+{
+
+
+}

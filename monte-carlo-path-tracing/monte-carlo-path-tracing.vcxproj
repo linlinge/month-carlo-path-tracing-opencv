@@ -126,23 +126,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AABB.cpp" />
     <ClCompile Include="BasicGeometry.cpp" />
     <ClCompile Include="kd_tree.cpp" />
     <ClCompile Include="load_obj.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Material.cpp" />
-    <ClCompile Include="Patch.cpp" />
     <ClCompile Include="Scene.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="AABB.h" />
+    <ClInclude Include="AABB.hpp" />
     <ClInclude Include="IlluminationModel.hpp" />
     <ClInclude Include="kd_tree.h" />
     <ClInclude Include="BasicGeometry.h" />
     <ClInclude Include="load_obj.h" />
     <ClInclude Include="Material.h" />
-    <ClInclude Include="Patch.h" />
+    <ClInclude Include="Patch.hpp" />
     <ClInclude Include="Ray.hpp" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="V3.hpp" />

@@ -7,9 +7,9 @@
 #include <sstream>
 #include <algorithm>
 #include "V3.hpp"
-#include "AABB.h"
+#include "AABB.hpp"
 #include "kd_tree.h"
-#include "Patch.h"
+#include "Patch.hpp"
 #include "Material.h"
 using namespace std;
 void remove_adjacent_duplicate(string& dat1, string dat2);
