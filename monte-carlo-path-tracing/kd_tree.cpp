@@ -21,13 +21,10 @@ KdNode* KdTree::Build(vector<Patch>& f,int depth)
 	// leaf node or not
 	if (depth > MAX_DEPTH || f.size()==0)
 	{
-		node->is_leaf_ = true;
 		node->leaf_val_ = f;
 		return node;
 	}
 
-	// internal node
-	node->is_leaf_ = false;
 	
 	// get the axis
 	node->axis_ = node->box_.GetMaxAxis();
@@ -105,6 +102,7 @@ KdNode* KdTree::Build(vector<Patch>& f,int depth)
 
 Patch KdTree::NearestSearch(Ray& ray)
 {
+	KdNode node_temp;
 
-
+	return Patch();
 }
