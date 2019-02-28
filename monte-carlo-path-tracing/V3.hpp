@@ -23,14 +23,24 @@ public:
 		g = g1;
 		b = b1;
 	}
-	V3 & operator=(const V3 & obj)
+	V3& operator=(const V3 & obj)
 	{
 		r = obj.r;
 		g = obj.g;
 		b = obj.b;
 		return (*this);
 	}
-
+	bool operator==(V3& dat)
+	{
+		return ((x == dat.x) && (y == dat.y) && (z == dat.z));
+	}
+	bool operator!=(V3& dat)
+	{
+		if ((x == dat.x) && (y == dat.y) && (z == dat.z))
+			return false;
+		else
+			return true;		
+	}
 	
 
 	float DistanceXY(V3 & dat)

@@ -1,13 +1,24 @@
 #include "kd_tree.h"
+#include <fstream>
+#include <iostream>
+using namespace std;
+
 KdTree tree;
+int number = 0;
 
 KdNode* KdTree::Build(vector<Patch>& f,int depth)
 {
 	//cout << depth << endl;
 	/*if (depth == 7)
 		depth = 7;*/
+
+	// store depth
+	max_depth_ = max_depth_ > depth ? max_depth_ : depth;
+
 	// define
 	KdNode *node = new KdNode;
+	node->id_ = number++;
+	node->depth_ = depth;
 
 	// find box for this node
 	AABB max_box;
@@ -103,6 +114,67 @@ KdNode* KdTree::Build(vector<Patch>& f,int depth)
 Patch KdTree::NearestSearch(Ray& ray)
 {
 	KdNode node_temp;
+	stack<KdNode> s;
+
+	s.push(*root_);
+
+	do
+	{
+		//left child 
+		while (s.top().left_ != NULL) s.push(*s.top().left_);
+
+		// left end, right child
+		/// leaf node
+		if (s.top().right_ == NULL)
+		{
+			s.pop(); 
+		}
+		else
+		{
+			s.push(*s.top().right_);
+		}
+		
+
+	} while (s.top() != *root_);
+
 
 	return Patch();
+}
+
+void KdTree::Print()
+{
+	id_record_.resize(max_depth_+1);
+	GetPrint(root_);
+
+	ofstream file("../output/kdtree-id-list.txt");
+	for (int i = 0; i < id_record_.size(); i++)
+	{
+		for (int j = 0; j < id_record_[i].size(); j++)
+		{
+			file << id_record_[i][j] << " ";
+		}
+		file << endl;
+	}
+	file.close();
+	
+}
+
+int temp = 0;
+void KdTree::GetPrint(KdNode* head)
+{
+	/*temp++;
+	cout << temp << endl;
+	if (temp == 17)
+		temp = 17;*/
+
+	if (head != NULL)
+	{
+		id_record_[head->depth_].push_back(head->id_);
+	}
+	else
+		return;
+
+	GetPrint(head->left_);
+	GetPrint(head->right_);
+	
 }

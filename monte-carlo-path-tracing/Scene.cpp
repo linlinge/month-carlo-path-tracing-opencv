@@ -50,6 +50,8 @@ V3 Scene::RayTracing(Ray& ray)
 {
 	V3 color;
 
+	//tree.NearestSearch(ray);
+	
 	return color;
 }
 

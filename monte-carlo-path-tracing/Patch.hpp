@@ -19,8 +19,9 @@ public:
 	V3 center_;
 	int obj_name_id_;
 	int mtl_id_;
-
 	AABB box_;
+
+
 
 	bool IsIntersect(Ray& ray)
 	{
@@ -31,9 +32,6 @@ public:
 		float is_same_direction = (intersect_point - ray.origin_).Dot(ray.direction_);
 		if ( is_same_direction< 0)
 			return false;
-
-
-
 
 		// Accumulate arc
 		float accumulator = 0.0f;
