@@ -27,7 +27,7 @@ int main()
 	// Rendering
 	Mat rst=scene.Rendering();
 
-	tree.Print();
+	//tree.Print();
 
 	// Display result
 	imshow("Rendering Result", rst);

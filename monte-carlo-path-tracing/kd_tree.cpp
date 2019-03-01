@@ -115,7 +115,6 @@ Patch KdTree::NearestSearch(Ray& ray)
 {
 	KdNode node_temp;
 	stack<KdNode> s;
-
 	s.push(*root_);
 
 	do
@@ -155,8 +154,7 @@ void KdTree::Print()
 		}
 		file << endl;
 	}
-	file.close();
-	
+	file.close();	
 }
 
 int temp = 0;
