@@ -18,8 +18,7 @@ vector<string> split(string dat, string separator);
 
 
 class Objs {
-public:	
-	
+public:		
 	vector<Material> mtls_;
 	vector<string> objs_name_;
 	vector<Patch> f_;

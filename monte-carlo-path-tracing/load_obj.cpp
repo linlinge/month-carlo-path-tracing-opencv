@@ -50,8 +50,8 @@ void Objs::LoadObjs(string filename)
 	ifstream f(filename);
 	string line;
 	int flag = 0;
-	int temp_mtl_id;
-	int temp_obj_name_id;
+	int temp_mtl_id=INT_MAX;
+	int temp_obj_name_id=INT_MAX;
 
 	while (getline(f, line))
 	{
@@ -126,9 +126,12 @@ void Objs::LoadObjs(string filename)
 			V3 v3 = v1.Cross(v2);
 			f_temp.normal_ = v3.GetNorm();
 			
-			// store obj_name_id_
-			f_temp.obj_name_id_ = temp_obj_name_id;
-			f_temp.mtl_id_ = temp_mtl_id;
+			// store obj_name_id_	
+			if(temp_obj_name_id!=INT_MAX)
+				f_temp.obj_name_id_ = temp_obj_name_id;
+
+			if(temp_mtl_id!=INT_MAX)
+				f_temp.mtl_id_ = temp_mtl_id;
 
 			// store Patch
 			f_.push_back(f_temp);
@@ -155,11 +158,15 @@ void Objs::LoadObjs(string filename)
 		}
 	}
 
-	// get properties
+	// get properties( center_ )
 	GetProperties();
 
 	// build kd-tree
-	// tree.Build(f_,0);
+	 tree.Build(f_,0);
+	 Ray ray;
+	 ray.origin_ = V3(0, 0, 0);
+	 ray.direction_ = V3(-10, 0.46278, 10);
+	 tree.NearestSearch(ray);
 
 
 

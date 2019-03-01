@@ -30,7 +30,7 @@ KdNode* KdTree::Build(vector<Patch>& f,int depth)
 	node->box_ = max_box;
 
 	// leaf node or not
-	if (depth > MAX_DEPTH || f.size()==0)
+	if (depth > MAX_DEPTH || f.size()==1)
 	{
 		node->leaf_val_ = f;
 		return node;
@@ -93,6 +93,19 @@ KdNode* KdTree::Build(vector<Patch>& f,int depth)
 		break;
 	}	
 
+	cout << "left" << endl;
+	for (auto& temp : left)
+	{
+		cout << temp.center_.x << " " << temp.center_.y << " " << temp.center_.z << endl;
+	}
+	cout << "right" << endl;
+	for (auto& temp : right)
+	{
+		cout << temp.center_.x << " " << temp.center_.y << " " << temp.center_.z << endl;
+	}
+	cout << endl;
+	cout << endl;
+
 	if (left.size() > 0)
 		node->left_ = Build(left, depth + 1);
 	else
@@ -118,24 +131,33 @@ Patch KdTree::NearestSearch(Ray& ray)
 	s.push(*root_);
 
 	do
-	{
-		//left child 
-		while (s.top().left_ != NULL) s.push(*s.top().left_);
+	{	
+		//left child
+		if(s.top().left_!=NULL && *s.top().left_!=node_temp && s.top().right_ != NULL && *s.top().right_ != node_temp)
+			while (s.top().left_ != NULL) s.push(*s.top().left_);
+		else if (s.top().right_ != NULL && *s.top().right_ == node_temp)
+		{
+			node_temp = s.top();
+			cout << s.top().id_ << endl;
+			s.pop();
+			if (s.top() == *root_)
+				break;
+		}
+		
 
 		// left end, right child
 		/// leaf node
 		if (s.top().right_ == NULL)
 		{
+			node_temp = s.top();
+			cout << s.top().id_ << endl;
 			s.pop(); 
 		}
 		else
 		{
 			s.push(*s.top().right_);
-		}
-		
-
+		}	
 	} while (s.top() != *root_);
-
 
 	return Patch();
 }
