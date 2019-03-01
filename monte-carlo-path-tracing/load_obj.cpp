@@ -159,7 +159,9 @@ void Objs::LoadObjs(string filename)
 	GetProperties();
 
 	// build kd-tree
-	tree.Build(f_,0);
+	// tree.Build(f_,0);
+
+
 
 	// test bounding box
 	ofstream file;
