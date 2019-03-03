@@ -47,6 +47,8 @@ public:
 	
 	KdNode* Build(vector<Patch>& f, int depth);
 	Patch NearestSearch(Ray& ray);
+	KdNode* NearestSearchRecursive(KdNode* node);
+
 	void Print();
 	void GetPrint(KdNode* head);
 };

@@ -131,37 +131,37 @@ Patch KdTree::NearestSearch(Ray& ray)
 	s.push(*root_);
 
 	do
-	{	
-		//left child
-		if(s.top().left_!=NULL && *s.top().left_!=node_temp && s.top().right_ != NULL && *s.top().right_ != node_temp)
-			while (s.top().left_ != NULL) s.push(*s.top().left_);
-		else if (s.top().right_ != NULL && *s.top().right_ == node_temp)
-		{
-			node_temp = s.top();
-			cout << s.top().id_ << endl;
-			s.pop();
-			if (s.top() == *root_)
-				break;
-		}
-		
+	{
+		// left child
+		while (s.top().left_ != NULL) s.push(*s.top().left_);
+		cout << s.top().id_ << endl;
+		s.pop();
 
-		// left end, right child
-		/// leaf node
-		if (s.top().right_ == NULL)
-		{
-			node_temp = s.top();
-			cout << s.top().id_ << endl;
-			s.pop(); 
-		}
-		else
+		// father output
+		cout << s.top().id_ << endl;		
+
+		// right child
+		if (s.top().right_ != NULL)
 		{
 			s.push(*s.top().right_);
-		}	
+		}
 	} while (s.top() != *root_);
 
 	return Patch();
 }
 
+KdNode* KdTree::NearestSearchRecursive(KdNode* node)
+{
+
+	if (node)
+	{
+		NearestSearchRecursive(node->left_);
+		cout << node->id_ << endl;
+		NearestSearchRecursive(node->right_);
+	}
+	return NULL;
+	
+}
 void KdTree::Print()
 {
 	id_record_.resize(max_depth_+1);
