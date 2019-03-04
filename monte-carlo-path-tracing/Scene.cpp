@@ -46,13 +46,16 @@ Mat Scene::Rendering()
 	return result;
 }
 
+// trace one ray 
 V3 Scene::RayTracing(Ray& ray)
 {
 	V3 color;
 
-	tree.NearestSearch(ray);
-	//tree.NearestSearchRecursive(tree.root_);
+	// Get nearest patch
+	Patch nearest_patch=tree.NearestSearchByLevel(ray);
 	
+
+
 	return color;
 }
 

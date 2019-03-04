@@ -7,6 +7,8 @@
 \usepackage{float}
 \usepackage{cases}
 \usepackage{multirow}
+\usepackage{algorithm}  
+\usepackage{algorithmic}
 
 \usepackage{listings}
 \usepackage{xcolor}
@@ -170,6 +172,26 @@ kd-tree在构造时满足一下任意条件则截止：
 \end{center}
 \end{figure}
 \end{itemize}
+\subsubsection{Kd-Tree的最近表面搜索策略}
+本文中用到的最近表面的搜索策略是在广度优先搜索的基础上，分层的进行搜索，其伪代码如下所示：
+\begin{algorithm}[!h]
+	\caption{Nearest Surface Search by Level}%算法标题
+	\begin{algorithmic}[1]%一行一个标行号
+		\STATE $B_s =$ Get current buffer size
+		\FOR{$i =$ 0 to $B_s$}
+		\IF{ It is leaf node }
+		\IF{ This node is more close }
+		\STATE Store this node
+		\ENDIF		
+		\ELSE
+		\STATE Insert two children
+		\ENDIF
+		\STATE Remove this first $B_s$ number of node
+		\ENDFOR
+	\end{algorithmic}
+\end{algorithm}
+
+
 
 \subsection{相机光线的产生}
 由于从相机出发逆向跟踪光路能够避免计算无法被看到的部分，从而大大降低计算量。下面介绍了如何从相机出发产生初始的逆向光线。

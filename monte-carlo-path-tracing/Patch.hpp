@@ -20,16 +20,31 @@ public:
 	int obj_name_id_;
 	int mtl_id_;
 	AABB box_;
+	V3 intersect_point_;
 
+	Patch& operator=(Patch& dat)
+	{
+		v_id_ = dat.v_id_;
+		vt_id_ = dat.vt_id_;
+		vn_id_ = dat.vn_id_;
 
+		normal_ = dat.normal_;
+		center_ = dat.center_;
+		obj_name_id_ = dat.obj_name_id_;
+		mtl_id_ = dat.mtl_id_;
+		box_ = dat.box_;
+		intersect_point_ = dat.intersect_point_;
 
-	bool IsIntersect(Ray& ray)
+		return *this;
+	}
+
+	float IsIntersect(Ray& ray)
 	{
 		// step1: Solve for the intersection between ray and plane
 		Plane plane1(v_[v_id_[0]], v_[v_id_[1]], v_[v_id_[2]]);
 		Line line1(ray.origin_,ray.direction_);
-		V3 intersect_point = plane1.IsIntersect(line1);
-		float is_same_direction = (intersect_point - ray.origin_).Dot(ray.direction_);
+		intersect_point_ = plane1.IsIntersect(line1);
+		float is_same_direction = (intersect_point_ - ray.origin_).Dot(ray.direction_);
 		if ( is_same_direction< 0)
 			return false;
 
@@ -37,15 +52,19 @@ public:
 		float accumulator = 0.0f;
 		for (int i = 0; i < v_id_.size()-1; i++)
 		{
-			Angle angle(intersect_point, v_[v_id_[i]], v_[v_id_[i + 1]]);
+			Angle angle(intersect_point_, v_[v_id_[i]], v_[v_id_[i + 1]]);
 			accumulator += angle.arc_;
 		}
-		Angle angle(intersect_point, v_[v_id_[0]],v_[v_id_[v_id_.size()-1]]);
+		Angle angle(intersect_point_, v_[v_id_[0]],v_[v_id_[v_id_.size()-1]]);
 		accumulator += angle.arc_;
 
-		if (abs(accumulator - 2*PI) < 0.01)
-			return true;
+		if (abs(accumulator - 2 * PI) < 0.01)
+		{
+			return ray.origin_.Distance(intersect_point_);
+		}		
 		else
-			return false;
+		{
+			return -1.0f;
+		}
 	}
 };

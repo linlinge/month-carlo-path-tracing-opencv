@@ -163,40 +163,43 @@ void Objs::LoadObjs(string filename)
 
 	// build kd-tree
 	 tree.Build(f_,0);
-	 Ray ray;
-	 ray.origin_ = V3(0, 0, 0);
-	 ray.direction_ = V3(-10, 0.46278, 10);
-	 tree.NearestSearch(ray);
+
+	 //// test kd-tree search
+	 //Ray ray;
+	 //ray.origin_ = V3(0, 0, 0);
+	 //ray.direction_ = V3(-8.61456, 11.3297, 9.29966);
+	 ////tree.NearestSearch(ray);
+	 //tree.NearestSearchByLevel(ray);
 
 
 
-	// test bounding box
-	ofstream file;
-	file.open("../output/bounding_box_check.txt");
-	auto temp = f_[500];
-	for (auto& temp_id : temp.v_id_)
-		file << v_[temp_id].x << " " << v_[temp_id].y << " " << v_[temp_id].z << endl;
+	//// test bounding box
+	//ofstream file;
+	//file.open("../output/bounding_box_check.txt");
+	//auto temp = f_[500];
+	//for (auto& temp_id : temp.v_id_)
+	//	file << v_[temp_id].x << " " << v_[temp_id].y << " " << v_[temp_id].z << endl;
 
-	file << temp.box_.top_left_.x << " " << temp.box_.top_left_.y << " " << temp.box_.top_left_.z << endl;
-	file << temp.box_.bottom_right_.x << " " << temp.box_.bottom_right_.y << " " << temp.box_.bottom_right_.z << endl;
+	//file << temp.box_.top_left_.x << " " << temp.box_.top_left_.y << " " << temp.box_.top_left_.z << endl;
+	//file << temp.box_.bottom_right_.x << " " << temp.box_.bottom_right_.y << " " << temp.box_.bottom_right_.z << endl;
 
-	file.close();
+	//file.close();
 
-	// test kd-tree
-	file.open("../output/kd-tree-test.txt");
-	V3* temp_v = &(tree.root_->box_.top_left_);
-	file << temp_v->x << " " << temp_v->y << " " << temp_v->z << endl;
-	temp_v = &(tree.root_->box_.bottom_right_);
-	file << temp_v->x << " " << temp_v->y << " " << temp_v->z << endl;
-	temp_v = &(tree.root_->left_->box_.top_left_);
-	file << temp_v->x << " " << temp_v->y << " " << temp_v->z << endl;
-	temp_v = &(tree.root_->left_->box_.bottom_right_);
-	file << temp_v->x << " " << temp_v->y << " " << temp_v->z << endl;
-	temp_v = &(tree.root_->right_->box_.top_left_);
-	file << temp_v->x << " " << temp_v->y << " " << temp_v->z << endl;
-	temp_v = &(tree.root_->right_->box_.bottom_right_);
-	file << temp_v->x << " " << temp_v->y << " " << temp_v->z << endl;
-	file.close();
+	//// test kd-tree
+	//file.open("../output/kd-tree-test.txt");
+	//V3* temp_v = &(tree.root_->box_.top_left_);
+	//file << temp_v->x << " " << temp_v->y << " " << temp_v->z << endl;
+	//temp_v = &(tree.root_->box_.bottom_right_);
+	//file << temp_v->x << " " << temp_v->y << " " << temp_v->z << endl;
+	//temp_v = &(tree.root_->left_->box_.top_left_);
+	//file << temp_v->x << " " << temp_v->y << " " << temp_v->z << endl;
+	//temp_v = &(tree.root_->left_->box_.bottom_right_);
+	//file << temp_v->x << " " << temp_v->y << " " << temp_v->z << endl;
+	//temp_v = &(tree.root_->right_->box_.top_left_);
+	//file << temp_v->x << " " << temp_v->y << " " << temp_v->z << endl;
+	//temp_v = &(tree.root_->right_->box_.bottom_right_);
+	//file << temp_v->x << " " << temp_v->y << " " << temp_v->z << endl;
+	//file.close();
 }
 
 void Objs::LoadMaterial(string filename)
