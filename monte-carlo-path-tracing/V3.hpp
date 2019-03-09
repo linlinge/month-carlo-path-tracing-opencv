@@ -3,6 +3,7 @@
 #include <vector>
 using namespace std;
 #define PI 3.1415926535897
+#define MAX2(a,b) (a>b? a:b)
 
 class V3
 {
@@ -52,13 +53,32 @@ public:
 		return sqrt(pow(x - dat.x, 2.0f) + pow(y - dat.y, 2.0f) + pow(z - dat.z, 2.0f));
 	}
 
-	V3& operator *(float scale)
+	V3 operator *(float scale)
 	{
-		x = x * scale;
-		y = y * scale;
-		z = z * scale;
-		return *this;
+		V3 temp;
+		temp.x = x * scale;
+		temp.y = y * scale;
+		temp.z = z * scale;
+		return temp;
 	}
+
+	friend V3 operator*(float scale, V3 dat)
+	{
+		dat.x = scale * dat.x;
+		dat.y = scale * dat.y;
+		dat.z = scale * dat.z;
+		return dat;
+	}
+
+	V3 operator*(V3 dat)
+	{
+		dat.x = dat.x*x;
+		dat.y = dat.y*y;
+		dat.z = dat.z*z;
+		return dat;
+	}
+
+
 	V3& operator /(float scale)
 	{
 		x = x / scale;
@@ -91,10 +111,11 @@ public:
 		return theta;
 	}
 
-	float Dot(V3& dat)
+	friend float Dot(V3 dat1,V3 dat2)
 	{	
-		return (x*dat.x+y*dat.y+z*dat.z);
+		return (dat1.x*dat2.x+dat1.y*dat2.y+dat1.z*dat2.z);
 	}
+
 
 	V3 Cross(V3& dat)
 	{
@@ -104,6 +125,7 @@ public:
 		rst.z = x * dat.y - dat.x*y;
 		return rst;
 	}
+
 
 	V3 GetNorm()
 	{
@@ -126,7 +148,10 @@ public:
 	{
 		x = y = z = INT_MAX;
 	}
+
+	friend ostream& operator <<(ostream& os, const V3 dat)
+	{
+		os << dat.x << " " << dat.y << " " << dat.z;
+		return os;
+	}
 };
-
-
-

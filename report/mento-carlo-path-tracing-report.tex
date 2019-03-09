@@ -68,13 +68,31 @@
 \begin{document}
 \maketitle
 \section{预备知识}
-\subsection{光照类型}
+\subsection{光照模型}
 \begin{itemize}
 \item[（1）]{\bm{环境光}}：环境光无处不在，无论表面的法向如何，明暗程度都是一致的。
 \item[（2）]{\bm{点光源}}：光源来自某个点，且向四面八方辐射。
 \item[（3）]{\bm{平行光}}：又称为镜面光，这种光是互相平行的。从手电筒或者太阳出来的光都可以被看做平行光。
 \item[（4）]{\bm{聚光灯}}：这种光源的光线从一个锥体中射出，在被照射的物体上产生聚光的效果。使用这种光源需要指定光的射出方向以及锥体的顶角$\alpha$。
 \end{itemize}
+
+\subsubsection{BlinnPhong光照模型（针对反射光线）}
+\begin{itemize}
+\item[（1）]{发射光} \mbox{}\\
+$$C_{e}=M_{e}$$
+$C_e$：发射颜色 \\
+$M_e$：发射材质颜色
+
+\item[（2）]{漫反射} \mbox{}\\
+定义漫反射因子$\alpha$如下：
+$$\alpha=max\{0,N \cdot L\}$$
+其中$L$是光线，$N$是定点法线向量。
+$$C_{d}=L_{d}M_{d}\alpha$$
+
+
+\end{itemize}
+
+
 \subsection{obj文件介绍}
 obj文件并不考虑物体的大小，所以不同的物体读入的坐标范围可能变化很大，因此为了显示的方便需将其转为当前绘制坐标系中。
 \begin{itemize}

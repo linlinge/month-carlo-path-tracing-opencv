@@ -9,8 +9,20 @@
 using namespace std;
 using namespace cv;
 #define PI 3.1415926535897
-class Camera
+
+extern vector<Material> mtls_;
+
+class Intersection
 {
+public:
+	bool is_hit_;
+	V3 point_;
+	V3 normal_;
+	Ray incident_light_;
+};
+
+class Camera
+{    
 public:
 	V3 position_;
 	V3 lookat_;
@@ -42,7 +54,15 @@ public:
 	}
 };
 
-class SphereLight
+
+class Object
+{
+public:
+
+	virtual Intersection IsIntersect(Ray& ray)=0;
+};
+ 
+class SphereLight:public Object
 {
 public:
 	V3 center_;
@@ -62,9 +82,18 @@ public:
 		Le_ = dat.Le_;
 		return *this;
 	}
+
+	virtual Intersection IsIntersect(Ray& ray)
+	{
+		Intersection itsc;
+		
+		
+
+		return itsc;
+	}
 };
 
-class QuadLight
+class QuadLight:public Object
 {
 public:
 	V3 center_;
@@ -78,6 +107,12 @@ public:
 		normal_ = normal;
 		size_[0] = size[0]; size_[1] = size[1];
 		Le_ = Le;
+	}
+
+	virtual Intersection IsIntersect(Ray& ray)
+	{
+
+		return Intersection();
 	}
 };
 
@@ -98,4 +133,5 @@ public:
 
 	Mat Rendering();
 	V3 RayTracing(Ray& ray);
+	V3 IlluminationModel(Ray& ray, Patch& patch,V3& intersection);
 };

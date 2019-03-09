@@ -2,6 +2,7 @@
 vector<V3> v_;
 vector<V3> vt_;
 vector<V3> vn_;
+vector<Material> mtls_;
 
 // global function definition
 void remove_adjacent_duplicate(string& dat1, string dat2)

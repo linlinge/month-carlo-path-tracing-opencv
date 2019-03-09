@@ -1,6 +1,4 @@
 #include "Material.h"
-
-
 // Material Function Definition
 Material& Material::operator=(Material& dat)
 {

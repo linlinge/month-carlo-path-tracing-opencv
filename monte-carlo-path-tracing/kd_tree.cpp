@@ -182,10 +182,9 @@ Patch KdTree::NearestSearch(Ray& ray)
 	return nearest_patch;
 }
 
-Patch KdTree::NearestSearchByLevel(Ray& ray)
+bool KdTree::NearestSearchByLevel(Ray& ray,Patch& out_nearest_patch, V3& out_intersection_point)
 {
 	vector<KdNode> v;
-	Patch nearest_patch;
 	float min_dist = INT_MAX;
 	int min_id = INT_MAX;
 	v.push_back(*root_);
@@ -206,14 +205,15 @@ Patch KdTree::NearestSearchByLevel(Ray& ray)
 				{
 					/// leaf node ?
 					if (v[i].left_ == NULL && v[i].right_ == NULL)
+						/// leaf node
 					{
 						float current_dist = v[i].leaf_val_[0].IsIntersect(ray);
 						if (current_dist>0 && current_dist < min_dist)
 						{
 							min_dist = current_dist;
 							min_id = v[i].id_;
-							nearest_patch = v[i].leaf_val_[0];
-							
+							out_nearest_patch = v[i].leaf_val_[0];
+							out_intersection_point = v[i].leaf_val_[0].intersect_point_;
 						}
 					}
 					else
@@ -233,14 +233,18 @@ Patch KdTree::NearestSearchByLevel(Ray& ray)
 		}
 	}
 	else
-		return Patch();
-	if (min_id != INT_MAX)
+		return false;
+
+	/*if (min_id != INT_MAX)
 	{
 		cout << min_dist << endl;
 		cout << min_id << endl;
-	}
+	}*/
 	
-	return nearest_patch;
+	if (min_id != INT_MAX)
+		return true;
+	else
+		return false;
 }
 
 
@@ -276,11 +280,6 @@ void KdTree::Print()
 int temp = 0;
 void KdTree::GetPrint(KdNode* head)
 {
-	/*temp++;
-	cout << temp << endl;
-	if (temp == 17)
-		temp = 17;*/
-
 	if (head != NULL)
 	{
 		id_record_[head->depth_].push_back(head->id_);

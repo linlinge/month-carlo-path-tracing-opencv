@@ -1,17 +1,11 @@
 #pragma once
 #include "V3.hpp"
-
-class RayIntersection
-{
-public:
-	float t;
-	V3 color;
-};
-
 class Ray
 {
 public:
 	V3 origin_, direction_;	
+	V3 color_;
+
 
 	Ray operator=(Ray& dat)
 	{

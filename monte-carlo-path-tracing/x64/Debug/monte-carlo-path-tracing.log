@@ -1,7 +1,18 @@
-﻿  kd_tree.cpp
-e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\v3.hpp(127): warning C4305: '=': truncation from 'int' to 'float'
-e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\kd_tree.cpp(131): warning C4305: 'initializing': truncation from 'int' to 'float'
-e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\kd_tree.cpp(189): warning C4305: 'initializing': truncation from 'int' to 'float'
-e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\kd_tree.cpp(199): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\aabb.hpp(61): warning C4715: 'AABB::GetMaxAxis': not all control paths return a value
+﻿  Scene.cpp
+e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\v3.hpp(149): warning C4305: '=': truncation from 'int' to 'float'
+e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\scene.h(39): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\scene.cpp(27): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\scene.cpp(36): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\scene.cpp(37): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\scene.cpp(45): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
+          with
+          [
+              _Tp=uchar
+          ]
+  main.cpp
+e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\v3.hpp(149): warning C4305: '=': truncation from 'int' to 'float'
+e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\scene.h(39): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\main.cpp(23): warning C4305: 'argument': truncation from 'double' to 'float'
+e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\main.cpp(25): warning C4305: 'argument': truncation from 'double' to 'float'
+  Generating Code...
   monte-carlo-path-tracing.vcxproj -> E:\ZJU_LESSON\CG\Homework2\month-carlo-path-tracing-opencv\x64\Debug\monte-carlo-path-tracing.exe

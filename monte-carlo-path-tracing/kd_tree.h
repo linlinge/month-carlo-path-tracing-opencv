@@ -47,7 +47,7 @@ public:
 	
 	KdNode* Build(vector<Patch>& f, int depth);
 	Patch NearestSearch(Ray& ray);		// middle search
-	Patch NearestSearchByLevel(Ray& ray); // level search
+	bool NearestSearchByLevel(Ray& ray, Patch& out_nearest_patch, V3& out_intersection_point); // level search
 	KdNode* NearestSearchRecursive(KdNode* node);
 
 	void Print();

@@ -15,11 +15,8 @@ using namespace std;
 void remove_adjacent_duplicate(string& dat1, string dat2);
 vector<string> split(string dat, string separator);
 
-
-
 class Objs {
-public:		
-	vector<Material> mtls_;
+public:
 	vector<string> objs_name_;
 	vector<Patch> f_;
 

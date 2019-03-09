@@ -15,7 +15,7 @@ using namespace cv;
 
 int main()
 {	
-	//// Initial Scene
+	// Initial Scene
 	Scene scene;
 
 	scene.LoadObjs("./dataset/Scene01/cup.obj");
@@ -33,6 +33,8 @@ int main()
 	// Display result
 	imshow("Rendering Result", rst);
 	waitKey(0);
+
+	
 
 
 

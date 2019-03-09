@@ -44,7 +44,7 @@ public:
 		Plane plane1(v_[v_id_[0]], v_[v_id_[1]], v_[v_id_[2]]);
 		Line line1(ray.origin_,ray.direction_);
 		intersect_point_ = plane1.IsIntersect(line1);
-		float is_same_direction = (intersect_point_ - ray.origin_).Dot(ray.direction_);
+		float is_same_direction = Dot(intersect_point_ - ray.origin_,(ray.direction_));
 		if ( is_same_direction< 0)
 			return false;
 
