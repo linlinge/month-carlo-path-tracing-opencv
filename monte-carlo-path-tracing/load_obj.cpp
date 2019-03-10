@@ -124,7 +124,7 @@ void Objs::LoadObjs(string filename)
 			// caculate normal
 			V3 v1 = p_temp[0] - p_temp[1];
 			V3 v2 = p_temp[1] - p_temp[2];
-			V3 v3 = v1.Cross(v2);
+			V3 v3 = Cross(v1, v2);
 			f_temp.normal_ = v3.GetNorm();
 			
 			// store obj_name_id_	
@@ -163,14 +163,14 @@ void Objs::LoadObjs(string filename)
 	GetProperties();
 
 	// build kd-tree
-	 tree.Build(f_,0);
+	tree.Build(f_,0);
 
-	 //// test kd-tree search
-	 //Ray ray;
-	 //ray.origin_ = V3(0, 0, 0);
-	 //ray.direction_ = V3(-8.61456, 11.3297, 9.29966);
-	 ////tree.NearestSearch(ray);
-	 //tree.NearestSearchByLevel(ray);
+	//// test kd-tree search
+	//Ray ray;
+	//ray.origin_ = V3(0, 0, 0);
+	//ray.direction_ = V3(-8.61456, 11.3297, 9.29966);
+	////tree.NearestSearch(ray);
+	//tree.NearestSearchByLevel(ray);
 
 
 
@@ -284,12 +284,12 @@ int Objs::GetMtlId(string str)
 
 void Objs::Clear()
 {
-	v_.clear();;
+	v_.clear();
 	vt_.clear();
-	vn_.clear();;
-	mtls_.clear();;
-	objs_name_.clear();;
-	f_.clear();;	
+	vn_.clear();
+	mtls_.clear();
+	objs_name_.clear();
+	f_.clear();
 }
 
 void Objs::GetProperties()

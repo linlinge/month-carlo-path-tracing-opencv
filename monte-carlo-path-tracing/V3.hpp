@@ -48,9 +48,9 @@ public:
 	{
 		return sqrt(pow(x - dat.x, 2.0f) + pow(y - dat.y, 2.0f));
 	}
-	float Distance(V3 & dat)
+	friend float Distance(V3& dat1,V3& dat2)
 	{
-		return sqrt(pow(x - dat.x, 2.0f) + pow(y - dat.y, 2.0f) + pow(z - dat.z, 2.0f));
+		return sqrt(pow(dat1.x - dat2.x, 2.0f) + pow(dat1.y - dat2.y, 2.0f) + pow(dat1.z - dat2.z, 2.0f));
 	}
 
 	V3 operator *(float scale)
@@ -86,13 +86,33 @@ public:
 		z = z / scale;
 		return *this;
 	}
-	V3& operator +(V3 & dat)
+	V3 operator +(V3 dat)
 	{
 		x = x + dat.x;
 		y = y + dat.y;
 		z = z + dat.z;
 		return *this;
 	}
+
+	V3 operator+ (float dat)
+	{
+		V3 temp;
+		temp.x = x + dat;
+		temp.y = y + dat;
+		temp.z = z + dat;
+
+		return temp;
+	}
+
+	friend V3 operator+(float dat1, V3 dat2)
+	{
+		V3 temp;
+		temp.x = dat1 + dat2.x;
+		temp.y = dat1 + dat2.y;
+		temp.z = dat1 + dat2.z;
+		return temp;
+	}
+
 
 	V3  operator -(V3 & dat)
 	{
@@ -103,10 +123,10 @@ public:
 		return rst;
 	}
 
-	float GetArc(V3& dat)
+	friend float GetArc(V3 dat1, V3 dat2)
 	{
-		float arc = x * dat.x + y * dat.y + z * dat.z;
-		float cos_theta= arc / sqrt(x*x + y * y + z * z) / sqrt(dat.x*dat.x + dat.y*dat.y + dat.z*dat.z);
+		float arc = dat1.x * dat2.x + dat1.y * dat2.y + dat1.z * dat2.z;
+		float cos_theta= arc / sqrt(dat1.x*dat1.x + dat1.y * dat1.y + dat1.z * dat1.z) / sqrt(dat2.x*dat2.x + dat2.y*dat2.y + dat2.z*dat2.z);
 		float theta=acos(cos_theta);		
 		return theta;
 	}
@@ -117,12 +137,12 @@ public:
 	}
 
 
-	V3 Cross(V3& dat)
+	friend V3 Cross(V3& dat1, V3& dat2)
 	{
 		V3 rst;
-		rst.x = y * dat.z - dat.y*z;
-		rst.y = dat.x*z - x * dat.z;
-		rst.z = x * dat.y - dat.x*y;
+		rst.x = dat1.y*dat2.z - dat2.y*dat1.z;
+		rst.y = dat2.x*dat1.z - dat1.x*dat2.z;
+		rst.z = dat1.x*dat2.y - dat1.y*dat2.x;
 		return rst;
 	}
 

@@ -3,12 +3,13 @@
 #include "V3.hpp"
 #include "AABB.hpp"
 #include "BasicGeometry.h"
+#include "Intersection.hpp"
 using namespace std;
-
 
 extern vector<V3> v_;
 extern vector<V3> vt_;
 extern vector<V3> vn_;
+
 
 class Patch {
 public:
@@ -38,33 +39,42 @@ public:
 		return *this;
 	}
 
-	float IsIntersect(Ray& ray)
+	Intersection IsIntersect(Ray& ray)
 	{
+		Intersection itsc;
+		itsc.type_ = PATCH;
+
 		// step1: Solve for the intersection between ray and plane
 		Plane plane1(v_[v_id_[0]], v_[v_id_[1]], v_[v_id_[2]]);
 		Line line1(ray.origin_,ray.direction_);
 		intersect_point_ = plane1.IsIntersect(line1);
 		float is_same_direction = Dot(intersect_point_ - ray.origin_,(ray.direction_));
-		if ( is_same_direction< 0)
-			return false;
+		if (is_same_direction < 0)
+		{
+			itsc.is_hit_ = false;
+		}
 
 		// Accumulate arc
 		float accumulator = 0.0f;
 		for (int i = 0; i < v_id_.size()-1; i++)
 		{
 			Angle angle(intersect_point_, v_[v_id_[i]], v_[v_id_[i + 1]]);
-			accumulator += angle.arc_;
+			accumulator  += angle.arc_;
 		}
 		Angle angle(intersect_point_, v_[v_id_[0]],v_[v_id_[v_id_.size()-1]]);
 		accumulator += angle.arc_;
 
 		if (abs(accumulator - 2 * PI) < 0.01)
 		{
-			return ray.origin_.Distance(intersect_point_);
+			itsc.is_hit_ = true;
+			itsc.distance_ = Distance(ray.origin_, intersect_point_);
+			itsc.point_ = intersect_point_;			
 		}		
 		else
 		{
-			return -1.0f;
+			itsc.is_hit_ = false;			
+
 		}
+		return itsc;
 	}
 };

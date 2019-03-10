@@ -6,10 +6,10 @@ public:
 	V3 origin_, direction_;	
 	V3 color_;
 
-
 	Ray operator=(Ray& dat)
 	{
 		origin_ = dat.origin_;
 		direction_ = dat.direction_;
+		return *this;
 	}
 };

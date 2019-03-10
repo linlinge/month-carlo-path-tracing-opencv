@@ -36,6 +36,6 @@ Angle::Angle(V3& mid, V3& left, V3& right)
 {
 	V3 line1 = left - mid;
 	V3 line2 = right - mid;
-	arc_=line1.GetArc(line2);
+	arc_=GetArc(line1,line2);
 	angle_ = arc_ * 180.0 / PI;
 }

@@ -136,6 +136,7 @@
   <ItemGroup>
     <ClInclude Include="AABB.hpp" />
     <ClInclude Include="IlluminationModel.hpp" />
+    <ClInclude Include="Intersection.hpp" />
     <ClInclude Include="kd_tree.h" />
     <ClInclude Include="BasicGeometry.h" />
     <ClInclude Include="load_obj.h" />

@@ -19,25 +19,24 @@ void Scene::AddQuadLight(QuadLight dat)
 Mat Scene::Rendering()
 {
 	// Define
-	Mat result(camera_.image_width_,camera_.image_height_,CV_8UC3,cv::Scalar(0,0,0));
+	Mat result(camera_.image_pixel_width_,camera_.image_pixel_height_,CV_8UC3,cv::Scalar(0,0,0));
 	/*imshow("hi", result);
 	waitKey(0);*/
 
-	// generate rays in each pixel
-	float ratio = camera_.image_width_ * 1.0 / camera_.image_height_;
-	for (int i = 0; i < camera_.image_width_; i++)
+
+
+	// generate rays in each pixel	
+	for (int i = 0; i < camera_.image_pixel_width_; i++)
 	{
-		for (int j = 0; j < camera_.image_height_; j++)
+		for (int j = 0; j < camera_.image_pixel_height_; j++)
 		{
 			// Define
 			V3 color;
-
-			// Generate camera ray			
-			float Px = (2 * (i + 0.5) / camera_.image_width_ - 1)*ratio*tan(camera_.fovy_arc_ / 2.0);
-			float Py = (1 - 2 * (j + 0.5)) / tan(camera_.fovy_arc_);
+			// Generate camera/primary ray					
+			V3 pos = V3(camera_.image_origin_.x + camera_.pixel_width_ / 2.0f*i, camera_.image_origin_.y + camera_.pixel_width_ / 2.0f*j, camera_.image_origin_.z);						
 			Ray ray;
 			ray.origin_ = camera_.position_;
-			ray.direction_ = (V3(Px, Py, -1) - camera_.position_).GetNorm();
+			ray.direction_ = (pos - camera_.position_).GetNorm();
 
 			// Ray Tracing
 			color=RayTracing(ray);
@@ -53,12 +52,10 @@ V3 Scene::RayTracing(Ray& ray)
 {
 	V3 color;
 	// Get Nearest Patch
-	Patch nearest_patch;
-	V3 intersection;
-	bool temp=tree.NearestSearchByLevel(ray,nearest_patch, intersection);	
-	if (temp == true)
+	Intersection itsc=tree.NearestSearchByLevel(ray);	
+	if (itsc.is_hit_ == true)
 	{
-		color=IlluminationModel(ray, nearest_patch, intersection);
+		color=IlluminationModel(ray, itsc);
 	}	
 
 
@@ -66,16 +63,16 @@ V3 Scene::RayTracing(Ray& ray)
 	return color;
 }
 
-V3 Scene::IlluminationModel(Ray& ray,Patch& patch,V3& intersection)
+V3 Scene::IlluminationModel(Ray& ray, Intersection itsc)
 {
 	// specular light: use blinn-phong model
-	V3 light_direction = (sphere_light_[0].center_ - intersection).GetNorm();
-	V3 view_direction = (camera_.position_ - intersection).GetNorm();
+	V3 light_direction = (sphere_light_[0].center_ - itsc.point_).GetNorm();
+	V3 view_direction = (camera_.position_ - itsc.point_).GetNorm();
 	V3 halfway_direction = (light_direction + view_direction).GetNorm();
 
 
-	Material& mtl_temp = mtls_[patch.mtl_id_];
-	V3 Rs = mtl_temp.Ks_*light_direction*pow(MAX2(0,Dot(patch.normal_,halfway_direction)), mtl_temp.Ns_);
+	Material& mtl_temp = mtls_[itsc.mtl_id_];
+	V3 Rs = mtl_temp.Ks_*light_direction*pow(MAX2(0,Dot(itsc.normal_,halfway_direction)), mtl_temp.Ns_);
 	
 	return Rs;
 	// diffuss light: 
