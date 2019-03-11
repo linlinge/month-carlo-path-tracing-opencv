@@ -4,7 +4,6 @@ class Ray
 {
 public:
 	V3 origin_, direction_;	
-	V3 color_;
 
 	Ray operator=(Ray& dat)
 	{

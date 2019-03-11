@@ -122,6 +122,15 @@ public:
 		rst.z = z - dat.z;
 		return rst;
 	}
+	V3 operator-(float dat)
+	{
+		V3 rst;
+		rst.x -= dat;
+		rst.y -= dat;
+		rst.z -= dat;
+		return rst;
+	}
+
 
 	friend float GetArc(V3 dat1, V3 dat2)
 	{

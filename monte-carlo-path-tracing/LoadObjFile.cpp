@@ -1,52 +1,6 @@
-#include "load_obj.h"
-vector<V3> v_;
-vector<V3> vt_;
-vector<V3> vn_;
-vector<Material> mtls_;
+#include "LoadObjFile.h"
 
-// global function definition
-void remove_adjacent_duplicate(string& dat1, string dat2)
-{
-	vector<int> pos;
-	int cur = dat1.find(dat2, 0);
-	if (cur != -1)
-	{
-		while (cur != -1)
-		{
-			if (cur != -1)
-				pos.push_back(cur);
-			cur = dat1.find(dat2, cur + 1);
-		}
-
-		// remove duplicate
-		int adjust = 0;
-		for (int i = 0; i < pos.size() - 1; i++)
-		{
-			if (pos[i] + 1 == pos[i + 1])
-			{
-				dat1.erase(pos[i] + adjust, 1);
-				adjust--;
-			}
-		}
-	}
-}
-
-vector<string> split(string dat, string separator)
-{
-	vector<string> rst;
-	int start, end;
-	do
-	{
-		start = dat.find(separator);
-		end = start + separator.size();
-		rst.push_back(dat.substr(0, start));
-		dat.erase(0, end);
-	} while (start != -1);
-	return rst;
-}
-
-// obj function definition
-void Objs::LoadObjs(string filename)
+void ObjFile::LoadObjs(string filename)
 {
 	ifstream f(filename);
 	string line;
@@ -161,49 +115,9 @@ void Objs::LoadObjs(string filename)
 
 	// get properties( center_ )
 	GetProperties();
-
-	// build kd-tree
-	tree.Build(f_,0);
-
-	//// test kd-tree search
-	//Ray ray;
-	//ray.origin_ = V3(0, 0, 0);
-	//ray.direction_ = V3(-8.61456, 11.3297, 9.29966);
-	////tree.NearestSearch(ray);
-	//tree.NearestSearchByLevel(ray);
-
-
-
-	//// test bounding box
-	//ofstream file;
-	//file.open("../output/bounding_box_check.txt");
-	//auto temp = f_[500];
-	//for (auto& temp_id : temp.v_id_)
-	//	file << v_[temp_id].x << " " << v_[temp_id].y << " " << v_[temp_id].z << endl;
-
-	//file << temp.box_.top_left_.x << " " << temp.box_.top_left_.y << " " << temp.box_.top_left_.z << endl;
-	//file << temp.box_.bottom_right_.x << " " << temp.box_.bottom_right_.y << " " << temp.box_.bottom_right_.z << endl;
-
-	//file.close();
-
-	//// test kd-tree
-	//file.open("../output/kd-tree-test.txt");
-	//V3* temp_v = &(tree.root_->box_.top_left_);
-	//file << temp_v->x << " " << temp_v->y << " " << temp_v->z << endl;
-	//temp_v = &(tree.root_->box_.bottom_right_);
-	//file << temp_v->x << " " << temp_v->y << " " << temp_v->z << endl;
-	//temp_v = &(tree.root_->left_->box_.top_left_);
-	//file << temp_v->x << " " << temp_v->y << " " << temp_v->z << endl;
-	//temp_v = &(tree.root_->left_->box_.bottom_right_);
-	//file << temp_v->x << " " << temp_v->y << " " << temp_v->z << endl;
-	//temp_v = &(tree.root_->right_->box_.top_left_);
-	//file << temp_v->x << " " << temp_v->y << " " << temp_v->z << endl;
-	//temp_v = &(tree.root_->right_->box_.bottom_right_);
-	//file << temp_v->x << " " << temp_v->y << " " << temp_v->z << endl;
-	//file.close();
 }
 
-void Objs::LoadMaterial(string filename)
+void ObjFile::LoadMaterial(string filename)
 {
 	ifstream f;
 	f.open(filename);
@@ -271,7 +185,7 @@ void Objs::LoadMaterial(string filename)
 	}
 }
 
-int Objs::GetMtlId(string str)
+int ObjFile::GetMtlId(string str)
 {
 	for (int i = 0; i < mtls_.size(); i++)
 	{
@@ -282,7 +196,7 @@ int Objs::GetMtlId(string str)
 	return -1;
 }
 
-void Objs::Clear()
+void ObjFile::Clear()
 {
 	v_.clear();
 	vt_.clear();
@@ -292,7 +206,7 @@ void Objs::Clear()
 	f_.clear();
 }
 
-void Objs::GetProperties()
+void ObjFile::GetProperties()
 {
 	for (auto& f_temp: f_)
 	{

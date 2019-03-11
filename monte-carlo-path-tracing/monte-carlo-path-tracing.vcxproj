@@ -127,21 +127,25 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BasicGeometry.cpp" />
-    <ClCompile Include="kd_tree.cpp" />
-    <ClCompile Include="load_obj.cpp" />
+    <ClCompile Include="Global.cpp" />
+    <ClCompile Include="KdTree.cpp" />
+    <ClCompile Include="LoadObjFile.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Material.cpp" />
+    <ClCompile Include="Objects.cpp" />
     <ClCompile Include="Scene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AABB.hpp" />
+    <ClInclude Include="Camera.hpp" />
+    <ClInclude Include="Global.h" />
     <ClInclude Include="IlluminationModel.hpp" />
     <ClInclude Include="Intersection.hpp" />
-    <ClInclude Include="kd_tree.h" />
+    <ClInclude Include="KdTree.h" />
     <ClInclude Include="BasicGeometry.h" />
-    <ClInclude Include="load_obj.h" />
+    <ClInclude Include="LoadObjFile.h" />
     <ClInclude Include="Material.h" />
-    <ClInclude Include="Patch.hpp" />
+    <ClInclude Include="Objects.h" />
     <ClInclude Include="Ray.hpp" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="V3.hpp" />

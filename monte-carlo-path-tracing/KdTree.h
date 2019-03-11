@@ -2,17 +2,18 @@
 #include <vector>
 #include "V3.hpp"
 #include "AABB.hpp"
-#include "Patch.hpp"
 #include "Ray.hpp"
 #include <iostream>
 #include <stack>
+#include "Objects.h"
+
 #define MAX_DEPTH 10
 using namespace std;
 
 class KdNode
 {
 public: 
-	vector<Patch> leaf_val_;
+	Object* leaf_val_;
 	float internal_val_;
 	int id_;
 	int depth_;
@@ -44,13 +45,10 @@ public:
 	KdNode * root_;
 	int  max_depth_;
 	vector<vector<int>> id_record_;	
-	KdNode* Build(vector<Patch>& f, int depth);
+	KdNode* Build(vector<Object*>& objs, int depth);
 	Patch NearestSearch(Ray& ray);		// middle search
 	Intersection NearestSearchByLevel(Ray& ray); // level search
 	KdNode* NearestSearchRecursive(KdNode* node);
 	void Print();
 	void GetPrint(KdNode* head);
 };
-
-
-extern KdTree tree;

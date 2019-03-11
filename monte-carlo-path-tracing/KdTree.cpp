@@ -1,17 +1,11 @@
-#include "kd_tree.h"
+#include "KdTree.h"
 #include <fstream>
 #include <iostream>
 using namespace std;
-
-KdTree tree;
 int number = 0;
 
-KdNode* KdTree::Build(vector<Patch>& f,int depth)
+KdNode* KdTree::Build(vector<Object*>& objs,int depth)
 {
-	//cout << depth << endl;
-	/*if (depth == 7)
-		depth = 7;*/
-
 	// store depth
 	max_depth_ = max_depth_ > depth ? max_depth_ : depth;
 
@@ -22,17 +16,17 @@ KdNode* KdTree::Build(vector<Patch>& f,int depth)
 
 	// find box for this node
 	AABB max_box;
-	max_box = f[0].box_;
-	for (int i = 1; i < f.size(); i++)
+	max_box = objs[0]->box_;
+	for (int i = 1; i < objs.size(); i++)
 	{
-		max_box.Expand(f[i].center_);
+		max_box.Expand(objs[i]->center_);
 	}
 	node->box_ = max_box;
 
 	// leaf node or not
-	if (depth > MAX_DEPTH || f.size()==1)
+	if (depth > MAX_DEPTH || objs.size()==1)
 	{
-		node->leaf_val_ = f;
+		node->leaf_val_ = objs[0];
 		return node;
 	}
 
@@ -43,68 +37,56 @@ KdNode* KdTree::Build(vector<Patch>& f,int depth)
 	// splite data
 	/// get middle value
 	node->internal_val_ = 0;
-	for (int i = 0; i < f.size(); i++)
+	for (int i = 0; i < objs.size(); i++)
 	{
 		switch (node->axis_)
 		{
 		case 0:
-			node->internal_val_ += f[i].center_.x;
+			node->internal_val_ += objs[i]->center_.x;
 			break;
 		case 1:
-			node->internal_val_ += f[i].center_.y;
+			node->internal_val_ += objs[i]->center_.y;
 			break;
 		case 2:
-			node->internal_val_ += f[i].center_.z;
+			node->internal_val_ += objs[i]->center_.z;
 			break;
 		}
 	}
-	node->internal_val_ = node->internal_val_ / f.size();
+	node->internal_val_ = node->internal_val_ / objs.size();
 
 	/// 
-	vector<Patch> left, right;	
+	vector<Object*> left, right;	
 	switch (node->axis_)
 	{
 	case 0:
-		for (int i = 0; i < f.size(); i++)
+		for (int i = 0; i < objs.size(); i++)
 		{
-			if (f[i].center_.x < node->internal_val_)
-				left.push_back(f[i]);
+			if (objs[i]->center_.x < node->internal_val_)
+				left.push_back(objs[i]);
 			else
-				right.push_back(f[i]);
+				right.push_back(objs[i]);
 		}
 		break;
 	case 1:
-		for (int i = 0; i < f.size(); i++)
+		for (int i = 0; i < objs.size(); i++)
 		{
-			if (f[i].center_.y < node->internal_val_)
-				left.push_back(f[i]);
+			if (objs[i]->center_.y < node->internal_val_)
+				left.push_back(objs[i]);
 			else
-				right.push_back(f[i]);			
+				right.push_back(objs[i]);			
 		}
 		break;
 	case 2:
-		for (int i = 0; i < f.size(); i++)
+		for (int i = 0; i < objs.size(); i++)
 		{
-			if (f[i].center_.z < node->internal_val_)
-				left.push_back(f[i]);
+			if (objs[i]->center_.z < node->internal_val_)
+				left.push_back(objs[i]);
 			else
-				right.push_back(f[i]);
+				right.push_back(objs[i]);
 		}
 		break;
 	}	
 
-	//cout << "left" << endl;
-	//for (auto& temp : left)
-	//{
-	//	cout << temp.center_.x << " " << temp.center_.y << " " << temp.center_.z << endl;
-	//}
-	//cout << "right" << endl;
-	//for (auto& temp : right)
-	//{
-	//	cout << temp.center_.x << " " << temp.center_.y << " " << temp.center_.z << endl;
-	//}
-	//cout << endl;
-	//cout << endl;
 
 	if (left.size() > 0)
 		node->left_ = Build(left, depth + 1);
@@ -212,12 +194,13 @@ Intersection KdTree::NearestSearchByLevel(Ray& ray)
 						Intersection itsc = v[i].leaf_val_[0].IsIntersect(ray);
 						
 						if (itsc.distance_>0 && itsc.distance_ < min_dist)
-						{
-							itsc.normal_ = v[i].leaf_val_[0].normal_;
-							itsc.mtl_id_ = v[i].leaf_val_[0].mtl_id_;
-							itsc.point_ = v[i].leaf_val_[0].intersect_point_;							
-							min_id = v[i].id_;														
-							nearest_itsc = itsc;
+						{	
+							if (v[i].leaf_val_->type_ == PATCH)
+							{																							
+								min_id = v[i].id_;
+								nearest_itsc = itsc;
+							}
+							
 						}
 					}
 					else

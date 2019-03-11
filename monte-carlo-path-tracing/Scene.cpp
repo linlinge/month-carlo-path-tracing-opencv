@@ -1,29 +1,29 @@
 #include "Scene.h"
 
-
 void Scene::AddCamera(Camera camera)
 {
 	camera_ = camera;
 }
 
 void Scene::AddSphereLight(SphereLight dat)
-{
-	sphere_light_.push_back(dat);
+{	
+	Objs_.push_back(&dat);
 }
 
 void Scene::AddQuadLight(QuadLight dat)
+{	
+	Objs_.push_back(&dat);
+}
+
+void Scene::BuildKdTree()
 {
-	quad_light_.push_back(dat);
+	// tree_.Build(f_, 0);
 }
 
 Mat Scene::Rendering()
 {
 	// Define
 	Mat result(camera_.image_pixel_width_,camera_.image_pixel_height_,CV_8UC3,cv::Scalar(0,0,0));
-	/*imshow("hi", result);
-	waitKey(0);*/
-
-
 
 	// generate rays in each pixel	
 	for (int i = 0; i < camera_.image_pixel_width_; i++)
@@ -39,8 +39,7 @@ Mat Scene::Rendering()
 			ray.direction_ = (pos - camera_.position_).GetNorm();
 
 			// Ray Tracing
-			color=RayTracing(ray);
-			color = color * 255;
+			color=RayTracing(ray);			
 			result.at<Vec3b>(i, j) = Vec3b(color.b,color.g,color.r);
 		}
 	}
@@ -51,36 +50,97 @@ Mat Scene::Rendering()
 V3 Scene::RayTracing(Ray& ray)
 {
 	V3 color;
-	// Get Nearest Patch
-	Intersection itsc=tree.NearestSearchByLevel(ray);	
-	if (itsc.is_hit_ == true)
-	{
-		color=IlluminationModel(ray, itsc);
-	}	
-
-
-
+	color = Lambertian(ray, 0);// +BlinnPhong(ray, 0);
+	
 	return color;
 }
 
-V3 Scene::IlluminationModel(Ray& ray, Intersection itsc)
+// difuss model
+V3 Scene::Lambertian(Ray& exit_light, int depth)
 {
-	// specular light: use blinn-phong model
-	V3 light_direction = (sphere_light_[0].center_ - itsc.point_).GetNorm();
-	V3 view_direction = (camera_.position_ - itsc.point_).GetNorm();
-	V3 halfway_direction = (light_direction + view_direction).GetNorm();
+	V3 color;
+	// Get Nearest Patch
+	Intersection itsc = tree_.NearestSearchByLevel(exit_light);
 
+	// backtracking
+	if (depth > 5)
+		/// if out of depth
+	{		
+		if (itsc.is_hit_ == false)
+			/// background
+		{
+			return V3(0, 0, 0);
+		}
+		else
+			/// 
+		{
+			return V3(0, 0, 0);
+		}
+	}
+	else
+	{
+		// generate 10 incident ray
+		for (int i = 0; i < LAMBERTIAN_SAMPLE_NUMBER; i++)
+		{
+			// Get Incident ray
+			Ray incident;
+			incident.origin_ = itsc.point_;
+			incident.direction_ = GetRandom();
+			
+			// Get Intersection Material
+			Material& mtl_temp = mtls_[itsc.mtl_id_];
 
-	Material& mtl_temp = mtls_[itsc.mtl_id_];
-	V3 Rs = mtl_temp.Ks_*light_direction*pow(MAX2(0,Dot(itsc.normal_,halfway_direction)), mtl_temp.Ns_);
+			// caculate color
+			color = color + mtl_temp.Kd_*Lambertian(incident, depth + 1)*Dot(exit_light.direction_,incident.direction_);
+		}
+
+		color = color / LAMBERTIAN_SAMPLE_NUMBER;
+	}
 	
-	return Rs;
-	// diffuss light: 
-
-
+	return color;
 }
+
+// specular model
+V3 Scene::BlinnPhong(Ray& exit_light,int depth)
+{
+	//// get intersection
+	//Intersection itsc = tree_.NearestSearchByLevel(exit_light);
+
+	//// return color
+	V3 color;
+
+	//// specular light: use blinn-phong model
+	//V3 light_direction = (sphere_light_[0].center_ - itsc.point_).GetNorm();
+	//V3 view_direction = (camera_.position_ - itsc.point_).GetNorm();
+	//V3 halfway_direction = (light_direction + view_direction).GetNorm();
+
+	//// caculate color
+	//Material& mtl_temp = mtls_[itsc.mtl_id_];
+	//color = mtl_temp.Ks_*light_direction*pow(MAX2(0,Dot(itsc.normal_,halfway_direction)), mtl_temp.Ns_);
+
+
+	
+	return color;
+}
+
+
 
 void Scene::LoadObjs(string filename)
 {
-	objs_.LoadObjs(filename);
+	// load file
+	obj_file_.LoadObjs(filename);
+
+	// convert into objects
+	for (int i = 0; i < obj_file_.f_.size(); i++)
+	{
+		Objs_.push_back(&obj_file_.f_[i]);
+	}
+}
+
+
+
+Intersection Scene::GetIntersect(Ray& ray)
+{
+
+	return Intersection();
 }
