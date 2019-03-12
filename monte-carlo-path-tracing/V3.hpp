@@ -165,6 +165,13 @@ public:
 		rst.x = x / a;
 		return rst;
 	}
+
+	float GetLength()
+	{
+		return sqrt(x*x + y * y + z * z);
+	}
+
+
 	void Normalize()
 	{
 		float a = sqrt(x*x + y * y + z * z);

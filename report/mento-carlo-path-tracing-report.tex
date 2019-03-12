@@ -270,11 +270,14 @@ $$\alpha+\beta+\gamma+\sigma < 2\pi$$
 如下图所示是光线和球求交的示意图：
 \begin{figure}[H]
 \begin{center}
-\includegraphics[scale=0.4]{intersection_ray_sphere.png}
+\includegraphics[scale=0.6]{intersection_ray_sphere.png}
 \caption{光线和球求交检测示意图}
 \end{center}
 \end{figure}
-则图中
+则图中得到$L$的公式为：
+$$\theta_1=arcsin(\frac{D}{L_1})$$
+$$\theta_2=arsin(\frac{D}{R})$$
+$$L_2=\frac{D}{tan(\theta_1)}-\frac{D}{tan(\theta_2)}$$
 
 \section{步骤}
 导入obj和mtl$\to$求解每个三角片的AABB包围盒$\to$建立kd-tree$\to$根据相机位置计算初始光线$\to$光线和包围盒求交的实现$\to$monte carlo采样

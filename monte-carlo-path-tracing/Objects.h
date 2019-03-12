@@ -45,18 +45,20 @@ public:
 	virtual Intersection IsIntersect(Ray& ray)
 	{
 		Intersection itsc;
-		V3 hypotenuse = center_ - ray.origin_;
-		float arc = acos(Dot(ray.direction_.GetNorm(), hypotenuse.GetNorm()));
-		float dist_ray_center = Distance(ray.origin_, center_)*sin(arc);
-
-		if (dist_ray_center < radius_)
+		
+		V3 L1_vector = center_ - ray.origin_;
+		float L1 = L1_vector.GetLength();
+		float theta1 = acos(Dot(ray.direction_.GetNorm(), L1_vector.GetNorm()));
+		float D = L1 * sin(theta1);
+		if (D <= radius_)
 		{
 			itsc.is_hit_ = true;
+			float theta2 = asin(D / radius_);
+			itsc.distance_ = L1 / tan(theta1) - L1 / tan(theta2);							
 		}
 		else
 		{
 			itsc.is_hit_ = false;
-
 		}
 		return itsc;
 	}
@@ -65,9 +67,10 @@ public:
 class QuadLight :public Object
 {
 public:
-	V3 normal_;		// light source normal
-	float size_[2]; // size 
-	V3 Le_;			// light source emission
+	V3 normal_;			// light source normal
+	float size_[2];		// size 
+	vector<V3> vertex_;
+	V3 Le_;				// light source emission
 
 	QuadLight(V3 center, V3 normal, float size[2], V3 Le)
 	{
@@ -77,21 +80,51 @@ public:
 		size_[0] = size[0]; size_[1] = size[1];
 		Le_ = Le;
 
-		V3 vertex1 = V3(center_.x , center_.y+ sqrt(2)/2.0f, center_.z);
-		V3 vertex2 = V3(center_.x, center_.y , center_.z+ sqrt(2) / 2.0f);
-		V3 vertex3 = V3(center_.x , center_.y- sqrt(2) / 2.0f, center_.z);
-		V3 vertex4 = V3(center_.x, center_.y , center_.z- sqrt(2) / 2.0f);
+		vertex_.push_back(V3(center_.x , center_.y+ sqrt(2)/2.0f, center_.z));
+		vertex_.push_back(V3(center_.x, center_.y , center_.z+ sqrt(2) / 2.0f));
+		vertex_.push_back(V3(center_.x , center_.y- sqrt(2) / 2.0f, center_.z));
+		vertex_.push_back(V3(center_.x, center_.y , center_.z- sqrt(2) / 2.0f));
 
-		box_.Expand(vertex1);
-		box_.Expand(vertex2);
-		box_.Expand(vertex3);
-		box_.Expand(vertex4);
+		for(auto& temp: vertex_)
+			box_.Expand(temp);
 	}
 
 	virtual Intersection IsIntersect(Ray& ray)
 	{
+		Intersection itsc;
 
-		return Intersection();
+		// step1: Solve for the intersection between ray and plane
+		Plane plane1(vertex_[0], vertex_[1], vertex_[2]);
+		Line line1(ray.origin_, ray.direction_);
+		itsc.intersection_ = plane1.IsIntersect(line1);
+		float is_same_direction = Dot(itsc.intersection_ - ray.origin_, (ray.direction_));
+		if (is_same_direction < 0)
+		{
+			itsc.is_hit_ = false;
+		}
+
+		// Accumulate arc
+		float accumulator = 0.0f;
+		for (int i = 0; i < vertex_.size() - 1; i++)
+		{
+			Angle angle(itsc.intersection_, vertex_[i], vertex_[i+1]);
+			accumulator += angle.arc_;
+		}
+		Angle angle(itsc.intersection_, vertex_[0], vertex_[3]);
+		accumulator += angle.arc_;
+
+		if (abs(accumulator - 2 * PI) < 0.01)
+		{
+			itsc.is_hit_ = true;
+			itsc.distance_ = Distance(ray.origin_, itsc.intersection_);
+			itsc.object_ = this;
+		}
+		else
+		{
+			itsc.is_hit_ = false;
+
+		}
+		return itsc;		
 	}
 
 	QuadLight operator=(QuadLight dat)
@@ -113,8 +146,7 @@ public:
 	vector<int> vn_id_;
 	V3 normal_;
 	int obj_name_id_;
-	int mtl_id_;	
-	V3 intersect_point_;
+	Material* mtl_;
 
 	Patch operator=(Patch dat)
 	{
@@ -125,10 +157,8 @@ public:
 		normal_ = dat.normal_;
 		center_ = dat.center_;
 		obj_name_id_ = dat.obj_name_id_;
-		mtl_id_ = dat.mtl_id_;
-		box_ = dat.box_;
-		intersect_point_ = dat.intersect_point_;
-
+		mtl_ = dat.mtl_;
+		box_ = dat.box_;		
 		return *this;
 	}
 
@@ -139,8 +169,8 @@ public:
 		// step1: Solve for the intersection between ray and plane
 		Plane plane1(v_[v_id_[0]], v_[v_id_[1]], v_[v_id_[2]]);
 		Line line1(ray.origin_, ray.direction_);
-		intersect_point_ = plane1.IsIntersect(line1);
-		float is_same_direction = Dot(intersect_point_ - ray.origin_, (ray.direction_));
+		itsc.intersection_= plane1.IsIntersect(line1);
+		float is_same_direction = Dot(itsc.intersection_ - ray.origin_, (ray.direction_));
 		if (is_same_direction < 0)
 		{
 			itsc.is_hit_ = false;
@@ -150,17 +180,17 @@ public:
 		float accumulator = 0.0f;
 		for (int i = 0; i < v_id_.size() - 1; i++)
 		{
-			Angle angle(intersect_point_, v_[v_id_[i]], v_[v_id_[i + 1]]);
+			Angle angle(itsc.intersection_, v_[v_id_[i]], v_[v_id_[i + 1]]);
 			accumulator += angle.arc_;
 		}
-		Angle angle(intersect_point_, v_[v_id_[0]], v_[v_id_[v_id_.size() - 1]]);
+		Angle angle(itsc.intersection_, v_[v_id_[0]], v_[v_id_[v_id_.size() - 1]]);
 		accumulator += angle.arc_;
 
 		if (abs(accumulator - 2 * PI) < 0.01)
 		{
 			itsc.is_hit_ = true;
-			itsc.distance_ = Distance(ray.origin_, intersect_point_);
-			itsc.point_ = intersect_point_;
+			itsc.distance_ = Distance(ray.origin_, itsc.intersection_);
+			itsc.object_ = this;			
 		}
 		else
 		{

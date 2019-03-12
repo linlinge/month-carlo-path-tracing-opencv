@@ -84,11 +84,11 @@ V3 Scene::Lambertian(Ray& exit_light, int depth)
 		{
 			// Get Incident ray
 			Ray incident;
-			incident.origin_ = itsc.point_;
+			incident.origin_ = itsc.intersection_;
 			incident.direction_ = GetRandom();
 			
 			// Get Intersection Material
-			Material& mtl_temp = mtls_[itsc.mtl_id_];
+			Material& mtl_temp = itsc.mtl;
 
 			// caculate color
 			color = color + mtl_temp.Kd_*Lambertian(incident, depth + 1)*Dot(exit_light.direction_,incident.direction_);

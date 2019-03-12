@@ -1,20 +1,29 @@
 #pragma once
-#include "V3.hpp"
-#include "Ray.hpp"
-#include "Objects.h"
+//#include "Objects.h"
+#include "Material.h"
+class Object;
 
 class Intersection
 {
 public:
-	bool is_hit_;	
+	bool is_hit_;
 	float distance_;
-	Object* object_;
+	V3 intersection_;
+	Material* pMtl_;
+
+	Intersection()
+	{
+		is_hit_ = false;
+		distance_ = INT_MAX;
+		pMtl_ = NULL;
+	}
 
 	Intersection operator =(Intersection& dat)
-	{
+	{		
 		is_hit_ = dat.is_hit_;
 		distance_ = dat.distance_;
-		object_ = dat.object_;
+		V3 intersection_ = dat.intersection_;
+		pMtl_= dat.pMtl_;
 		return *this;
 	}
 };

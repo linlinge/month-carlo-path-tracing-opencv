@@ -1,11 +1,99 @@
 ﻿  KdTree.cpp
-e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\v3.hpp(178): warning C4305: '=': truncation from 'int' to 'float'
-e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\objects.h(80): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\objects.h(81): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\objects.h(82): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\objects.h(83): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\kdtree.cpp(113): warning C4305: 'initializing': truncation from 'int' to 'float'
-e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\kdtree.cpp(170): warning C4305: 'initializing': truncation from 'int' to 'float'
-e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\kdtree.cpp(182): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
-e:\zju_lesson\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\aabb.hpp(61): warning C4715: 'AABB::GetMaxAxis': not all control paths return a value
-  monte-carlo-path-tracing.vcxproj -> E:\ZJU_LESSON\CG\Homework2\month-carlo-path-tracing-opencv\x64\Debug\monte-carlo-path-tracing.exe
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\v3.hpp(185): warning C4305: '=': truncation from 'int' to 'float'
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\intersection.hpp(17): warning C4305: '=': truncation from 'int' to 'float'
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\objects.h(83): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\objects.h(84): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\objects.h(85): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\objects.h(86): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\objects.h(120): error C2039: 'object_': is not a member of 'Intersection'
+  d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\intersection.hpp(6): note: see declaration of 'Intersection'
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\objects.h(193): error C2039: 'object_': is not a member of 'Intersection'
+  d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\intersection.hpp(6): note: see declaration of 'Intersection'
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\kdtree.cpp(113): warning C4305: 'initializing': truncation from 'int' to 'float'
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\kdtree.cpp(170): warning C4305: 'initializing': truncation from 'int' to 'float'
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\kdtree.cpp(182): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  LoadObjFile.cpp
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\v3.hpp(185): warning C4305: '=': truncation from 'int' to 'float'
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\intersection.hpp(17): warning C4305: '=': truncation from 'int' to 'float'
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\objects.h(83): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\objects.h(84): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\objects.h(85): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\objects.h(86): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\objects.h(120): error C2039: 'object_': is not a member of 'Intersection'
+  d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\intersection.hpp(6): note: see declaration of 'Intersection'
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\objects.h(193): error C2039: 'object_': is not a member of 'Intersection'
+  d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\intersection.hpp(6): note: see declaration of 'Intersection'
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\loadobjfile.cpp(21): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\loadobjfile.cpp(23): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\loadobjfile.cpp(25): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\loadobjfile.cpp(35): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\loadobjfile.cpp(37): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\loadobjfile.cpp(39): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\loadobjfile.cpp(49): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\loadobjfile.cpp(51): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\loadobjfile.cpp(53): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\loadobjfile.cpp(89): error C2039: 'mtl_id_': is not a member of 'Patch'
+  d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\objects.h(141): note: see declaration of 'Patch'
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\loadobjfile.cpp(98): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\loadobjfile.cpp(109): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\loadobjfile.cpp(149): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\loadobjfile.cpp(150): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\loadobjfile.cpp(151): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\loadobjfile.cpp(155): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\loadobjfile.cpp(156): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\loadobjfile.cpp(157): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\loadobjfile.cpp(161): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\loadobjfile.cpp(162): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\loadobjfile.cpp(163): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\loadobjfile.cpp(167): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\loadobjfile.cpp(171): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\loadobjfile.cpp(172): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\loadobjfile.cpp(173): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\loadobjfile.cpp(177): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\loadobjfile.cpp(223): warning C4244: 'argument': conversion from 'unsigned __int64' to 'float', possible loss of data
+  main.cpp
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\v3.hpp(185): warning C4305: '=': truncation from 'int' to 'float'
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\intersection.hpp(17): warning C4305: '=': truncation from 'int' to 'float'
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\objects.h(83): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\objects.h(84): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\objects.h(85): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\objects.h(86): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\objects.h(120): error C2039: 'object_': is not a member of 'Intersection'
+  d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\intersection.hpp(6): note: see declaration of 'Intersection'
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\objects.h(193): error C2039: 'object_': is not a member of 'Intersection'
+  d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\intersection.hpp(6): note: see declaration of 'Intersection'
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\camera.hpp(48): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\main.cpp(25): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\main.cpp(27): warning C4305: 'argument': truncation from 'double' to 'float'
+  Objects.cpp
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\v3.hpp(185): warning C4305: '=': truncation from 'int' to 'float'
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\intersection.hpp(17): warning C4305: '=': truncation from 'int' to 'float'
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\objects.h(83): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\objects.h(84): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\objects.h(85): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\objects.h(86): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\objects.h(120): error C2039: 'object_': is not a member of 'Intersection'
+  d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\intersection.hpp(6): note: see declaration of 'Intersection'
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\objects.h(193): error C2039: 'object_': is not a member of 'Intersection'
+  d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\intersection.hpp(6): note: see declaration of 'Intersection'
+  Scene.cpp
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\v3.hpp(185): warning C4305: '=': truncation from 'int' to 'float'
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\intersection.hpp(17): warning C4305: '=': truncation from 'int' to 'float'
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\objects.h(83): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\objects.h(84): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\objects.h(85): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\objects.h(86): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\objects.h(120): error C2039: 'object_': is not a member of 'Intersection'
+  d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\intersection.hpp(6): note: see declaration of 'Intersection'
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\objects.h(193): error C2039: 'object_': is not a member of 'Intersection'
+  d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\intersection.hpp(6): note: see declaration of 'Intersection'
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\camera.hpp(48): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\scene.cpp(43): warning C4244: 'argument': conversion from 'float' to '_Tp', possible loss of data
+          with
+          [
+              _Tp=uchar
+          ]
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\scene.cpp(91): error C2039: 'mtl': is not a member of 'Intersection'
+  d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\intersection.hpp(6): note: see declaration of 'Intersection'
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\scene.cpp(91): error C2530: 'mtl_temp': references must be initialized
+  Generating Code...
