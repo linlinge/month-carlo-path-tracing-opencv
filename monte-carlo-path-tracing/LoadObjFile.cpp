@@ -85,8 +85,10 @@ void ObjFile::LoadObjs(string filename)
 			if(temp_obj_name_id!=INT_MAX)
 				f_temp.obj_name_id_ = temp_obj_name_id;
 
-			if(temp_mtl_id!=INT_MAX)
-				f_temp.mtl_id_ = temp_mtl_id;
+			if (temp_mtl_id != INT_MAX)
+			{
+				f_temp.pMtl_ = &mtls_[temp_mtl_id];
+			}				
 
 			// store Patch
 			f_.push_back(f_temp);

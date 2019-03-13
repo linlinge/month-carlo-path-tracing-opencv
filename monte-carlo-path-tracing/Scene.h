@@ -18,7 +18,7 @@ class Scene
 public:
 	Camera camera_;
 	ObjFile obj_file_;
-	vector<Object*> Objs_;
+	vector<Object*> objs_;
 	KdTree tree_;
 
 	Scene(){};

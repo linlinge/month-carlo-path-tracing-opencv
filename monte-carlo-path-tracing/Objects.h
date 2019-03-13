@@ -15,7 +15,6 @@ public:
 	
 };
 
-
 class SphereLight :public Object
 {
 public:
@@ -45,6 +44,7 @@ public:
 	virtual Intersection IsIntersect(Ray& ray)
 	{
 		Intersection itsc;
+		itsc.type_ = SPHERE_SOURCE;
 		
 		V3 L1_vector = center_ - ray.origin_;
 		float L1 = L1_vector.GetLength();
@@ -54,7 +54,8 @@ public:
 		{
 			itsc.is_hit_ = true;
 			float theta2 = asin(D / radius_);
-			itsc.distance_ = L1 / tan(theta1) - L1 / tan(theta2);							
+			itsc.distance_ = L1 / tan(theta1) - L1 / tan(theta2);
+			itsc.pLe_ = &Le_;
 		}
 		else
 		{
@@ -92,6 +93,7 @@ public:
 	virtual Intersection IsIntersect(Ray& ray)
 	{
 		Intersection itsc;
+		itsc.type_ = QUAD_SOURCE;
 
 		// step1: Solve for the intersection between ray and plane
 		Plane plane1(vertex_[0], vertex_[1], vertex_[2]);
@@ -117,12 +119,11 @@ public:
 		{
 			itsc.is_hit_ = true;
 			itsc.distance_ = Distance(ray.origin_, itsc.intersection_);
-			itsc.object_ = this;
+			itsc.pLe_ = &Le_;
 		}
 		else
 		{
 			itsc.is_hit_ = false;
-
 		}
 		return itsc;		
 	}
@@ -146,7 +147,7 @@ public:
 	vector<int> vn_id_;
 	V3 normal_;
 	int obj_name_id_;
-	Material* mtl_;
+	Material* pMtl_;
 
 	Patch operator=(Patch dat)
 	{
@@ -157,7 +158,7 @@ public:
 		normal_ = dat.normal_;
 		center_ = dat.center_;
 		obj_name_id_ = dat.obj_name_id_;
-		mtl_ = dat.mtl_;
+		pMtl_ = dat.pMtl_;
 		box_ = dat.box_;		
 		return *this;
 	}
@@ -165,6 +166,7 @@ public:
 	virtual Intersection IsIntersect(Ray& ray)
 	{
 		Intersection itsc;
+		itsc.type_ = PATCH;
 
 		// step1: Solve for the intersection between ray and plane
 		Plane plane1(v_[v_id_[0]], v_[v_id_[1]], v_[v_id_[2]]);
@@ -189,8 +191,8 @@ public:
 		if (abs(accumulator - 2 * PI) < 0.01)
 		{
 			itsc.is_hit_ = true;
-			itsc.distance_ = Distance(ray.origin_, itsc.intersection_);
-			itsc.object_ = this;			
+			itsc.distance_ = Distance(ray.origin_, itsc.intersection_);			
+			itsc.pMtl_ = pMtl_;
 		}
 		else
 		{

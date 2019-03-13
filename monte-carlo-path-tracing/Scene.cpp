@@ -7,17 +7,17 @@ void Scene::AddCamera(Camera camera)
 
 void Scene::AddSphereLight(SphereLight dat)
 {	
-	Objs_.push_back(&dat);
+	objs_.push_back(&dat);
 }
 
 void Scene::AddQuadLight(QuadLight dat)
 {	
-	Objs_.push_back(&dat);
+	objs_.push_back(&dat);
 }
 
 void Scene::BuildKdTree()
 {
-	// tree_.Build(f_, 0);
+	 tree_.Build(objs_, 0);
 }
 
 Mat Scene::Rendering()
@@ -62,40 +62,42 @@ V3 Scene::Lambertian(Ray& exit_light, int depth)
 	// Get Nearest Patch
 	Intersection itsc = tree_.NearestSearchByLevel(exit_light);
 
-	// backtracking
+	if (itsc.is_hit_ == false)
+		return V3(255, 255, 255);
+
+
+	// abnormal situation1: 
+	if (itsc.type_ == SPHERE_SOURCE || itsc.type_ == QUAD_SOURCE)
+	{
+		return *itsc.pLe_;
+	}
+
+	// abnormal situation2: out of depth
 	if (depth > 5)
 		/// if out of depth
-	{		
-		if (itsc.is_hit_ == false)
-			/// background
-		{
-			return V3(0, 0, 0);
-		}
-		else
-			/// 
-		{
-			return V3(0, 0, 0);
-		}
+	{				
+		return V3(0, 0, 0);
 	}
-	else
+
+
+
+	// generate 10 incident ray
+	for (int i = 0; i < LAMBERTIAN_SAMPLE_NUMBER; i++)
 	{
-		// generate 10 incident ray
-		for (int i = 0; i < LAMBERTIAN_SAMPLE_NUMBER; i++)
-		{
-			// Get Incident ray
-			Ray incident;
-			incident.origin_ = itsc.intersection_;
-			incident.direction_ = GetRandom();
+		// Get Incident ray
+		Ray incident;
+		incident.origin_ = itsc.intersection_;
+		incident.direction_ = GetRandom();
 			
-			// Get Intersection Material
-			Material& mtl_temp = itsc.mtl;
+		// Get Intersection Material
+		Material* mtl_temp = itsc.pMtl_;
 
-			// caculate color
-			color = color + mtl_temp.Kd_*Lambertian(incident, depth + 1)*Dot(exit_light.direction_,incident.direction_);
-		}
-
-		color = color / LAMBERTIAN_SAMPLE_NUMBER;
+		// caculate color
+		color = color + mtl_temp->Kd_*Lambertian(incident, depth + 1)*Dot(exit_light.direction_,incident.direction_);
 	}
+
+	color = color / LAMBERTIAN_SAMPLE_NUMBER;
+
 	
 	return color;
 }
@@ -133,8 +135,10 @@ void Scene::LoadObjs(string filename)
 	// convert into objects
 	for (int i = 0; i < obj_file_.f_.size(); i++)
 	{
-		Objs_.push_back(&obj_file_.f_[i]);
+		objs_.push_back(&obj_file_.f_[i]);
 	}
+
+	//tree_.Build(objs_, 0);
 }
 
 
