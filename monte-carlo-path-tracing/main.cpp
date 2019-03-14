@@ -18,11 +18,11 @@ int main()
 	// Initial Scene
 	Scene scene;
 	// load obj file
-	scene.LoadObjs("./dataset/Scene01/cup.obj");
+	scene.LoadObjs("./dataset/Scene02/room.obj");
 	
 
 	// add objects
-	scene.AddCamera(Camera(V3(0.0, 0.64, 0.52),V3(0.0, 0.40, 0.3),V3(0.0, 1.0, 0.0),
+	scene.AddCamera(Camera(V3(0.0, 0.0, 0.4),V3(0.0, 0.0, 0.0),V3(0.0,1.0,0.0),
 					50,1.0f,IMAGE_WIDTH,IMAGE_HEIGHT));
 	scene.AddSphereLight(SphereLight(V3(0.0, 1.589, -1.274),0.2,V3(50, 50, 40)));
 

@@ -10,7 +10,7 @@
 
 #include "V3.hpp"
 #include "Material.h"
-#define LAMBERTIAN_SAMPLE_NUMBER 10.0f
+#define LAMBERTIAN_SAMPLE_NUMBER 4.0f
 #define PI 3.1415926535897
 
 // variables

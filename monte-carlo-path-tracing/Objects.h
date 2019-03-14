@@ -55,7 +55,7 @@ public:
 			itsc.is_hit_ = true;
 			float theta2 = asin(D / radius_);
 			itsc.distance_ = L1 / tan(theta1) - L1 / tan(theta2);
-			itsc.pLe_ = &Le_;
+			itsc.pLe_ = &Le_;			
 		}
 		else
 		{
@@ -193,6 +193,7 @@ public:
 			itsc.is_hit_ = true;
 			itsc.distance_ = Distance(ray.origin_, itsc.intersection_);			
 			itsc.pMtl_ = pMtl_;
+			itsc.normal_ = normal_;
 		}
 		else
 		{

@@ -11,6 +11,7 @@ public:
 	ObjectType type_;
 	float distance_;
 	V3 intersection_;
+	V3 normal_;
 	Material* pMtl_;
 	V3* pLe_;
 

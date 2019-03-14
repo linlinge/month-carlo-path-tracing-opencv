@@ -59,11 +59,12 @@ V3 Scene::RayTracing(Ray& ray)
 V3 Scene::Lambertian(Ray& exit_light, int depth)
 {
 	V3 color;
+	Ray incident;
 	// Get Nearest Patch
 	Intersection itsc = tree_.NearestSearchByLevel(exit_light);
 
 	if (itsc.is_hit_ == false)
-		return V3(255, 255, 255);
+		return V3(255, 0,0);
 
 
 	// abnormal situation1: 
@@ -72,20 +73,25 @@ V3 Scene::Lambertian(Ray& exit_light, int depth)
 		return *itsc.pLe_;
 	}
 
+
+
 	// abnormal situation2: out of depth
 	if (depth > 5)
 		/// if out of depth
-	{				
-		return V3(0, 0, 0);
+	{	
+		srand((unsigned)time(NULL));
+		float temp_random = rand() / double(RAND_MAX);
+		if (temp_random < 0.1)
+			return V3(0, 255, 0);
+		else
+			return V3(50, 50, 40);
 	}
 
-
-
-	// generate 10 incident ray
+	// generate 4 incident ray
 	for (int i = 0; i < LAMBERTIAN_SAMPLE_NUMBER; i++)
 	{
 		// Get Incident ray
-		Ray incident;
+
 		incident.origin_ = itsc.intersection_;
 		incident.direction_ = GetRandom();
 			
@@ -95,6 +101,20 @@ V3 Scene::Lambertian(Ray& exit_light, int depth)
 		// caculate color
 		color = color + mtl_temp->Kd_*Lambertian(incident, depth + 1)*Dot(exit_light.direction_,incident.direction_);
 	}
+
+
+
+	//float temp_arc = PI - GetArc(exit_light.direction_, itsc.normal_);
+	//incident.origin_ = exit_light.origin_ + 2 * itsc.distance_*exit_light.direction_ + 2 * itsc.distance_*cos(temp_arc)*itsc.normal_;
+	//incident.direction_ = (itsc.intersection_ - incident.origin_).GetNorm();
+	//// Get Intersection Material
+	//Material* mtl_temp = itsc.pMtl_;
+
+	//// caculate color
+	//color = color + mtl_temp->Kd_*Lambertian(incident, depth + 1)*Dot(exit_light.direction_, incident.direction_);
+
+
+
 
 	color = color / LAMBERTIAN_SAMPLE_NUMBER;
 
