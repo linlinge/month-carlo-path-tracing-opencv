@@ -7,9 +7,13 @@ void ObjFile::LoadObjs(string filename)
 	int flag = 0;
 	int temp_mtl_id=INT_MAX;
 	int temp_obj_name_id=INT_MAX;
-
+	int temp_i = 0;
 	while (getline(f, line))
 	{
+		cout << temp_i++ << endl;
+		if (temp_i == 121)
+			temp_i = 121;
+
 		remove_adjacent_duplicate(line, " ");
 		vector<string> ss = split(line, " ");
 		if (ss[0] == "v")
@@ -85,7 +89,7 @@ void ObjFile::LoadObjs(string filename)
 			if(temp_obj_name_id!=INT_MAX)
 				f_temp.obj_name_id_ = temp_obj_name_id;
 
-			if (temp_mtl_id != INT_MAX)
+			if (temp_mtl_id != INT_MAX && temp_mtl_id==-1)
 			{
 				f_temp.pMtl_ = &mtls_[temp_mtl_id];
 			}				
