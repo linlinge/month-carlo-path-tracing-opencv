@@ -9,8 +9,8 @@
 using namespace std;
 using namespace cv;
 // image size
-#define IMAGE_WIDTH	 512
-#define IMAGE_HEIGHT 512
+#define IMAGE_WIDTH	 100
+#define IMAGE_HEIGHT 100
 
 
 int main()
@@ -23,7 +23,7 @@ int main()
 
 	// add objects
 	scene.AddCamera(Camera(V3(0.0, 0.0, 0.4),V3(0.0, 0.0, 0.0),V3(0.0,1.0,0.0),
-					50,1.0f,IMAGE_WIDTH,IMAGE_HEIGHT));
+					50,10.0f,IMAGE_WIDTH,IMAGE_HEIGHT));
 	scene.AddSphereLight(SphereLight(V3(0.0, 1.589, -1.274),0.2,V3(50, 50, 40)));
 
 	// establish kd-tree	

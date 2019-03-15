@@ -196,6 +196,7 @@ Intersection KdTree::NearestSearchByLevel(Ray& ray)
 						if (itsc.distance_>0 && itsc.distance_ < min_dist)
 						{	
 							min_id = v[i].id_;
+							min_dist = itsc.distance_;
 							nearest_itsc = itsc;						
 						}
 					}

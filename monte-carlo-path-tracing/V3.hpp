@@ -86,12 +86,13 @@ public:
 		z = z / scale;
 		return *this;
 	}
-	V3 operator +(V3 dat)
+	friend V3 operator +(V3 dat1, V3 dat2)
 	{
-		x = x + dat.x;
-		y = y + dat.y;
-		z = z + dat.z;
-		return *this;
+		V3 rst;
+		rst.x = dat1.x + dat2.x;
+		rst.y = dat1.y + dat2.y;
+		rst.z = dat1.z + dat2.z;
+		return rst;
 	}
 
 	V3 operator+ (float dat)
@@ -114,7 +115,7 @@ public:
 	}
 
 
-	V3  operator -(V3 & dat)
+	V3  operator -(V3  dat)
 	{
 		V3 rst;
 		rst.x = x - dat.x;

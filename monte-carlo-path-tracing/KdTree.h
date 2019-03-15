@@ -5,7 +5,7 @@
 #include "Ray.hpp"
 #include <iostream>
 #include <stack>
-#include "Objects.h"
+#include "Objects.hpp"
 
 #define MAX_DEPTH 10
 using namespace std;

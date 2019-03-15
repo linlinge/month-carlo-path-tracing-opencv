@@ -27,7 +27,7 @@ public:
 	{		
 		is_hit_ = dat.is_hit_;
 		distance_ = dat.distance_;
-		V3 intersection_ = dat.intersection_;
+		intersection_ = dat.intersection_;
 		pMtl_= dat.pMtl_;
 		pLe_ = dat.pLe_;
 		return *this;

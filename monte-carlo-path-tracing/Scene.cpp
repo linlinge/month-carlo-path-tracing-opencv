@@ -25,6 +25,8 @@ Mat Scene::Rendering()
 	// Define
 	Mat result(camera_.image_pixel_width_,camera_.image_pixel_height_,CV_8UC3,cv::Scalar(0,0,0));
 
+	ofstream f("../matlab/ray.txt");
+
 	// generate rays in each pixel	
 	for (int i = 0; i < camera_.image_pixel_width_; i++)
 	{
@@ -33,16 +35,17 @@ Mat Scene::Rendering()
 			// Define
 			V3 color;
 			// Generate camera/primary ray					
-			V3 pos = V3(camera_.image_origin_.x + camera_.pixel_width_ / 2.0f*i, camera_.image_origin_.y + camera_.pixel_width_ / 2.0f*j, camera_.image_origin_.z);						
+			V3 pos = camera_.GetPosition(i, j);
 			Ray ray;
 			ray.origin_ = camera_.position_;
-			ray.direction_ = (pos - camera_.position_).GetNorm();
-
+			ray.direction_ = (pos - camera_.position_).GetNorm();			
+			f << ray.origin_ <<" "<<pos<< endl;			
 			// Ray Tracing
-			color=RayTracing(ray);			
+			color=RayTracing(ray)*256;			
 			result.at<Vec3b>(i, j) = Vec3b(color.b,color.g,color.r);
 		}
 	}
+	f.close();
 	return result;
 }
 
@@ -105,7 +108,7 @@ V3 Scene::Lambertian(Ray& exit_light, int depth)
 
 
 	//float temp_arc = PI - GetArc(exit_light.direction_, itsc.normal_);
-	//incident.origin_ = exit_light.origin_ + 2 * itsc.distance_*exit_light.direction_ + 2 * itsc.distance_*cos(temp_arc)*itsc.normal_;
+	//incident.origin_ = exit_light.origin_ + 2 * itsc.distance_*exit_l   ight.direction_ + 2 * itsc.distance_*cos(temp_arc)*itsc.normal_;
 	//incident.direction_ = (itsc.intersection_ - incident.origin_).GetNorm();
 	//// Get Intersection Material
 	//Material* mtl_temp = itsc.pMtl_;
@@ -113,12 +116,7 @@ V3 Scene::Lambertian(Ray& exit_light, int depth)
 	//// caculate color
 	//color = color + mtl_temp->Kd_*Lambertian(incident, depth + 1)*Dot(exit_light.direction_, incident.direction_);
 
-
-
-
-	color = color / LAMBERTIAN_SAMPLE_NUMBER;
-
-	
+	color = color / LAMBERTIAN_SAMPLE_NUMBER;	
 	return color;
 }
 
@@ -139,8 +137,6 @@ V3 Scene::BlinnPhong(Ray& exit_light,int depth)
 	//// caculate color
 	//Material& mtl_temp = mtls_[itsc.mtl_id_];
 	//color = mtl_temp.Ks_*light_direction*pow(MAX2(0,Dot(itsc.normal_,halfway_direction)), mtl_temp.Ns_);
-
-
 	
 	return color;
 }
@@ -165,6 +161,5 @@ void Scene::LoadObjs(string filename)
 
 Intersection Scene::GetIntersect(Ray& ray)
 {
-
 	return Intersection();
 }

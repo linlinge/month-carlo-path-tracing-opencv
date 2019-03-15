@@ -63,7 +63,15 @@ public:
 		image_actual_height_ = r * sin(alpha);
 		pixel_width_ = image_actual_width_ * 1.0f / image_pixel_width_;
 		pixel_height_ = image_actual_height_ * 1.0f / image_pixel_height_;
+
+
 		image_origin_ = position_ + focal_length_ * forward_ + image_actual_width_ / 2.0f*left_ + image_actual_height_ / 2.0f*actual_up_;
+	}
+
+	V3 GetPosition(int i,int j)
+	{
+		
+		return image_origin_ - image_pixel_width_ * j*left_ - image_pixel_height_ * i*actual_up_;
 	}
 	Camera() {};
 };
