@@ -9,8 +9,8 @@
 using namespace std;
 using namespace cv;
 // image size
-#define IMAGE_WIDTH	 100
-#define IMAGE_HEIGHT 100
+#define IMAGE_WIDTH	 50
+#define IMAGE_HEIGHT 50
 
 
 int main()
@@ -20,13 +20,15 @@ int main()
 	// load obj file
 	scene.LoadObjs("./dataset/Scene02/room.obj");
 	
-
 	// add objects
-	scene.AddCamera(Camera(V3(0.0, 0.0, 0.4),V3(0.0, 0.0, 0.0),V3(0.0,1.0,0.0),
-					50,10.0f,IMAGE_WIDTH,IMAGE_HEIGHT));
+	/*scene.AddCamera(Camera(V3(0.0, 0.0, 0.4),V3(0.0, 0.0, 0.0),V3(0.0,1.0,0.0),
+					50,10.0f,IMAGE_WIDTH,IMAGE_HEIGHT));*/
+	scene.AddCamera(Camera(V3(0.0, -2, 1), V3(-0.09809,-0.6217,-0.08914), V3(0.0, 1.0, 0.0),
+		50, 1.0f, IMAGE_WIDTH, IMAGE_HEIGHT));
+
 	scene.AddSphereLight(SphereLight(V3(0.0, 1.589, -1.274),0.2,V3(50, 50, 40)));
 
-	// establish kd-tree	
+	// establish kd-tree
 	scene.BuildKdTree();
 
 	Mat temp = imread("./image/1.jpg");
@@ -34,14 +36,9 @@ int main()
 	Mat rst=scene.Rendering();
 
 	//tree.Print();
-
 	// Display result
 	imshow("Rendering Result", rst);
 	waitKey(0);
-
-	
-
-
 
 
 	//// test for intersection between AABB box and ray
@@ -52,7 +49,6 @@ int main()
 	//cout << box_temp.IsIntersect(ray) << endl;
 	//system("pause");
 	
-
 	
 	//// test for intersection between polygon and ray
 	//Patch& p = scene.objs_.f_[500];	
