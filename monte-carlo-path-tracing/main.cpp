@@ -9,8 +9,8 @@
 using namespace std;
 using namespace cv;
 // image size
-#define IMAGE_WIDTH	 50
-#define IMAGE_HEIGHT 50
+#define IMAGE_WIDTH	500
+#define IMAGE_HEIGHT 500
 
 
 int main()
@@ -18,15 +18,20 @@ int main()
 	// Initial Scene
 	Scene scene;
 	// load obj file
-	scene.LoadObjs("./dataset/Scene02/room.obj");
+	//scene.LoadObjs("./dataset/Example01/example01.obj");
+	scene.LoadObjs("./dataset/Example02/example02.obj");
+	//scene.LoadObjs("./dataset/Scene01/cup.obj");
 	
 	// add objects
-	/*scene.AddCamera(Camera(V3(0.0, 0.0, 0.4),V3(0.0, 0.0, 0.0),V3(0.0,1.0,0.0),
-					50,10.0f,IMAGE_WIDTH,IMAGE_HEIGHT));*/
-	scene.AddCamera(Camera(V3(0.0, -2, 1), V3(-0.09809,-0.6217,-0.08914), V3(0.0, 1.0, 0.0),
-		50, 1.0f, IMAGE_WIDTH, IMAGE_HEIGHT));
+	//scene.AddCamera(Camera(V3(0.0, 0.0, 0.4),V3(0.0, 0.0, 0.0),V3(0.0,1.0,0.0),
+	//				50,10.0f,IMAGE_WIDTH,IMAGE_HEIGHT));
+	scene.AddCamera(Camera(V3(0.0, -2, 1), V3(-15.09809,-10.6217,4.08914), V3(0.0, 1.0, 0.0),
+		150, 1.0f, IMAGE_WIDTH, IMAGE_HEIGHT));
 
-	scene.AddSphereLight(SphereLight(V3(0.0, 1.589, -1.274),0.2,V3(50, 50, 40)));
+	/*scene.AddCamera(Camera(V3(0,0,6), V3(-5.72581, -3.16399, 0), V3(0.0, 1.0, 0.0),
+		110, 10.0f, IMAGE_WIDTH, IMAGE_HEIGHT));*/
+
+	scene.AddSphereLight(SphereLight(V3(1.0, 10,10),0.2,V3(50, 50, 40)));
 
 	// establish kd-tree
 	scene.BuildKdTree();

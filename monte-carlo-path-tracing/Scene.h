@@ -17,6 +17,8 @@ class Scene
 {
 public:
 	Camera camera_;
+	vector<SphereLight> sphere_light_;
+	vector<QuadLight> quad_light_;
 	ObjFile obj_file_;
 	vector<Object*> objs_;
 	KdTree tree_;

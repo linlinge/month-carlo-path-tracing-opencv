@@ -68,7 +68,7 @@ public:
 		image_origin_ = position_ + focal_length_ * forward_ + image_actual_width_ / 2.0f*left_ + image_actual_height_ / 2.0f*actual_up_;
 	}
 
-	V3 GetPosition(int i,int j)
+	V3 GetPosition(float i,float j)
 	{
 		
 		return image_origin_ - pixel_width_ * j*left_ - pixel_height_ * i*actual_up_;

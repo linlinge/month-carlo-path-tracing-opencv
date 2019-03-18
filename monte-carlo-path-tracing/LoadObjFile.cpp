@@ -121,6 +121,13 @@ void ObjFile::LoadObjs(string filename)
 
 	// get properties(center_ )
 	GetProperties();
+
+	/*ofstream file("../output/v.txt");
+	for (int i = 0; i <v_.size(); i++)
+	{
+		file << v_[i].x << " " << v_[i].y << " " << v_[i].z << endl;
+	}
+	f.close();*/
 }
 
 void ObjFile::LoadMaterial(string filename)

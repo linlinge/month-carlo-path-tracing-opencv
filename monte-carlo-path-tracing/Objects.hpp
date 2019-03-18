@@ -34,8 +34,9 @@ public:
 
 	SphereLight operator=(SphereLight& dat)
 	{
-		type_ = dat.type_;
-		center_ = dat.center_;
+		type_=dat.type_;
+		center_=dat.center_;
+		box_=dat.box_;		
 		radius_ = dat.radius_;
 		Le_ = dat.Le_;
 		return *this;
@@ -130,7 +131,9 @@ public:
 
 	QuadLight operator=(QuadLight dat)
 	{
+		type_ = dat.type_;
 		center_ = dat.center_;
+		box_ = dat.box_;		
 		normal_ = dat.normal_;
 		size_[0]=dat.size_[0];
 		size_[1] = dat.size_[1];
@@ -148,18 +151,21 @@ public:
 	V3 normal_;
 	int obj_name_id_;
 	Material* pMtl_;
+	
 
 	Patch operator=(Patch dat)
 	{
+		type_ = dat.type_;
+		center_ = dat.center_;
+		box_ = dat.box_;
+
 		v_id_ = dat.v_id_;
 		vt_id_ = dat.vt_id_;
 		vn_id_ = dat.vn_id_;
 
-		normal_ = dat.normal_;
-		center_ = dat.center_;
+		normal_ = dat.normal_;		
 		obj_name_id_ = dat.obj_name_id_;
-		pMtl_ = dat.pMtl_;
-		box_ = dat.box_;		
+		pMtl_ = dat.pMtl_;	
 		return *this;
 	}
 
@@ -167,8 +173,12 @@ public:
 	{
 		Intersection itsc;
 		itsc.type_ = PATCH;
+		itsc.pPatch_ = this;
 
 		// step1: Solve for the intersection between ray and plane
+		if (v_id_[0] == 1 && v_id_[1] == 2 && v_id_[2] == 3)
+			v_id_[0] = 1;
+
 		Plane plane1(v_[v_id_[0]], v_[v_id_[1]], v_[v_id_[2]]);
 		Line line1(ray.origin_, ray.direction_);
 		itsc.intersection_= plane1.IsIntersect(line1);

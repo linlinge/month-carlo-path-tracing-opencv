@@ -85,8 +85,7 @@ KdNode* KdTree::Build(vector<Object*>& objs,int depth)
 				right.push_back(objs[i]);
 		}
 		break;
-	}	
-
+	}
 
 	if (left.size() > 0)
 		node->left_ = Build(left, depth + 1);
@@ -159,7 +158,7 @@ Patch KdTree::NearestSearch(Ray& ray)
 		}		
 	} while (s.top() != *root_);
 
-	cout << root_->id_ << endl;
+	// cout << root_->id_ << endl;
 
 	return nearest_patch;
 }

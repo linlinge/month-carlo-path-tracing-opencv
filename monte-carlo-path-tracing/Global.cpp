@@ -3,6 +3,8 @@ vector<V3> v_;
 vector<V3> vt_;
 vector<V3> vn_;
 vector<Material> mtls_;
+V3 background(10,10,10);
+
 
 // get random normlized vector in hemisphere
 V3 GetRandom()
