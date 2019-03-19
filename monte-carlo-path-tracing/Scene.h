@@ -22,6 +22,7 @@ public:
 	ObjFile obj_file_;
 	vector<Object*> objs_;
 	KdTree tree_;
+	vector<V3> buffer_;
 
 	Scene(){};
 	void LoadObjs(string filename);
@@ -33,6 +34,6 @@ public:
 	Mat Rendering();
 	V3 RayTracing(Ray& exit_light);
 	V3 BlinnPhong(Ray& exit_light,int depth);
-	V3 Lambertian(Ray& exit_light,int depth);
+	V3 Lambertian(Ray& exit_light);
 	Intersection GetIntersect(Ray& ray); 
 };

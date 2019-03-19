@@ -176,9 +176,6 @@ public:
 		itsc.pPatch_ = this;
 
 		// step1: Solve for the intersection between ray and plane
-		if (v_id_[0] == 1 && v_id_[1] == 2 && v_id_[2] == 3)
-			v_id_[0] = 1;
-
 		Plane plane1(v_[v_id_[0]], v_[v_id_[1]], v_[v_id_[2]]);
 		Line line1(ray.origin_, ray.direction_);
 		itsc.intersection_= plane1.IsIntersect(line1);

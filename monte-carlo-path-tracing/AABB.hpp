@@ -60,6 +60,7 @@ public:
 		if (delta_z >= delta_x && delta_z >= delta_y) return 2;
 	}
 
+
 	bool IsIntersect(Ray& ray)
 	{
 		float tmin = 0.0f;

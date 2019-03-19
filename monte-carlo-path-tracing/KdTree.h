@@ -44,11 +44,17 @@ class KdTree
 public:
 	KdNode * root_;
 	int  max_depth_;
+	int leaf_num_;
+	KdTree()
+	{
+		root_ = NULL;
+		max_depth_ = 0;
+		leaf_num_ = 0;
+	}
 	vector<vector<int>> id_record_;	
 	KdNode* Build(vector<Object*>& objs, int depth);
-	Patch NearestSearch(Ray& ray);		// middle search
-	Intersection NearestSearchByLevel(Ray& ray); // level search
-	KdNode* NearestSearchRecursive(KdNode* node);
+	Intersection NearestSearchByLevel(Ray& ray); // level search	
 	void Print();
 	void GetPrint(KdNode* head);
+	float  GetMean(vector<Object*>& dat, int axis);
 };

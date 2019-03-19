@@ -5,6 +5,7 @@ vector<V3> vn_;
 vector<Material> mtls_;
 V3 background(10,10,10);
 
+ofstream global_file("../output/hit_patch.txt");
 
 // get random normlized vector in hemisphere
 V3 GetRandom()
@@ -64,3 +65,4 @@ vector<string> split(string dat, string separator)
 	} while (start != -1);
 	return rst;
 }
+

@@ -25,8 +25,8 @@ public:
 		pPatch_ = NULL;
 	}
 
-	Intersection operator =(Intersection& dat)
-	{		
+	Intersection operator =(Intersection dat)
+	{			
 		is_hit_ = dat.is_hit_;
 		type_ = dat.type_;
 		distance_ = dat.distance_;

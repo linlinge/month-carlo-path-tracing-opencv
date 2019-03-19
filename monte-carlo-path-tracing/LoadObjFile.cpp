@@ -10,8 +10,8 @@ void ObjFile::LoadObjs(string filename)
 	//int temp_i = 0;
 	while (getline(f, line))
 	{
-		/*cout << temp_i++ << endl;
-		if (temp_i == 121)
+		//cout << temp_i++ << endl;
+		/*if (temp_i == 121)
 			temp_i = 121;*/
 
 		remove_adjacent_duplicate(line, " ");
@@ -223,11 +223,14 @@ void ObjFile::GetProperties()
 {
 	for (auto& f_temp: f_)
 	{
-		// get bound box
-		/// init 
+		/// init center
+		f_temp.center_ = V3(0, 0, 0);
+		
+		/// init box
 		f_temp.box_.top_left_ = f_temp.box_.bottom_right_ = v_[f_temp.v_id_[0]];
+
 		/// expand
-		for (int i = 1; i < f_temp.v_id_.size(); i++)
+		for (int i = 0; i < f_temp.v_id_.size(); i++)
 		{
 			f_temp.box_.Expand(v_[f_temp.v_id_[i]]);
 			f_temp.center_ = f_temp.center_ + v_[f_temp.v_id_[i]];

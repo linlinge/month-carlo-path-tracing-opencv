@@ -6,6 +6,9 @@ int number = 0;
 
 KdNode* KdTree::Build(vector<Object*>& objs,int depth)
 {
+	/// Define
+	vector<Object*> left, right;
+
 	// store depth
 	max_depth_ = max_depth_ > depth ? max_depth_ : depth;
 
@@ -24,38 +27,27 @@ KdNode* KdTree::Build(vector<Object*>& objs,int depth)
 	node->box_ = max_box;
 
 	// leaf node or not
-	if (depth > MAX_DEPTH || objs.size()==1)
+	//if (depth > MAX_DEPTH || objs.size()==1)
+	if ( objs.size() == 1)
 	{
 		node->leaf_val_ = objs[0];
+		leaf_num_++;
 		return node;
 	}
 
-	
 	// get the axis
 	node->axis_ = node->box_.GetMaxAxis();
 
 	// splite data
-	/// get middle value
-	node->internal_val_ = 0;
-	for (int i = 0; i < objs.size(); i++)
+	/// get mean value
+	node->internal_val_ = GetMean(objs,node->axis_);
+	/// equal condition
+	while (node->internal_val_ == INT_MAX)
 	{
-		switch (node->axis_)
-		{
-		case 0:
-			node->internal_val_ += objs[i]->center_.x;
-			break;
-		case 1:
-			node->internal_val_ += objs[i]->center_.y;
-			break;
-		case 2:
-			node->internal_val_ += objs[i]->center_.z;
-			break;
-		}
+		node->axis_ = (node->axis_ + 1) % 3;
+		node->internal_val_ = GetMean(objs, node->axis_);
 	}
-	node->internal_val_ = node->internal_val_ / objs.size();
-
-	/// 
-	vector<Object*> left, right;	
+		
 	switch (node->axis_)
 	{
 	case 0:
@@ -87,6 +79,7 @@ KdNode* KdTree::Build(vector<Object*>& objs,int depth)
 		break;
 	}
 
+
 	if (left.size() > 0)
 		node->left_ = Build(left, depth + 1);
 	else
@@ -103,64 +96,6 @@ KdNode* KdTree::Build(vector<Object*>& objs,int depth)
 		root_ = node;
 	}
 	return node;
-}
-
-Patch KdTree::NearestSearch(Ray& ray)
-{
-	KdNode node_temp;
-	stack<KdNode> s;
-	float min_dist = INT_MAX;
-	Patch nearest_patch;
-
-	if (root_->box_.IsIntersect(ray) != true)
-		return Patch();
-	else
-		cout << "Has Intersection" << endl;
-
-	s.push(*root_);
-	if (root_->right_ != NULL)
-		s.push(*root_->right_);
-
-	if (root_->left_ != NULL)
-		s.push(*root_->left_);
-
-	do
-	{	// left child
-		if (s.top().left_ == NULL  || *s.top().left_ == node_temp)// have been detected
-			/// left child has been detected
-		{					
-			if (s.top().right_ != NULL)
-			{
-				/// output middle	
-				cout << s.top().id_ << endl;
-
-				/// push right child			
-				s.push(*s.top().right_); 
-				/// may be it still has children, so need to output
-			}
-			else
-				/// leaf node
-			{		
-				cout << s.top().id_ << endl;
-				node_temp = s.top();
-				s.pop();
-			}			
-		}
-		else if (s.top().right_==NULL || *s.top().right_==node_temp)
-		{			
-			node_temp = s.top();
-			s.pop();
-		}
-		else
-			/// detect left child
-		{
-			while(s.top().left_!=NULL ) s.push(*s.top().left_);			
-		}		
-	} while (s.top() != *root_);
-
-	// cout << root_->id_ << endl;
-
-	return nearest_patch;
 }
 
 Intersection KdTree::NearestSearchByLevel(Ray& ray)
@@ -190,7 +125,19 @@ Intersection KdTree::NearestSearchByLevel(Ray& ray)
 					if (v[i].left_ == NULL && v[i].right_ == NULL)
 						/// leaf node
 					{
-						Intersection itsc = v[i].leaf_val_[0].IsIntersect(ray);
+						Intersection itsc;
+						switch (v[i].leaf_val_[0].type_)
+						{
+						case PATCH:
+							itsc=((Patch*) &v[i].leaf_val_[0])->IsIntersect(ray);
+							break;
+						case SPHERE_SOURCE:
+							itsc = ((SphereLight*)&v[i].leaf_val_[0])->IsIntersect(ray);
+							break;
+						case QUAD_SOURCE:
+							itsc = ((QuadLight*)&v[i].leaf_val_[0])->IsIntersect(ray);
+							break;
+						}												
 						
 						if (itsc.distance_>0 && itsc.distance_ < min_dist)
 						{	
@@ -228,18 +175,7 @@ Intersection KdTree::NearestSearchByLevel(Ray& ray)
 }
 
 
-KdNode* KdTree::NearestSearchRecursive(KdNode* node)
-{
 
-	if (node)
-	{
-		NearestSearchRecursive(node->left_);
-		cout << node->id_ << endl;
-		NearestSearchRecursive(node->right_);
-	}
-	return NULL;
-	
-}
 void KdTree::Print()
 {
 	id_record_.resize(max_depth_+1);
@@ -270,4 +206,49 @@ void KdTree::GetPrint(KdNode* head)
 	GetPrint(head->left_);
 	GetPrint(head->right_);
 	
+}
+
+
+// if rst==INT_MAX, then abnormal
+// else ,normal 
+float  KdTree::GetMean(vector<Object*>& dat, int axis)
+{
+	float avr = 0;
+	float accumulator = 0;
+
+	switch (axis)
+	{
+	case 0:
+		avr = dat[0]->center_.x;
+		for (int i = 1; i < dat.size(); i++)
+		{
+			avr += dat[i]->center_.x;
+			accumulator += abs(dat[i - 1]->center_.x - dat[i]->center_.x);
+		}
+		break;
+	case 1:
+		avr = dat[0]->center_.y;
+		for (int i = 1; i < dat.size(); i++)
+		{
+			avr += dat[i]->center_.y;
+			accumulator += abs(dat[i - 1]->center_.y - dat[i]->center_.y);
+		}
+		break;
+	case 2:
+		avr = dat[0]->center_.z;
+		for (int i = 1; i < dat.size(); i++)
+		{
+			avr += dat[i]->center_.z;
+			accumulator += abs(dat[i - 1]->center_.z - dat[i]->center_.z);
+		}
+		break;
+	}
+
+	if (accumulator < 0.00001)
+		return INT_MAX;
+	else
+	{
+		avr = avr / dat.size();
+		return avr;
+	}	
 }

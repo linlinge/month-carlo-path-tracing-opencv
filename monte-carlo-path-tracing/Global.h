@@ -20,6 +20,7 @@ extern vector<V3> vn_;		// vertex normal load from obj file
 extern vector<Material> mtls_; // material load from mtl file
 enum ObjectType { PATCH, SPHERE_SOURCE, QUAD_SOURCE };
 extern V3 background;
+extern ofstream global_file;
 
 // function
 V3 GetRandom();
