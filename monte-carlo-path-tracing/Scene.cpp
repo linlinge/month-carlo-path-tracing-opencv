@@ -87,12 +87,9 @@ Mat Scene::Rendering()
 	{
 		for (int j = 0; j < camera_.image_pixel_height_; j++)
 		{
-
 			result.at<Vec3b>(i, j)[0] =(buffer_[i*camera_.image_pixel_width_+j].x-min_val) /delta *255;
 			result.at<Vec3b>(i, j)[1] =(buffer_[i*camera_.image_pixel_width_+j].y-min_val) / delta *255;
 			result.at<Vec3b>(i, j)[2] =(buffer_[i*camera_.image_pixel_width_+j].z-min_val) / delta *255;
-
-
 		}
 
 	}	
@@ -105,7 +102,7 @@ Mat Scene::Rendering()
 V3 Scene::RayTracing(Ray& ray)
 {
 	V3 color;
-	color = Lambertian(ray);// +BlinnPhong(ray, 0);
+	color = Lambertian(ray) +BlinnPhong(ray, 0);
 	
 	return color;
 }
@@ -143,24 +140,41 @@ V3 Scene::Lambertian(Ray& exit_light)
 }
 
 // specular model
-V3 Scene::BlinnPhong(Ray& exit_light,int depth)
+V3 Scene::BlinnPhong(Ray& exit_ray,int depth)
 {
 	// get intersection
-	Intersection itsc = tree_.NearestSearchByLevel(exit_light);
+	Intersection itsc = tree_.NearestSearchByLevel(exit_ray);
 
-	//// return color
+
+	// condition 
+	if (itsc.is_hit_ == false)
+		return background;
+
+	if (itsc.type_ == SPHERE_SOURCE || itsc.type_ == QUAD_SOURCE)
+		/// light
+	{
+		return *itsc.pLe_;
+	}
+	if (depth > 5)
+		/// out of maximum depth
+	{
+		return background;
+	}
+
+	// define
 	V3 color;
+	// get incident light
+	Ray incident_ray = GetIncidentRay(exit_ray, itsc);
+	V3 L = incident_ray.direction_;
+	V3 V = (camera_.position_ - itsc.intersection_).GetNorm();
+	V3 H = (L + V) / (L + V).GetLength();	
 
-	//// specular light: use blinn-phong model
-	//V3 light_direction = (sphere_light_[0].center_ - itsc.point_).GetNorm();
-	//V3 view_direction = (camera_.position_ - itsc.point_).GetNorm();
-	//V3 halfway_direction = (light_direction + view_direction).GetNorm();
 
-	//// caculate color
-	//Material& mtl_temp = mtls_[itsc.mtl_id_];
-	//color = mtl_temp.Ks_*light_direction*pow(MAX2(0,Dot(itsc.normal_,halfway_direction)), mtl_temp.Ns_);	
+	// caculate color	
+	color = itsc.pMtl_->Ks_*BlinnPhong(incident_ray,depth+1)*pow(MAX2(0,Dot(itsc.normal_,H)), itsc.pMtl_->Ns_);
 	return color;
 }
+
 
 
 void Scene::LoadObjs(string filename)
@@ -175,7 +189,21 @@ void Scene::LoadObjs(string filename)
 	}
 }
 
-Intersection Scene::GetIntersect(Ray& ray)
+
+
+
+Ray& Scene::GetIncidentRay(Ray& exit_light, Intersection& itsc)
 {
-	return Intersection();
+	// make sure that direction of exit light is nomalized
+	exit_light.direction_.Normalize();
+
+	Ray incident_ray;
+	incident_ray.origin_ = itsc.intersection_;
+	// calculate direction
+	float cos_theta = Dot(exit_light.direction_,itsc.normal_);
+	cos_theta = -1.0f*cos_theta; // you should make sure that direction is right
+	float D = 1.0f*cos_theta; // because the direction vector is a normalized vector
+	incident_ray.direction_ = (exit_light.direction_ + 2 * D*itsc.normal_).GetNorm();
+
+	return incident_ray;
 }

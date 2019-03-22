@@ -17,17 +17,20 @@ int main()
 {	
 	// Initial Scene
 	Scene scene;
-	// load obj file
-	//scene.LoadObjs("./dataset/Example01/example01.obj");
+	
+	// example01
+	scene.LoadObjs("./dataset/Example01/example01.obj");
+	scene.AddCamera(Camera(V3(1.0, 2, 1), V3(-5.09809, -5.6217, 4.08914), V3(1.0, 0.0, 0.0),
+		130, 1.0f, IMAGE_WIDTH, IMAGE_HEIGHT));
+
 	//scene.LoadObjs("./dataset/Example02/example02.obj");
 	//scene.LoadObjs("./dataset/Scene01/cup.obj");
-	scene.LoadObjs("./dataset/Scene02/room.obj");
+	//scene.LoadObjs("./dataset/Scene02/room.obj");
 	
 	// add objects
 	//scene.AddCamera(Camera(V3(0.0, 0.0, 0.4),V3(0.0, 0.0, 0.0),V3(0.0,1.0,0.0),
 	//				50,10.0f,IMAGE_WIDTH,IMAGE_HEIGHT));
-	scene.AddCamera(Camera(V3(1.0, 2, 1), V3(-5.09809,-5.6217,-4.08914), V3(1.0, 0.0, 0.0),
-		100, 1.0f, IMAGE_WIDTH, IMAGE_HEIGHT));
+	
 
 	/*scene.AddCamera(Camera(V3(0,0,6), V3(-5.72581, -3.16399, 0), V3(0.0, 1.0, 0.0),
 		110, 10.0f, IMAGE_WIDTH, IMAGE_HEIGHT));*/

@@ -2,7 +2,7 @@
 #include "AABB.hpp"
 #include "KdTree.h"
 #include "global.h"
-#include "Material.h"
+#include "Material.hpp"
 using namespace std;
 
 class ObjFile {

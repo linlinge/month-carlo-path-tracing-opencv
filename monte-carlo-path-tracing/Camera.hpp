@@ -18,7 +18,7 @@ public:
 	V3 image_origin_;
 	float pixel_width_, pixel_height_;
 
-	Camera operator=(Camera& dat)
+	Camera& operator=(Camera& dat)
 	{
 		position_ = dat.position_;
 		lookat_ = dat.lookat_;
@@ -31,7 +31,7 @@ public:
 		focal_length_ = dat.focal_length_;		
 		image_pixel_width_ = dat.image_pixel_width_;
 		image_pixel_height_ = dat.image_pixel_height_;
-		image_actual_width_ = dat.image_actual_height_;
+		image_actual_width_ = dat.image_actual_width_;
 		image_actual_height_ = dat.image_actual_height_;
 		image_origin_ = dat.image_origin_;
 		pixel_width_ = dat.pixel_width_;

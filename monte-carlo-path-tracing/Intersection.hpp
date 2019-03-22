@@ -1,6 +1,6 @@
 #pragma once
 //#include "Objects.h"
-#include "Material.h"
+#include "Material.hpp"
 #include "Global.h"
 class Object;
 class Patch;
@@ -25,7 +25,7 @@ public:
 		pPatch_ = NULL;
 	}
 
-	Intersection operator =(Intersection dat)
+	Intersection& operator =(Intersection dat)
 	{			
 		is_hit_ = dat.is_hit_;
 		type_ = dat.type_;

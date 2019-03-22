@@ -5,7 +5,7 @@ class Ray
 public:
 	V3 origin_, direction_;	
 
-	Ray operator=(Ray& dat)
+	Ray& operator=(Ray& dat)
 	{
 		origin_ = dat.origin_;
 		direction_ = dat.direction_;

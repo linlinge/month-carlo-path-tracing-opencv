@@ -35,5 +35,7 @@ public:
 	V3 RayTracing(Ray& exit_light);
 	V3 BlinnPhong(Ray& exit_light,int depth);
 	V3 Lambertian(Ray& exit_light);
-	Intersection GetIntersect(Ray& ray); 
+
+private:
+	Ray& GetIncidentRay(Ray& exit_light, Intersection& itsc);
 };

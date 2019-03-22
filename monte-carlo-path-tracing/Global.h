@@ -9,7 +9,7 @@
 #include <algorithm>
 
 #include "V3.hpp"
-#include "Material.h"
+#include "Material.hpp"
 #define LAMBERTIAN_SAMPLE_NUMBER 4.0f
 #define PI 3.1415926535897
 

@@ -32,7 +32,7 @@ public:
 		box_.bottom_right_ = center_ + radius_ / 2.0f;
 	}
 
-	SphereLight operator=(SphereLight& dat)
+	SphereLight& operator=(SphereLight& dat)
 	{
 		type_=dat.type_;
 		center_=dat.center_;
@@ -73,6 +73,20 @@ public:
 	float size_[2];		// size 
 	vector<V3> vertex_;
 	V3 Le_;				// light source emission
+
+
+	QuadLight& operator=(QuadLight dat)
+	{
+		type_ = dat.type_;
+		center_ = dat.center_;
+		box_ = dat.box_;
+		normal_ = dat.normal_;
+		size_[0] = dat.size_[0];
+		size_[1] = dat.size_[1];
+		vertex_ = dat.vertex_;
+		Le_ = dat.Le_;
+		return *this;
+	}
 
 	QuadLight(V3 center, V3 normal, float size[2], V3 Le)
 	{
@@ -129,16 +143,6 @@ public:
 		return itsc;		
 	}
 
-	QuadLight operator=(QuadLight dat)
-	{
-		type_ = dat.type_;
-		center_ = dat.center_;
-		box_ = dat.box_;		
-		normal_ = dat.normal_;
-		size_[0]=dat.size_[0];
-		size_[1] = dat.size_[1];
-		Le_=dat.Le_;
-	}
 };
 
 
@@ -153,7 +157,7 @@ public:
 	Material* pMtl_;
 	
 
-	Patch operator=(Patch dat)
+	Patch& operator=(Patch dat)
 	{
 		type_ = dat.type_;
 		center_ = dat.center_;
@@ -200,6 +204,18 @@ public:
 			itsc.is_hit_ = true;
 			itsc.distance_ = Distance(ray.origin_, itsc.intersection_);			
 			itsc.pMtl_ = pMtl_;
+
+			float cos_theta = Dot(ray.direction_, normal_);
+			if (cos_theta < 0)
+				/// direction of normal is right,but theta should be adjust
+			{
+				cos_theta = -1.0f*cos_theta;
+			}
+			else
+				/// direction of normal is not right
+			{
+				normal_ = -1.0f*normal_;
+			}
 			itsc.normal_ = normal_;
 		}
 		else
