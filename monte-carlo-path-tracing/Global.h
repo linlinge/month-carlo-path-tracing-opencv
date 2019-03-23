@@ -11,7 +11,7 @@
 #include "V3.hpp"
 #include "Material.hpp"
 #define LAMBERTIAN_SAMPLE_NUMBER 4.0f
-#define PI 3.1415926535897
+#define PI 3.1415926535897f
 
 // variables
 extern vector<V3> v_;		// vertex load from obj file

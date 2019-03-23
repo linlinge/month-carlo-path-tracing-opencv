@@ -22,7 +22,7 @@ KdNode* KdTree::Build(vector<Object*>& objs,int depth)
 	max_box = objs[0]->box_;
 	for (int i = 1; i < objs.size(); i++)
 	{
-		max_box.Expand(objs[i]->center_);
+		max_box.Expand(objs[i]->box_);
 	}
 	node->box_ = max_box;
 

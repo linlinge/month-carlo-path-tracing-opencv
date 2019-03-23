@@ -8,7 +8,7 @@ public:
 	V3 applied_up_;
 	V3 actual_up_;
 	V3 forward_;
-	V3 left_;
+	V3 right_;
 
 	float fovy_degree_; // represent with degree
 	float fovy_arc_;
@@ -25,7 +25,7 @@ public:
 		applied_up_ = dat.applied_up_;
 		actual_up_ = dat.actual_up_;
 		forward_ = dat.forward_;
-		left_ = dat.left_;
+		right_ = dat.right_;
 		fovy_degree_ = dat.fovy_degree_;
 		fovy_arc_ = dat.fovy_arc_;
 		focal_length_ = dat.focal_length_;		
@@ -55,7 +55,7 @@ public:
 		actual_up_ = (applied_up_*sin(arc)).GetNorm();
 		forward_ = (lookat_-position_).GetNorm();
 		
-		left_ = (Cross(forward_, actual_up_)).GetNorm();
+		right_ = (Cross(forward_, actual_up_)).GetNorm();
 
 		// image origin, pixel height, pixel width
 		float r = tan(fovy_arc_ / 2.0f)*focal_length_*2.0f;
@@ -65,13 +65,13 @@ public:
 		pixel_width_ = image_actual_width_ * 1.0f / image_pixel_width_;
 		pixel_height_ = image_actual_height_ * 1.0f / image_pixel_height_;
 
-		image_origin_ = position_ + focal_length_ * forward_ + image_actual_width_ / 2.0f*left_ + image_actual_height_ / 2.0f*actual_up_;
+		image_origin_ = position_ + focal_length_ * forward_ - image_actual_width_ / 2.0f*right_ + image_actual_height_ / 2.0f*actual_up_;
 	}
 
 	V3 GetPosition(float i,float j)
 	{
 		
-		return image_origin_ - pixel_width_ * j*left_ - pixel_height_ * i*actual_up_;
+		return image_origin_ + pixel_width_ * j*right_ - pixel_height_ * i*actual_up_;
 	}
 	Camera() {};
 };

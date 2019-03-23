@@ -9,9 +9,8 @@
 using namespace std;
 using namespace cv;
 // image size
-#define IMAGE_WIDTH	500
-#define IMAGE_HEIGHT 500
-
+#define IMAGE_WIDTH	512
+#define IMAGE_HEIGHT 512
 
 int main()
 {	
@@ -19,31 +18,45 @@ int main()
 	Scene scene;
 	
 	// example01
-	scene.LoadObjs("./dataset/Example01/example01.obj");
+	/*scene.LoadObjs("./dataset/Example01/example01.obj");
 	scene.AddCamera(Camera(V3(1.0, 2, 1), V3(-5.09809, -5.6217, 4.08914), V3(1.0, 0.0, 0.0),
 		130, 1.0f, IMAGE_WIDTH, IMAGE_HEIGHT));
+	scene.AddSphereLight(SphereLight(V3(5.0, 4.589, -4.274), 0.2, V3(30, 30, 30)));*/
 
-	//scene.LoadObjs("./dataset/Example02/example02.obj");
+	// example02
+	/*scene.LoadObjs("./dataset/Example02/example02.obj");
+	scene.AddCamera(Camera(V3(1.0, 2, 1), V3(-5.09809, -5.6217, 4.08914), V3(1.0, 0.0, 0.0),
+		130, 1.0f, IMAGE_WIDTH, IMAGE_HEIGHT));
+	scene.AddSphereLight(SphereLight(V3(1.0, 1.589, 1.274), 0.2, V3(180, 180, 180)));*/
+	
+	/*scene.LoadObjs("./dataset/Example03/example03.obj");
+	scene.AddCamera(Camera(V3(1.0, 2, 1), V3(-5.09809, -5.6217, 4.08914), V3(1.0, 0.0, 0.0),
+		130, 1.0f, IMAGE_WIDTH, IMAGE_HEIGHT));
+	scene.AddSphereLight(SphereLight(V3(1.0, 10, 10), 0.2, V3(50, 50, 40)));*/
+		
+
+
+	//// cup
 	//scene.LoadObjs("./dataset/Scene01/cup.obj");
-	//scene.LoadObjs("./dataset/Scene02/room.obj");
-	
-	// add objects
-	//scene.AddCamera(Camera(V3(0.0, 0.0, 0.4),V3(0.0, 0.0, 0.0),V3(0.0,1.0,0.0),
-	//				50,10.0f,IMAGE_WIDTH,IMAGE_HEIGHT));
-	
+	//scene.AddCamera(Camera(V3(0.0, 0.64, 0.52), V3(0.0, 0.40, 0.3), V3(0.0,1.0,0.0),
+	//	100, 1.0f, IMAGE_WIDTH, IMAGE_HEIGHT));
+	//float size[2];
+	//size[0] = size[1] = 1;
+	////scene.AddQuadLight(QuadLight(V3(-2.758771896, 1.5246, 0),V3(1, 0, 0),size,V3(40, 40, 40)));
+	//scene.AddSphereLight(SphereLight(V3(0.0, 1.589, -1.274), 0.2, V3(50, 50, 40)));
 
-	/*scene.AddCamera(Camera(V3(0,0,6), V3(-5.72581, -3.16399, 0), V3(0.0, 1.0, 0.0),
-		110, 10.0f, IMAGE_WIDTH, IMAGE_HEIGHT));*/
+	// room
+	scene.LoadObjs("./dataset/Scene02/room.obj");
+	scene.AddCamera(Camera(V3(0.0, 0.0, 0.4), V3(0.0, 0.0, 0.0), V3(0.0,1.0,0.0),
+		150, 10.0f, IMAGE_WIDTH, IMAGE_HEIGHT));
+	scene.AddSphereLight(SphereLight(V3(0.0, 1.589, -1.274),0.2,V3(50, 50, 40)));
 
-	scene.AddSphereLight(SphereLight(V3(1.0, 10,10),0.2,V3(50, 50, 40)));
 
 	// establish kd-tree
 	scene.BuildKdTree();
-
 	Mat temp = imread("./image/1.jpg");
 	// Rendering
 	Mat rst=scene.Rendering();
-
 	global_file.close();
 	//tree.Print();
 	// Display result

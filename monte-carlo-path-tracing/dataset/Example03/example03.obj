@@ -1,0 +1,11 @@
+# This file uses centimeters as units for non-parametric coordinates.
+mtllib example03.mtl
+g default
+v -3.92857 -3.04175 0
+v -2.84197 -0.64533 0
+v -5 -1 0
+v -3.93 -3.04 4
+v -2.84 -0.65 4
+v -5 -1 4
+usemtl breakfast_room_cup_Ceramic_001
+f 3 1 4 6

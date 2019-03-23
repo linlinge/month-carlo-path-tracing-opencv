@@ -135,9 +135,8 @@ public:
 
 	friend float GetArc(V3 dat1, V3 dat2)
 	{
-		float arc = dat1.x * dat2.x + dat1.y * dat2.y + dat1.z * dat2.z;
-		float cos_theta= arc / sqrt(dat1.x*dat1.x + dat1.y * dat1.y + dat1.z * dat1.z) / sqrt(dat2.x*dat2.x + dat2.y*dat2.y + dat2.z*dat2.z);
-		float theta=acos(cos_theta);		
+		float cos_theta = Dot(dat1.GetNorm(), dat2.GetNorm());
+		float theta = acos(cos_theta);
 		return theta;
 	}
 

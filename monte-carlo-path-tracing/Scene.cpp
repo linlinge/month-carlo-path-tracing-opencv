@@ -29,7 +29,6 @@ Mat Scene::Rendering()
 	// Define
 	Mat result(camera_.image_pixel_width_,camera_.image_pixel_height_,CV_8UC3,cv::Scalar(0,0,0));
 
-
 	//ofstream f("../matlab/ray.txt");
 
 	// Generate rays in each pixel
@@ -42,7 +41,6 @@ Mat Scene::Rendering()
 			// Define
 			V3 color;
 			
-
 			//for (int k = 0; k < 10; k++)
 			//{
 			//	//srand((unsigned)time(NULL));
@@ -58,10 +56,9 @@ Mat Scene::Rendering()
 
 			//	// f << ray.origin_ <<" "<<pos<< endl;
 			//	// Ray Tracing
-
 			//	color=color+RayTracing(ray);
-			//}
-			//color = color / 10.0f;
+			// }
+			// color = color / 10.0f;
 
 
 			// not jitter
@@ -69,6 +66,10 @@ Mat Scene::Rendering()
 			Ray ray;
 			ray.origin_ = camera_.position_;
 			ray.direction_ = (pos - camera_.position_).GetNorm();
+			if (i == 330 && j == 160)
+			{
+				i = 330;
+			}
 			color = RayTracing(ray);
 
 			min_val= min(color.x, min(color.y, min(color.z, min_val)));
@@ -81,8 +82,9 @@ Mat Scene::Rendering()
 		//cout << endl;
 	}
 	//f.close();
-	 
+		
 	float delta = max_val - min_val;
+
 	for (int i = 0; i < camera_.image_pixel_width_; i++)
 	{
 		for (int j = 0; j < camera_.image_pixel_height_; j++)
@@ -90,11 +92,20 @@ Mat Scene::Rendering()
 			result.at<Vec3b>(i, j)[0] =(buffer_[i*camera_.image_pixel_width_+j].x-min_val) /delta *255;
 			result.at<Vec3b>(i, j)[1] =(buffer_[i*camera_.image_pixel_width_+j].y-min_val) / delta *255;
 			result.at<Vec3b>(i, j)[2] =(buffer_[i*camera_.image_pixel_width_+j].z-min_val) / delta *255;
-		}
 
-	}	
+			/*result.at<Vec3b>(i, j)[0] = buffer_[i*camera_.image_pixel_width_ + j].x;
+			result.at<Vec3b>(i, j)[1] = buffer_[i*camera_.image_pixel_width_ + j].y;
+			result.at<Vec3b>(i, j)[2] = buffer_[i*camera_.image_pixel_width_ + j].z;*/
+			/*if (i == 330 || j==160)
+			{
+				result.at<Vec3b>(i, j)[0] = 255;
+				result.at<Vec3b>(i, j)[1] = 0;
+				result.at<Vec3b>(i, j)[2] = 0;
+			}*/
+
+		}		
+	}
 	cout << max_val << endl;
-	
 	return result;
 }
 
@@ -102,12 +113,12 @@ Mat Scene::Rendering()
 V3 Scene::RayTracing(Ray& ray)
 {
 	V3 color;
-	color = Lambertian(ray) +BlinnPhong(ray, 0);
-	
+	//V3 temp = BlinnPhong(ray, 0);
+	color = Lambertian(ray); //  +temp;
 	return color;
 }
 
-// difuss model
+// Difuss model
 V3 Scene::Lambertian(Ray& exit_light)
 {
 	V3 color;
@@ -120,13 +131,12 @@ V3 Scene::Lambertian(Ray& exit_light)
 	//	global_file<< itsc.pPatch_->v_id_[1] << " ";
 	//	global_file << itsc.pPatch_->v_id_[2] << endl;
 	//}
-
-	if (itsc.pMtl_ == NULL)
-		return background;
-
 	if (itsc.is_hit_ == false)
 		return background;
 
+	if (itsc.pMtl_ == NULL)
+		return background;
+	
 	// abnormal situation1: hit light source
 	if (itsc.type_ == SPHERE_SOURCE || itsc.type_ == QUAD_SOURCE)
 	{
@@ -135,46 +145,43 @@ V3 Scene::Lambertian(Ray& exit_light)
 
 	V3 intersection_to_lightsource = (sphere_light_[0].center_ - itsc.intersection_).GetNorm();
 	color = itsc.pMtl_->Kd_*sphere_light_[0].Le_*abs(Dot(itsc.normal_, intersection_to_lightsource));
-
 	return color;
 }
 
 // specular model
 V3 Scene::BlinnPhong(Ray& exit_ray,int depth)
 {
-	// get intersection
+	// Get intersection
 	Intersection itsc = tree_.NearestSearchByLevel(exit_ray);
 
-
-	// condition 
+	// Condition
 	if (itsc.is_hit_ == false)
 		return background;
 
 	if (itsc.type_ == SPHERE_SOURCE || itsc.type_ == QUAD_SOURCE)
-		/// light
+		/// Light
 	{
 		return *itsc.pLe_;
 	}
-	if (depth > 5)
-		/// out of maximum depth
+
+	if (depth > 8)
+		/// Out of maximum depth
 	{
-		return background;
+		return V3(50, 50, 40);
 	}
 
-	// define
+	// Define
 	V3 color;
-	// get incident light
+	// Get incident light
 	Ray incident_ray = GetIncidentRay(exit_ray, itsc);
 	V3 L = incident_ray.direction_;
 	V3 V = (camera_.position_ - itsc.intersection_).GetNorm();
-	V3 H = (L + V) / (L + V).GetLength();	
+	V3 H = (L + V) / (L + V).GetLength();
 
-
-	// caculate color	
+	// Caculate color
 	color = itsc.pMtl_->Ks_*BlinnPhong(incident_ray,depth+1)*pow(MAX2(0,Dot(itsc.normal_,H)), itsc.pMtl_->Ns_);
 	return color;
 }
-
 
 
 void Scene::LoadObjs(string filename)
@@ -190,13 +197,10 @@ void Scene::LoadObjs(string filename)
 }
 
 
-
-
 Ray& Scene::GetIncidentRay(Ray& exit_light, Intersection& itsc)
 {
 	// make sure that direction of exit light is nomalized
 	exit_light.direction_.Normalize();
-
 	Ray incident_ray;
 	incident_ray.origin_ = itsc.intersection_;
 	// calculate direction
@@ -204,6 +208,5 @@ Ray& Scene::GetIncidentRay(Ray& exit_light, Intersection& itsc)
 	cos_theta = -1.0f*cos_theta; // you should make sure that direction is right
 	float D = 1.0f*cos_theta; // because the direction vector is a normalized vector
 	incident_ray.direction_ = (exit_light.direction_ + 2 * D*itsc.normal_).GetNorm();
-
 	return incident_ray;
 }
