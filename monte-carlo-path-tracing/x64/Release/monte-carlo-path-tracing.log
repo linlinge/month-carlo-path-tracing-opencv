@@ -1,19 +1,47 @@
-﻿  main.cpp
-e:\zju_course\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\v3.hpp(185): warning C4305: '=': truncation from 'int' to 'float'
-e:\zju_course\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\global.h(14): warning C4005: 'PI': macro redefinition
-  e:\zju_course\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\v3.hpp(5): note: see previous definition of 'PI'
-e:\zju_course\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\intersection.hpp(23): warning C4305: '=': truncation from 'int' to 'float'
-e:\zju_course\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\objects.hpp(99): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-e:\zju_course\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\objects.hpp(100): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-e:\zju_course\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\objects.hpp(101): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-e:\zju_course\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\objects.hpp(102): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
-e:\zju_course\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\camera.hpp(48): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
-e:\zju_course\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\camera.hpp(56): warning C4305: 'argument': truncation from 'double' to 'float'
-e:\zju_course\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\main.cpp(41): warning C4305: 'argument': truncation from 'double' to 'float'
-e:\zju_course\cg\homework2\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\main.cpp(46): warning C4305: 'argument': truncation from 'double' to 'float'
+﻿  Scene.cpp
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\v3.hpp(185): warning C4305: '=': truncation from 'int' to 'float'
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\global.h(14): warning C4005: 'PI': macro redefinition
+  d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\v3.hpp(5): note: see previous definition of 'PI'
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\intersection.hpp(23): warning C4305: '=': truncation from 'int' to 'float'
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\objects.hpp(99): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\objects.hpp(100): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\objects.hpp(101): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\objects.hpp(102): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\camera.hpp(48): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\camera.hpp(56): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\scene.cpp(36): warning C4305: 'initializing': truncation from 'int' to 'float'
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\scene.cpp(65): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\scene.cpp(92): warning C4244: '=': conversion from 'float' to '_Tp', possible loss of data
+          with
+          [
+              _Tp=uchar
+          ]
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\scene.cpp(93): warning C4244: '=': conversion from 'float' to '_Tp', possible loss of data
+          with
+          [
+              _Tp=uchar
+          ]
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\scene.cpp(94): warning C4244: '=': conversion from 'float' to '_Tp', possible loss of data
+          with
+          [
+              _Tp=uchar
+          ]
+  main.cpp
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\v3.hpp(185): warning C4305: '=': truncation from 'int' to 'float'
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\global.h(14): warning C4005: 'PI': macro redefinition
+  d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\v3.hpp(5): note: see previous definition of 'PI'
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\intersection.hpp(23): warning C4305: '=': truncation from 'int' to 'float'
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\objects.hpp(99): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\objects.hpp(100): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\objects.hpp(101): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\objects.hpp(102): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\camera.hpp(48): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\camera.hpp(56): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\main.cpp(41): warning C4305: 'argument': truncation from 'double' to 'float'
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\main.cpp(45): warning C4305: 'argument': truncation from 'double' to 'float'
   Generating code
-  1 of 1074 functions (<0.1%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
+  174 of 1093 functions (15.9%) were compiled, the rest were copied from previous compilation.
+    8 functions were new in current compilation
+    28 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
-  monte-carlo-path-tracing.vcxproj -> E:\ZJU_COURSE\CG\Homework2\month-carlo-path-tracing-opencv\x64\Release\monte-carlo-path-tracing.exe
+  monte-carlo-path-tracing.vcxproj -> D:\workspace\month-carlo-path-tracing-opencv\x64\Release\monte-carlo-path-tracing.exe

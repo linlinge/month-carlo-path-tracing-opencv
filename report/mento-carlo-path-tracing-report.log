@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2018.12.3)  12 MAR 2019 09:26
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2018.12.3)  24 MAR 2019 22:26
 entering extended mode
 **mento-carlo-path-tracing-report.tex
 
@@ -1128,21 +1128,28 @@ File: chart_flow.png Graphic file (type png)
 <use chart_flow.png>
 Package pdftex.def Info: chart_flow.png used on input line 286.
 (pdftex.def)             Requested size: 246.02103pt x 84.76733pt.
- <monte_carlo_sample.png, id=236, 570.13pt x 322.20375pt>
+ <result1.png, id=235, 385.44pt x 385.44pt>
+File: result1.png Graphic file (type png)
+
+<use result1.png>
+Package pdftex.def Info: result1.png used on input line 294.
+(pdftex.def)             Requested size: 192.71953pt x 192.71953pt.
+ <monte_carlo_sample.png, id=237, 570.13pt x 322.20375pt>
 File: monte_carlo_sample.png Graphic file (type png)
 
 <use monte_carlo_sample.png>
-Package pdftex.def Info: monte_carlo_sample.png used on input line 307.
+Package pdftex.def Info: monte_carlo_sample.png used on input line 312.
 (pdftex.def)             Requested size: 142.53215pt x 80.55074pt.
  [7 <D:/workspace/month-carlo-path-tracing-opencv/report/chart_flow.png> <D:/wo
-rkspace/month-carlo-path-tracing-opencv/report/monte_carlo_sample.png>] [8]
+rkspace/month-carlo-path-tracing-opencv/report/result1.png>] [8 <D:/workspace/m
+onth-carlo-path-tracing-opencv/report/monte_carlo_sample.png>]
 (D:\workspace\month-carlo-path-tracing-opencv\report\mento-carlo-path-tracing-r
 eport.aux) ) 
 Here is how much of TeX's memory you used:
- 13713 strings out of 495354
- 203529 string characters out of 3183859
+ 13720 strings out of 495354
+ 203627 string characters out of 3183859
  282403 words of memory out of 3000000
- 16245 multiletter control sequences out of 15000+200000
+ 16251 multiletter control sequences out of 15000+200000
  67501 words of font info for 230 fonts, out of 3000000 for 9000
  14 hyphenation exceptions out of 8191
  40i,9n,58p,876b,1477s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1202,9 +1209,9 @@ sfonts/cm/cmmib10.pfb><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb>
 <D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><D:/CTEX/MiKTeX/fonts/
 type1/public/amsfonts/cm/cmr7.pfb><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/c
 m/cmr8.pfb><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on mento-carlo-path-tracing-report.pdf (8 pages, 959646 bytes).
+Output written on mento-carlo-path-tracing-report.pdf (8 pages, 981792 bytes).
 PDF statistics:
- 680 PDF objects out of 1000 (max. 8388607)
+ 682 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 332 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 337 words of extra memory for PDF output out of 10000 (max. 10000000)
 

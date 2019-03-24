@@ -113,7 +113,7 @@ Mat Scene::Rendering()
 V3 Scene::RayTracing(Ray& ray)
 {
 	V3 color;
-	V3 temp = BlinnPhong(ray, 0);
+	//V3 temp = BlinnPhong(ray, 0);
 	color = Lambertian(ray);//  +temp;
 	return color;
 }
