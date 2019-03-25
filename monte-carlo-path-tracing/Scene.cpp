@@ -10,13 +10,13 @@ void Scene::AddCamera(Camera camera)
 void Scene::AddSphereLight(SphereLight dat)
 {	
 	objs_.push_back(&dat);
-	sphere_light_.push_back(dat);
+	light_source_.push_back(&dat);
 }
 
-void Scene::AddQuadLight(QuadLight dat)
+void Scene::AddQuadLight(QuadLight& dat)
 {	
-	objs_.push_back(&dat);
-	quad_light_.push_back(dat);
+	objs_.push_back(&dat);	
+	light_source_.push_back(&dat);
 }
 
 void Scene::BuildKdTree()
@@ -113,24 +113,19 @@ Mat Scene::Rendering()
 V3 Scene::RayTracing(Ray& ray)
 {
 	V3 color;
-	//V3 temp = BlinnPhong(ray, 0);
-	color = Lambertian(ray);//  +temp;
+	V3 temp = BlinnPhong(ray, 0);
+	color = Lambert(ray)  +temp;
 	return color;
 }
 
 // Difuss model
-V3 Scene::Lambertian(Ray& exit_light)
+V3 Scene::Lambert(Ray& exit_light)
 {
 	V3 color;
 	Ray incident;
 	// Get Nearest Patch
 	Intersection itsc = tree_.NearestSearchByLevel(exit_light);
-	//if (itsc.is_hit_==true && itsc.type_ == PATCH)
-	//{		
-	//	global_file<< itsc.pPatch_->v_id_[0] << " ";
-	//	global_file<< itsc.pPatch_->v_id_[1] << " ";
-	//	global_file << itsc.pPatch_->v_id_[2] << endl;
-	//}
+	
 	if (itsc.is_hit_ == false)
 		return background;
 
@@ -143,8 +138,26 @@ V3 Scene::Lambertian(Ray& exit_light)
 		return *itsc.pLe_;
 	}
 
-	V3 intersection_to_lightsource = (sphere_light_[0].center_ - itsc.intersection_).GetNorm();
-	color = itsc.pMtl_->Kd_*sphere_light_[0].Le_*abs(Dot(itsc.normal_, intersection_to_lightsource));
+	SphereLight* sphere_light_temp = NULL;
+	QuadLight* quad_light_temp = NULL;
+	V3 intersection_to_lightsource;
+	for (auto& object_temp : light_source_)
+	{
+		switch (object_temp->type_)
+		{
+		case SPHERE_SOURCE:
+			sphere_light_temp = (SphereLight*)object_temp;
+			intersection_to_lightsource = (sphere_light_temp->center_ - itsc.intersection_).GetNorm();
+			color = color + itsc.pMtl_->Kd_*sphere_light_temp->Le_*abs(Dot(itsc.normal_, intersection_to_lightsource));
+			break;
+		case QUAD_SOURCE:
+			quad_light_temp = (QuadLight*)object_temp;
+			intersection_to_lightsource = (quad_light_temp->center_ - itsc.intersection_).GetNorm();
+			color = color + itsc.pMtl_->Kd_*quad_light_temp->Le_*abs(Dot(itsc.normal_, intersection_to_lightsource));
+			break;
+		}		
+	}
+	color = color / (float)light_source_.size();
 	return color;
 }
 
@@ -167,7 +180,7 @@ V3 Scene::BlinnPhong(Ray& exit_ray,int depth)
 	if (depth > 8)
 		/// Out of maximum depth
 	{
-		return V3(50, 50, 40);
+		return V3(0, 0, 0);
 	}
 
 	// Define

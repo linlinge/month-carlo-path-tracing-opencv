@@ -51,11 +51,14 @@ public:
 		image_pixel_height_ = height;
 
 		// actual up, left and forward diretion
-		float arc = GetArc(position_ - lookat_, applied_up_);
-		actual_up_ = (applied_up_*sin(arc)).GetNorm();
-		actual_up_ = V3(0,1,-1.09);
-		forward_ = (lookat_-position_).GetNorm();
-		
+		forward_ = (lookat_ - position_).GetNorm();
+		float arc = GetArc(forward_, applied_up_);		
+		float D = (applied_up_*cos(arc)).GetLength();
+		if(arc>PI/2.0f)
+			actual_up_ = (applied_up_ + D * forward_).GetNorm();		
+		else
+			actual_up_ = (applied_up_ - D * forward_).GetNorm();
+		// actual_up_ = V3(0,1,-1.09);				
 		right_ = (Cross(forward_, actual_up_)).GetNorm();
 
 		// image origin, pixel height, pixel width

@@ -75,21 +75,20 @@
 \item[（3）]{\bm{平行光}}：又称为镜面光，这种光是互相平行的。从手电筒或者太阳出来的光都可以被看做平行光。
 \item[（4）]{\bm{聚光灯}}：这种光源的光线从一个锥体中射出，在被照射的物体上产生聚光的效果。使用这种光源需要指定光的射出方向以及锥体的顶角$\alpha$。
 \end{itemize}
+\subsubsection{Lambert光照模型（针对漫反射光线）}
 
 \subsubsection{BlinnPhong光照模型（针对反射光线）}
 \begin{itemize}
-\item[（1）]{发射光} \mbox{}\\
+\item[（1）]{\bm{发射光}} \mbox{}\\
 $$C_{e}=M_{e}$$
 $C_e$：发射颜色 \\
 $M_e$：发射材质颜色
 
-\item[（2）]{漫反射} \mbox{}\\
+\item[（2）]{\bm{漫反射}} \mbox{}\\
 定义漫反射因子$\alpha$如下：
 $$\alpha=max\{0,N \cdot L\}$$
 其中$L$是光线，$N$是定点法线向量。
 $$C_{d}=L_{d}M_{d}\alpha$$
-
-
 \end{itemize}
 
 
@@ -296,6 +295,20 @@ $$L_2=\frac{D}{tan(\theta_1)}-\frac{D}{tan(\theta_2)}$$
 \caption{场景1结果图}
 \end{figure}
 
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.5]{result2.png}
+\end{center}
+\caption{场景2结果图}
+\end{figure}
+
+\begin{figure}[H]
+\begin{center}
+\includegraphics[scale=0.5]{result3.png}
+\end{center}
+\caption{场景3结果图}
+\end{figure}
 
 \section{问题汇总}
 \subsection{关于光线的疑问}

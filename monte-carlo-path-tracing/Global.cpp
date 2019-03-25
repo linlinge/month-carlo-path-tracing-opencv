@@ -3,7 +3,7 @@ vector<V3> v_;
 vector<V3> vt_;
 vector<V3> vn_;
 vector<Material> mtls_;
-V3 background(10,10,10);
+V3 background(0,0,0);
 
 ofstream global_file("../output/hit_patch.txt");
 

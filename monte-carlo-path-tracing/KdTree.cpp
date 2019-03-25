@@ -30,6 +30,9 @@ KdNode* KdTree::Build(vector<Object*>& objs,int depth)
 	//if (depth > MAX_DEPTH || objs.size()==1)
 	if ( objs.size() == 1)
 	{
+		if (objs[0]->type_ == QUAD_SOURCE)
+			objs[0]->type_ = QUAD_SOURCE;
+
 		node->leaf_val_ = objs[0];
 		leaf_num_++;
 		return node;

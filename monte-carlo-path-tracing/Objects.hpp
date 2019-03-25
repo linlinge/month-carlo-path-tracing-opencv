@@ -71,7 +71,7 @@ class QuadLight :public Object
 public:
 	V3 normal_;			// light source normal
 	float size_[2];		// size 
-	vector<V3> vertex_;
+	vector<V3*> pvertex_;
 	V3 Le_;				// light source emission
 
 
@@ -83,7 +83,8 @@ public:
 		normal_ = dat.normal_;
 		size_[0] = dat.size_[0];
 		size_[1] = dat.size_[1];
-		vertex_ = dat.vertex_;
+		pvertex_.insert(pvertex_.begin(),dat.pvertex_.begin(),dat.pvertex_.end());
+		//pvertex_ = dat.pvertex_;
 		Le_ = dat.Le_;
 		return *this;
 	}
@@ -96,13 +97,13 @@ public:
 		size_[0] = size[0]; size_[1] = size[1];
 		Le_ = Le;
 
-		vertex_.push_back(V3(center_.x , center_.y+ sqrt(2)/2.0f, center_.z));
-		vertex_.push_back(V3(center_.x, center_.y , center_.z+ sqrt(2) / 2.0f));
-		vertex_.push_back(V3(center_.x , center_.y- sqrt(2) / 2.0f, center_.z));
-		vertex_.push_back(V3(center_.x, center_.y , center_.z- sqrt(2) / 2.0f));
+		pvertex_.push_back(&V3(center_.x , center_.y+ sqrt(2)/2.0f, center_.z));
+		pvertex_.push_back(&V3(center_.x, center_.y , center_.z+ sqrt(2) / 2.0f));
+		pvertex_.push_back(&V3(center_.x , center_.y- sqrt(2) / 2.0f, center_.z));
+		pvertex_.push_back(&V3(center_.x, center_.y , center_.z- sqrt(2) / 2.0f));
 
-		for(auto& temp: vertex_)
-			box_.Expand(temp);
+		for(auto& temp: pvertex_)
+			box_.Expand(*temp);
 	}
 
 	virtual Intersection IsIntersect(Ray& ray)
@@ -111,7 +112,7 @@ public:
 		itsc.type_ = QUAD_SOURCE;
 
 		// step1: Solve for the intersection between ray and plane
-		Plane plane1(vertex_[0], vertex_[1], vertex_[2]);
+		Plane plane1(*pvertex_[0], *pvertex_[1], *pvertex_[2]);
 		Line line1(ray.origin_, ray.direction_);
 		itsc.intersection_ = plane1.IsIntersect(line1);
 		float is_same_direction = Dot(itsc.intersection_ - ray.origin_, (ray.direction_));
@@ -122,12 +123,12 @@ public:
 
 		// Accumulate arc
 		float accumulator = 0.0f;
-		for (int i = 0; i < vertex_.size() - 1; i++)
+		for (int i = 0; i < pvertex_.size() - 1; i++)
 		{
-			Angle angle(itsc.intersection_, vertex_[i], vertex_[i+1]);
+			Angle angle(itsc.intersection_, *pvertex_[i], *pvertex_[i+1]);
 			accumulator += angle.arc_;
 		}
-		Angle angle(itsc.intersection_, vertex_[0], vertex_[3]);
+		Angle angle(itsc.intersection_, *pvertex_[0], *pvertex_[3]);
 		accumulator += angle.arc_;
 
 		if (abs(accumulator - 2 * PI) < 0.01)
@@ -142,7 +143,6 @@ public:
 		}
 		return itsc;		
 	}
-
 };
 
 

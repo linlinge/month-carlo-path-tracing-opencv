@@ -17,8 +17,7 @@ class Scene
 {
 public:
 	Camera camera_;
-	vector<SphereLight> sphere_light_;
-	vector<QuadLight> quad_light_;
+	vector<Object*> light_source_;
 	ObjFile obj_file_;
 	vector<Object*> objs_;
 	KdTree tree_;
@@ -29,12 +28,12 @@ public:
 	void BuildKdTree();
 	void AddCamera(Camera camera);
 	void AddSphereLight(SphereLight dat);
-	void AddQuadLight(QuadLight dat);
+	void AddQuadLight(QuadLight& dat);
 
 	Mat Rendering();
 	V3 RayTracing(Ray& exit_light);
 	V3 BlinnPhong(Ray& exit_light,int depth);
-	V3 Lambertian(Ray& exit_light);
+	V3 Lambert(Ray& exit_light);
 
 private:
 	Ray& GetIncidentRay(Ray& exit_light, Intersection& itsc);

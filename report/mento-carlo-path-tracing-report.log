@@ -1,11 +1,20 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2018.12.3)  24 MAR 2019 22:26
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2018.12.5)  25 MAR 2019 16:02
 entering extended mode
 **mento-carlo-path-tracing-report.tex
 
-(D:\workspace\month-carlo-path-tracing-opencv\report\mento-carlo-path-tracing-r
-eport.tex
+(E:\ZJU_COURSE\CG\Homework2\month-carlo-path-tracing-opencv\report\mento-carlo-
+path-tracing-report.tex
 LaTeX2e <2011/06/27>
-Babel <v3.8m> and hyphenation patterns for loaded.
+Babel <v3.8m> and hyphenation patterns for english, afrikaans, ancientgreek, ar
+abic, armenian, assamese, basque, bengali, bokmal, bulgarian, catalan, coptic, 
+croatian, czech, danish, dutch, esperanto, estonian, farsi, finnish, french, ga
+lician, german, german-x-2009-06-19, greek, gujarati, hindi, hungarian, iceland
+ic, indonesian, interlingua, irish, italian, kannada, kurmanji, lao, latin, lat
+vian, lithuanian, malayalam, marathi, mongolian, mongolianlmc, monogreek, ngerm
+an, ngerman-x-2009-06-19, nynorsk, oriya, panjabi, pinyin, polish, portuguese, 
+romanian, russian, sanskrit, serbian, slovak, slovenian, spanish, swedish, swis
+sgerman, tamil, telugu, turkish, turkmen, ukenglish, ukrainian, uppersorbian, u
+senglishmax, welsh, loaded.
 (D:\CTEX\MiKTeX\tex\latex\base\article.cls
 Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
 (D:\CTEX\MiKTeX\tex\latex\base\size10.clo
@@ -945,8 +954,8 @@ LaTeX Info: Redefining \addtolength on input line 77.
 \calc@Ccount=\count286
 \calc@Cskip=\skip59
 )
-(D:\workspace\month-carlo-path-tracing-opencv\report\mento-carlo-path-tracing-r
-eport.aux)
+(E:\ZJU_COURSE\CG\Homework2\month-carlo-path-tracing-opencv\report\mento-carlo-
+path-tracing-report.aux)
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 68.
 LaTeX Font Info:    ... okay on input line 68.
 LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 68.
@@ -1067,151 +1076,169 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 73.
 Package CJKpunct Info: punctuation spaces for family 'zhhei' do not exist. Use 
-family 'def' instead. on input line 79.
+family 'def' instead. on input line 78.
 
-Underfull \hbox (badness 10000) in paragraph at lines 81--82
+Underfull \hbox (badness 10000) in paragraph at lines 82--83
 
  []
 
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 101.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 100.
 
 (D:\CTEX\MiKTeX\tex\latex\base\omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 101.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 100.
  [1
 
 ] [2]
-<AABB1.png, id=175, 421.575pt x 316.18124pt>
+<AABB1.png, id=176, 421.575pt x 316.18124pt>
 File: AABB1.png Graphic file (type png)
  <use AABB1.png>
-Package pdftex.def Info: AABB1.png used on input line 166.
+Package pdftex.def Info: AABB1.png used on input line 165.
 (pdftex.def)             Requested size: 210.78697pt x 158.09023pt.
- [3 <D:/workspace/month-carlo-path-tracing-opencv/report/AABB1.png (PNG copy)>]
-
-<kd-tree-structure.png, id=192, 421.575pt x 316.18124pt>
+ [3 <E:/ZJU_COURSE/CG/Homework2/month-carlo-path-tracing-opencv/report/AABB1.pn
+g (PNG copy)>]
+<kd-tree-structure.png, id=193, 421.575pt x 316.18124pt>
 File: kd-tree-structure.png Graphic file (type png)
 
 <use kd-tree-structure.png>
-Package pdftex.def Info: kd-tree-structure.png used on input line 188.
+Package pdftex.def Info: kd-tree-structure.png used on input line 187.
 (pdftex.def)             Requested size: 210.78697pt x 158.09023pt.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[4 <D:/workspace/month-carlo-path-tracing-opencv/report/kd-tree-structure.png (
-PNG copy)>] <case1.png, id=211, 493.34312pt x 489.32813pt>
+[4 <E:/ZJU_COURSE/CG/Homework2/month-carlo-path-tracing-opencv/report/kd-tree-s
+tructure.png (PNG copy)>] <case1.png, id=212, 493.34312pt x 489.32813pt>
 File: case1.png Graphic file (type png)
- <use case1.png>
-Package pdftex.def Info: case1.png used on input line 257.
-(pdftex.def)             Requested size: 172.67267pt x 171.2674pt.
 
-<case2.png, id=213, 494.84875pt x 488.82625pt>
+<use case1.png>
+Package pdftex.def Info: case1.png used on input line 256.
+(pdftex.def)             Requested size: 172.67267pt x 171.2674pt.
+ <case2.png, id=214, 494.84875pt x 488.82625pt>
 File: case2.png Graphic file (type png)
  <use case2.png>
-Package pdftex.def Info: case2.png used on input line 259.
+Package pdftex.def Info: case2.png used on input line 258.
 (pdftex.def)             Requested size: 173.19966pt x 171.09174pt.
- [5]
-<intersection_ray_sphere.png, id=226, 280.79906pt x 247.67531pt>
+
+[5] <intersection_ray_sphere.png, id=227, 280.79906pt x 247.67531pt>
 File: intersection_ray_sphere.png Graphic file (type png)
 
 <use intersection_ray_sphere.png>
-Package pdftex.def Info: intersection_ray_sphere.png used on input line 273.
+Package pdftex.def Info: intersection_ray_sphere.png used on input line 272.
 (pdftex.def)             Requested size: 168.48073pt x 148.60632pt.
- [6 <D:/workspace/month-carlo-path-tracing-opencv/report/case1.png> <D:/workspa
-ce/month-carlo-path-tracing-opencv/report/case2.png> <D:/workspace/month-carlo-
-path-tracing-opencv/report/intersection_ray_sphere.png>] <chart_flow.png, id=23
-4, 820.06375pt x 282.55562pt>
+ [6 <E:/ZJU_COURSE/CG/Homework2/month-carlo-path-tracing-opencv/report/case1.pn
+g> <E:/ZJU_COURSE/CG/Homework2/month-carlo-path-tracing-opencv/report/case2.png
+> <E:/ZJU_COURSE/CG/Homework2/month-carlo-path-tracing-opencv/report/intersecti
+on_ray_sphere.png>]
+<chart_flow.png, id=235, 820.06375pt x 282.55562pt>
 File: chart_flow.png Graphic file (type png)
-
-<use chart_flow.png>
-Package pdftex.def Info: chart_flow.png used on input line 286.
+ <use chart_flow.png>
+Package pdftex.def Info: chart_flow.png used on input line 285.
 (pdftex.def)             Requested size: 246.02103pt x 84.76733pt.
- <result1.png, id=235, 385.44pt x 385.44pt>
-File: result1.png Graphic file (type png)
 
-<use result1.png>
-Package pdftex.def Info: result1.png used on input line 294.
+<result1.png, id=236, 385.44pt x 385.44pt>
+File: result1.png Graphic file (type png)
+ <use result1.png>
+Package pdftex.def Info: result1.png used on input line 293.
 (pdftex.def)             Requested size: 192.71953pt x 192.71953pt.
- <monte_carlo_sample.png, id=237, 570.13pt x 322.20375pt>
+
+<result2.png, id=237, 385.44pt x 385.44pt>
+File: result2.png Graphic file (type png)
+ <use result2.png>
+Package pdftex.def Info: result2.png used on input line 301.
+(pdftex.def)             Requested size: 192.71953pt x 192.71953pt.
+ [7 <E:/ZJU_COURSE/CG/Homework2/month-carlo-path-tracing-opencv/report/chart_fl
+ow.png> <E:/ZJU_COURSE/CG/Homework2/month-carlo-path-tracing-opencv/report/resu
+lt1.png>]
+<result3.png, id=244, 385.44pt x 385.44pt>
+File: result3.png Graphic file (type png)
+ <use result3.png>
+Package pdftex.def Info: result3.png used on input line 308.
+(pdftex.def)             Requested size: 192.71953pt x 192.71953pt.
+
+<monte_carlo_sample.png, id=246, 570.13pt x 322.20375pt>
 File: monte_carlo_sample.png Graphic file (type png)
 
 <use monte_carlo_sample.png>
-Package pdftex.def Info: monte_carlo_sample.png used on input line 312.
+Package pdftex.def Info: monte_carlo_sample.png used on input line 325.
 (pdftex.def)             Requested size: 142.53215pt x 80.55074pt.
- [7 <D:/workspace/month-carlo-path-tracing-opencv/report/chart_flow.png> <D:/wo
-rkspace/month-carlo-path-tracing-opencv/report/result1.png>] [8 <D:/workspace/m
-onth-carlo-path-tracing-opencv/report/monte_carlo_sample.png>]
-(D:\workspace\month-carlo-path-tracing-opencv\report\mento-carlo-path-tracing-r
-eport.aux) ) 
+ [8 <E:/ZJU_COURSE/CG/Homework2/month-carlo-path-tracing-opencv/report/result2.
+png> <E:/ZJU_COURSE/CG/Homework2/month-carlo-path-tracing-opencv/report/result3
+.png>] [9 <E:/ZJU_COURSE/CG/Homework2/month-carlo-path-tracing-opencv/report/mo
+nte_carlo_sample.png>]
+(E:\ZJU_COURSE\CG\Homework2\month-carlo-path-tracing-opencv\report\mento-carlo-
+path-tracing-report.aux) ) 
 Here is how much of TeX's memory you used:
- 13720 strings out of 495354
- 203627 string characters out of 3183859
- 282403 words of memory out of 3000000
- 16251 multiletter control sequences out of 15000+200000
- 67501 words of font info for 230 fonts, out of 3000000 for 9000
- 14 hyphenation exceptions out of 8191
+ 13735 strings out of 494045
+ 203954 string characters out of 3153701
+ 285097 words of memory out of 3000000
+ 16385 multiletter control sequences out of 15000+200000
+ 67790 words of font info for 231 fonts, out of 3000000 for 9000
+ 715 hyphenation exceptions out of 8191
  40i,9n,58p,876b,1477s stack positions out of 5000i,500n,10000p,200000b,50000s
-<C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simhei.ttf><C:/WINDO
-WS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/simhei.ttf><
-C:/WINDOWS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simh
-ei.ttf><C:/WINDOWS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/simhei.ttf><C:/WINDOWS/Fo
-nts/simhei.ttf><C:/WINDOWS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/simhei.ttf><C:/WI
-NDOWS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/simsun.tt
-c><C:/WINDOWS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/s
-imhei.ttf><C:/WINDOWS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/simhei.ttf><C:/WINDOWS
-/Fonts/simhei.ttf><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simhei.ttf><C:
-/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/simhei
-.ttf><C:/WINDOWS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/simhei.ttf><C:/WINDOWS/Font
-s/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WIND
-OWS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/simhei.ttf>
-<C:/WINDOWS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/sim
-sun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simhei.ttf><C:/WINDOWS/F
-onts/simhei.ttf><C:/WINDOWS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/simhei.ttf><C:/W
-INDOWS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/simsun.t
-tc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/
-simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOW
-S/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C
-:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/simhe
-i.ttf><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fon
-ts/simsun.ttc><C:/WINDOWS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/simhei.ttf><C:/WIN
-DOWS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/simhei.ttf
-><C:/WINDOWS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/si
-msun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/
-Fonts/simhei.ttf><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/
-WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.
-ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts
-/simsun.ttc><C:/WINDOWS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/simhei.ttf><C:/WINDO
-WS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><
-C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/simh
-ei.ttf><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fo
-nts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WI
-NDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.tt
-c><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/s
-imsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS
-/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simhei.ttf><C:
-/WINDOWS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simhei
-.ttf><C:/WINDOWS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/simhei.ttf><C:/WINDOWS/Font
-s/simhei.ttf><C:/WINDOWS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/simhei.ttf><C:/WIND
-OWS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/simhei.ttf><C:/WINDOWS/Fonts/simsun.ttc>
-<C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/sim
-sun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/F
-onts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/W
-INDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.t
-tc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/
-simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><C:/WINDOWS/Fonts/simsun.ttc><D:/CTEX/M
-iKTeX/fonts/type1/public/amsfonts/cm/cmbx10.pfb><D:/CTEX/MiKTeX/fonts/type1/pub
-lic/amsfonts/cm/cmbx12.pfb><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmex1
-0.pfb><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi10.pfb><D:/CTEX/MiKTeX
-/fonts/type1/public/amsfonts/cm/cmmi7.pfb><D:/CTEX/MiKTeX/fonts/type1/public/am
-sfonts/cm/cmmib10.pfb><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb>
-<D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><D:/CTEX/MiKTeX/fonts/
-type1/public/amsfonts/cm/cmr7.pfb><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/c
-m/cmr8.pfb><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on mento-carlo-path-tracing-report.pdf (8 pages, 981792 bytes).
+<C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simhei
+.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Font
+s/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simsun.ttc><C:/Wind
+ows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf>
+<C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/sim
+hei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/F
+onts/simsun.ttc><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/W
+indows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.t
+tf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/
+simhei.ttf><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simhei.ttf><C:/Window
+s/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C
+:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simsu
+n.ttc><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fon
+ts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simsun.ttc><C:/Win
+dows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simhei.ttf
+><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/si
+mhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/
+Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/
+Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.
+ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts
+/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simhei.ttf><C:/Windo
+ws/Fonts/simhei.ttf><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><
+C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simh
+ei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fo
+nts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Wi
+ndows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.tt
+c><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/s
+imsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows
+/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:
+/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simhei
+.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simsun.ttc><C:/Windows/Font
+s/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Wind
+ows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simsun.ttc>
+<C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/sim
+sun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/F
+onts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/W
+indows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.t
+tc><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/
+simsun.ttc><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Window
+s/Fonts/simsun.ttc><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C
+:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhe
+i.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fonts/simhei.ttf><C:/Windows/Fon
+ts/simhei.ttf><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Win
+dows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc
+><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/si
+msun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/
+Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/
+Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.ttc><C:/Windows/Fonts/simsun.
+ttc><C:/Windows/Fonts/simsun.ttc><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm
+/cmbx10.pfb><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><D:/CTEX/
+MiKTeX/fonts/type1/public/amsfonts/cm/cmex10.pfb><D:/CTEX/MiKTeX/fonts/type1/pu
+blic/amsfonts/cm/cmmi10.pfb><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmmi
+7.pfb><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmmib10.pfb><D:/CTEX/MiKTe
+X/fonts/type1/public/amsfonts/cm/cmr10.pfb><D:/CTEX/MiKTeX/fonts/type1/public/a
+msfonts/cm/cmr12.pfb><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr7.pfb><D
+:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr8.pfb><D:/CTEX/MiKTeX/fonts/typ
+e1/public/amsfonts/cm/cmsy10.pfb>
+Output written on mento-carlo-path-tracing-report.pdf (9 pages, 1058894 bytes).
+
 PDF statistics:
- 682 PDF objects out of 1000 (max. 8388607)
+ 693 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 337 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 347 words of extra memory for PDF output out of 10000 (max. 10000000)
 
