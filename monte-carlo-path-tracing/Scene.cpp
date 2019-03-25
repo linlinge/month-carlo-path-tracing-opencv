@@ -114,7 +114,7 @@ V3 Scene::RayTracing(Ray& ray)
 {
 	V3 color;
 	V3 temp = BlinnPhong(ray, 0);
-	color = Lambert(ray)  +temp;
+	color = Lambert(ray);// +temp;
 	return color;
 }
 
@@ -141,6 +141,9 @@ V3 Scene::Lambert(Ray& exit_light)
 	SphereLight* sphere_light_temp = NULL;
 	QuadLight* quad_light_temp = NULL;
 	V3 intersection_to_lightsource;
+	Ray shadow_ray;
+	Intersection shadow_itsc;
+	shadow_ray.origin_ = itsc.intersection_;
 	for (auto& object_temp : light_source_)
 	{
 		switch (object_temp->type_)
@@ -148,12 +151,20 @@ V3 Scene::Lambert(Ray& exit_light)
 		case SPHERE_SOURCE:
 			sphere_light_temp = (SphereLight*)object_temp;
 			intersection_to_lightsource = (sphere_light_temp->center_ - itsc.intersection_).GetNorm();
+			shadow_ray.direction_ = intersection_to_lightsource;
+			shadow_itsc = tree_.NearestSearchByLevel(shadow_ray);
 			color = color + itsc.pMtl_->Kd_*sphere_light_temp->Le_*abs(Dot(itsc.normal_, intersection_to_lightsource));
+			if (shadow_itsc.type_ == PATCH)
+				color = 0.1*color;			
 			break;
 		case QUAD_SOURCE:
 			quad_light_temp = (QuadLight*)object_temp;
 			intersection_to_lightsource = (quad_light_temp->center_ - itsc.intersection_).GetNorm();
+			shadow_ray.direction_ = intersection_to_lightsource;
+			shadow_itsc = tree_.NearestSearchByLevel(shadow_ray);
 			color = color + itsc.pMtl_->Kd_*quad_light_temp->Le_*abs(Dot(itsc.normal_, intersection_to_lightsource));
+			if (shadow_itsc.type_ == PATCH)
+				color = V3(0,0,0);
 			break;
 		}		
 	}
@@ -180,7 +191,7 @@ V3 Scene::BlinnPhong(Ray& exit_ray,int depth)
 	if (depth > 8)
 		/// Out of maximum depth
 	{
-		return V3(0, 0, 0);
+		return V3(10, 10, 10);
 	}
 
 	// Define
@@ -213,7 +224,6 @@ void Scene::LoadObjs(string filename)
 Ray& Scene::GetIncidentRay(Ray& exit_light, Intersection& itsc)
 {
 	// make sure that direction of exit light is nomalized
-	exit_light.direction_.Normalize();
 	Ray incident_ray;
 	incident_ray.origin_ = itsc.intersection_;
 	// calculate direction
