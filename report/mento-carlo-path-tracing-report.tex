@@ -232,7 +232,8 @@ $$
 $$\bm{D}_{right}=\bm{D}_{forward} \times \bm{D}_{up}$$
 假设单个像素的实际宽度为$W$，宽度像素的实际个数为$N_{w}$，单个像素的实际高度为$H$，高度方向是像素个数为$N_{h}$，相机的焦距为$L$，则像平面左上角像素在世界坐标系下的位置$P_{0,0}$为：
 $$P_{0,0}=\bm{P}_{camera}+L\bm{D}_{forward}-N_{w}WD_{right}+N_{h}HD_{up}$$
-
+则有则第$i$行第$j$列像素的实际位置可以表示如下所示：
+$$\bm{P}_{i,j}=\bm{P}_{0,0}+W*j+H*i$$
 \subsection{求交检测}
 \subsubsection{AABB包围盒与光线求交检测}
 

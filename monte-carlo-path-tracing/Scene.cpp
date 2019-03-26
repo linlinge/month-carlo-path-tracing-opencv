@@ -66,37 +66,33 @@ Mat Scene::Rendering()
 			Ray ray;
 			ray.origin_ = camera_.position_;
 			ray.direction_ = (pos - camera_.position_).GetNorm();
-			if (i == 330 && j == 160)
+			if (i == 330 && j == 100)
 			{
 				i = 330;
 			}
 			color = RayTracing(ray);
-
 			min_val= min(color.x, min(color.y, min(color.z, min_val)));
 			max_val = max(color.x, max(color.y, max(color.z, max_val)));
 			//result.at<Vec3b>(i, j) = Vec3b(color.b,color.g,color.r);
-			buffer_[i*camera_.image_pixel_width_ + j] = color;
-			
+			buffer_[i*camera_.image_pixel_width_ + j] = color;			
 			//cout << color.x << " ";
 		}
 		//cout << endl;
 	}
-	//f.close();
-		
+	//f.close();		
 	float delta = max_val - min_val;
-
 	for (int i = 0; i < camera_.image_pixel_width_; i++)
 	{
 		for (int j = 0; j < camera_.image_pixel_height_; j++)
 		{
-			result.at<Vec3b>(i, j)[0] =(buffer_[i*camera_.image_pixel_width_+j].x-min_val) /delta *255;
-			result.at<Vec3b>(i, j)[1] =(buffer_[i*camera_.image_pixel_width_+j].y-min_val) / delta *255;
-			result.at<Vec3b>(i, j)[2] =(buffer_[i*camera_.image_pixel_width_+j].z-min_val) / delta *255;
+			result.at<Vec3b>(i, j)[0] = (buffer_[i*camera_.image_pixel_width_ + j].z - min_val) / delta * 255;
+			result.at<Vec3b>(i, j)[1] = (buffer_[i*camera_.image_pixel_width_ + j].y - min_val) / delta * 255;
+			result.at<Vec3b>(i, j)[2] = (buffer_[i*camera_.image_pixel_width_ + j].x - min_val) / delta * 255; 
 
 			/*result.at<Vec3b>(i, j)[0] = buffer_[i*camera_.image_pixel_width_ + j].x;
 			result.at<Vec3b>(i, j)[1] = buffer_[i*camera_.image_pixel_width_ + j].y;
 			result.at<Vec3b>(i, j)[2] = buffer_[i*camera_.image_pixel_width_ + j].z;*/
-			/*if (i == 330 || j==160)
+			/*if (i == 330 || j==100)
 			{
 				result.at<Vec3b>(i, j)[0] = 255;
 				result.at<Vec3b>(i, j)[1] = 0;
@@ -114,12 +110,12 @@ V3 Scene::RayTracing(Ray& ray)
 {
 	V3 color;
 	//V3 temp = BlinnPhong(ray, 0);
-	color = Lambert(ray);// +temp;
+	color = Lambertian(ray);// +temp;
 	return color;
 }
 
 // Difuss model
-V3 Scene::Lambert(Ray& exit_light)
+V3 Scene::Lambertian(Ray& exit_light)
 {
 	V3 color;
 	Ray incident;
@@ -137,7 +133,6 @@ V3 Scene::Lambert(Ray& exit_light)
 	{
 		return *itsc.pLe_;
 	}
-
 	SphereLight* sphere_light_temp = NULL;
 	QuadLight* quad_light_temp = NULL;
 	V3 intersection_to_lightsource;
@@ -150,23 +145,32 @@ V3 Scene::Lambert(Ray& exit_light)
 		{
 		case SPHERE_SOURCE:
 			sphere_light_temp = (SphereLight*)object_temp;
-			intersection_to_lightsource = (sphere_light_temp->center_ - itsc.intersection_).GetNorm();
-			/*shadow_ray.direction_ = intersection_to_lightsource;
-			shadow_itsc = tree_.NearestSearchByLevel(shadow_ray);*/
-			color = color + itsc.pMtl_->Kd_*sphere_light_temp->Le_*abs(Dot(itsc.normal_, intersection_to_lightsource));
-			/*if (shadow_itsc.type_ == PATCH)
-				color = 0.1*color;	*/		
+			// shadow check lines
+			for (int i = 0; i < 5; i++)
+			{
+				// Get random points from light
+				V3 light_sample = sphere_light_temp->center_ + GetRandom()* sphere_light_temp->radius_;
+				intersection_to_lightsource = (light_sample - itsc.intersection_).GetNorm(); // 整理这里的代码
+				shadow_ray.direction_ = intersection_to_lightsource;
+				shadow_itsc = tree_.NearestSearchByLevel(shadow_ray);
+				color = color + itsc.pMtl_->Kd_*sphere_light_temp->Le_*abs(Dot(itsc.normal_, intersection_to_lightsource));//这里的代码放到外面去
+				if (shadow_itsc.is_hit_ == true && shadow_itsc.type_ == PATCH )
+					color = color*0.5;
+			}
+			color = color / 5.0f;
 			break;
+
 		case QUAD_SOURCE:
 			quad_light_temp = (QuadLight*)object_temp;
-			intersection_to_lightsource = (quad_light_temp->center_ - itsc.intersection_).GetNorm();
-			/*shadow_ray.direction_ = intersection_to_lightsource;
-			shadow_itsc = tree_.NearestSearchByLevel(shadow_ray);*/
+			
+			intersection_to_lightsource = (sphere_light_temp->center_ - itsc.intersection_).GetNorm();
+			shadow_ray.direction_ = intersection_to_lightsource;
+			shadow_itsc = tree_.NearestSearchByLevel(shadow_ray);
 			color = color + itsc.pMtl_->Kd_*quad_light_temp->Le_*abs(Dot(itsc.normal_, intersection_to_lightsource));
-			/*if (shadow_itsc.type_ == PATCH)
-				color = V3(0,0,0);*/
+			if (shadow_itsc.is_hit_ == true && shadow_itsc.type_ == PATCH && shadow_itsc.distance_ < 0.1f && shadow_itsc.distance_ > 0.01f)
+				color = V3(0,0,0);
 			break;
-		}		
+		}
 	}
 	color = color / (float)light_source_.size();
 	return color;

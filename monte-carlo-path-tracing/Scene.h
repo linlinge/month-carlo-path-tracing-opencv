@@ -33,7 +33,7 @@ public:
 	Mat Rendering();
 	V3 RayTracing(Ray& exit_light);
 	V3 BlinnPhong(Ray& exit_light,int depth);
-	V3 Lambert(Ray& exit_light);
+	V3 Lambertian(Ray& exit_light);
 
 private:
 	Ray& GetIncidentRay(Ray& exit_light, Intersection& itsc);

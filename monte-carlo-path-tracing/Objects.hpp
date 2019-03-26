@@ -184,7 +184,7 @@ public:
 		Line line1(ray.origin_, ray.direction_);
 		itsc.intersection_= plane1.IsIntersect(line1);
 		float is_same_direction = Dot(itsc.intersection_ - ray.origin_, (ray.direction_));
-		if (is_same_direction < 0)
+		if (is_same_direction <= 0)
 		{
 			itsc.is_hit_ = false;
 		}

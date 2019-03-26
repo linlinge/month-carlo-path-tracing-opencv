@@ -6,7 +6,7 @@ v -5.72581 -3.16399 0
 v -4.73484 -1.07796 0
 v -2.00901 -4.57539 0
 v -1.70362 -2.97673 4.65213
-usemtl breakfast_room_cup_Ceramic_001
+usemtl phong1SG
 f 1 2 4
 f 2 3 4
 f 1 3 4
