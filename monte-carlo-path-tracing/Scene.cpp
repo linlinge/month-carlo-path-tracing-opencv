@@ -113,7 +113,7 @@ Mat Scene::Rendering()
 V3 Scene::RayTracing(Ray& ray)
 {
 	V3 color;
-	V3 temp = BlinnPhong(ray, 0);
+	//V3 temp = BlinnPhong(ray, 0);
 	color = Lambert(ray);// +temp;
 	return color;
 }
@@ -151,20 +151,20 @@ V3 Scene::Lambert(Ray& exit_light)
 		case SPHERE_SOURCE:
 			sphere_light_temp = (SphereLight*)object_temp;
 			intersection_to_lightsource = (sphere_light_temp->center_ - itsc.intersection_).GetNorm();
-			shadow_ray.direction_ = intersection_to_lightsource;
-			shadow_itsc = tree_.NearestSearchByLevel(shadow_ray);
+			/*shadow_ray.direction_ = intersection_to_lightsource;
+			shadow_itsc = tree_.NearestSearchByLevel(shadow_ray);*/
 			color = color + itsc.pMtl_->Kd_*sphere_light_temp->Le_*abs(Dot(itsc.normal_, intersection_to_lightsource));
-			if (shadow_itsc.type_ == PATCH)
-				color = 0.1*color;			
+			/*if (shadow_itsc.type_ == PATCH)
+				color = 0.1*color;	*/		
 			break;
 		case QUAD_SOURCE:
 			quad_light_temp = (QuadLight*)object_temp;
 			intersection_to_lightsource = (quad_light_temp->center_ - itsc.intersection_).GetNorm();
-			shadow_ray.direction_ = intersection_to_lightsource;
-			shadow_itsc = tree_.NearestSearchByLevel(shadow_ray);
+			/*shadow_ray.direction_ = intersection_to_lightsource;
+			shadow_itsc = tree_.NearestSearchByLevel(shadow_ray);*/
 			color = color + itsc.pMtl_->Kd_*quad_light_temp->Le_*abs(Dot(itsc.normal_, intersection_to_lightsource));
-			if (shadow_itsc.type_ == PATCH)
-				color = V3(0,0,0);
+			/*if (shadow_itsc.type_ == PATCH)
+				color = V3(0,0,0);*/
 			break;
 		}		
 	}
