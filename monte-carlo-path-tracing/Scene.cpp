@@ -109,8 +109,8 @@ Mat Scene::Rendering()
 V3 Scene::RayTracing(Ray& ray)
 {
 	V3 color;
-	//V3 temp = BlinnPhong(ray, 0);
-	color = Lambertian(ray);// +temp;
+	V3 temp = BlinnPhong(ray, 0);
+	color = Lambertian(ray) +temp;
 	return color;
 }
 
@@ -133,45 +133,45 @@ V3 Scene::Lambertian(Ray& exit_light)
 	{
 		return *itsc.pLe_;
 	}
-	SphereLight* sphere_light_temp = NULL;
-	QuadLight* quad_light_temp = NULL;
-	V3 intersection_to_lightsource;
-	Ray shadow_ray;
-	Intersection shadow_itsc;
-	shadow_ray.origin_ = itsc.intersection_;
-	for (auto& object_temp : light_source_)
+	SphereLight* pLight0 = NULL;
+	QuadLight* pLight1 = NULL;
+	Ray detect_ray;
+	Intersection detect_itsc;
+	detect_ray.origin_ = itsc.intersection_;
+	for (int i = 0; i < light_source_.size(); i++)
 	{
-		switch (object_temp->type_)
-		{
-		case SPHERE_SOURCE:
-			sphere_light_temp = (SphereLight*)object_temp;
-			// shadow check lines
-			for (int i = 0; i < 5; i++)
-			{
-				// Get random points from light
-				V3 light_sample = sphere_light_temp->center_ + GetRandom()* sphere_light_temp->radius_;
-				intersection_to_lightsource = (light_sample - itsc.intersection_).GetNorm(); // 整理这里的代码
-				shadow_ray.direction_ = intersection_to_lightsource;
-				shadow_itsc = tree_.NearestSearchByLevel(shadow_ray);
-				color = color + itsc.pMtl_->Kd_*sphere_light_temp->Le_*abs(Dot(itsc.normal_, intersection_to_lightsource));//这里的代码放到外面去
-				if (shadow_itsc.is_hit_ == true && shadow_itsc.type_ == PATCH )
-					color = color*0.5;
-			}
-			color = color / 5.0f;
-			break;
-
-		case QUAD_SOURCE:
-			quad_light_temp = (QuadLight*)object_temp;
-			
-			intersection_to_lightsource = (sphere_light_temp->center_ - itsc.intersection_).GetNorm();
-			shadow_ray.direction_ = intersection_to_lightsource;
-			shadow_itsc = tree_.NearestSearchByLevel(shadow_ray);
-			color = color + itsc.pMtl_->Kd_*quad_light_temp->Le_*abs(Dot(itsc.normal_, intersection_to_lightsource));
-			if (shadow_itsc.is_hit_ == true && shadow_itsc.type_ == PATCH && shadow_itsc.distance_ < 0.1f && shadow_itsc.distance_ > 0.01f)
-				color = V3(0,0,0);
-			break;
-		}
+		V3 direction_temp = (light_source_[i]->center_ - itsc.intersection_).GetNorm();
+		color = color + itsc.pMtl_->Kd_*light_source_[i]->Le_*abs(Dot(itsc.normal_, direction_temp));
 	}
+		
+	//for (auto& object_temp : light_source_)
+	//{
+	//	switch (object_temp->type_)
+	//	{
+	//	case SPHERE_SOURCE:
+	//		pLight0 = (SphereLight*)object_temp;
+	//		// shadow check lines
+	//		for (int i = 0; i < NUMBER_OF_LIGHT_SAMPLES; i++)
+	//		{
+	//			// Get random points from light				
+	//			detect_ray.direction_ = (pLight0->Sampling() - itsc.intersection_).GetNorm(); // 整理这里的代码				
+	//			detect_itsc = tree_.NearestSearchByLevel(detect_ray);				
+	//			/*if (detect_itsc.is_hit_ == true && detect_itsc.type_ == PATCH )
+	//				color = V3(0,0,0);*/
+	//		}
+	//		color = color / NUMBER_OF_LIGHT_SAMPLES;
+	//		break;
+	//	case QUAD_SOURCE:
+	//		pLight1 = (QuadLight*)object_temp;			
+	//		detect_ray.direction_ = (pLight1->center_ - itsc.intersection_).GetNorm();			
+	//		detect_itsc = tree_.NearestSearchByLevel(detect_ray);
+	//		color = color + itsc.pMtl_->Kd_*pLight1->Le_*abs(Dot(itsc.normal_, detect_ray.direction_));
+	//		if (detect_itsc.is_hit_ == true && detect_itsc.type_ == PATCH && detect_itsc.distance_ < 0.1f && detect_itsc.distance_ > 0.01f)
+	//			color = V3(0,0,0);
+	//		break;
+	//	}
+	//}
+
 	color = color / (float)light_source_.size();
 	return color;
 }
@@ -192,10 +192,10 @@ V3 Scene::BlinnPhong(Ray& exit_ray,int depth)
 		return *itsc.pLe_;
 	}
 
-	if (depth > 8)
+	if (depth > 3)
 		/// Out of maximum depth
 	{
-		return V3(10, 10, 10);
+		return V3(1, 1, 1);
 	}
 
 	// Define
@@ -207,7 +207,9 @@ V3 Scene::BlinnPhong(Ray& exit_ray,int depth)
 	V3 H = (L + V) / (L + V).GetLength();
 
 	// Caculate color
-	color = itsc.pMtl_->Ks_*BlinnPhong(incident_ray,depth+1)*pow(MAX2(0,Dot(itsc.normal_,H)), itsc.pMtl_->Ns_);
+	V3 temp1 = BlinnPhong(incident_ray, depth + 1);
+	float temp2 = pow(MAX2(0, Dot(itsc.normal_, H)), itsc.pMtl_->Ns_);
+	color = itsc.pMtl_->Ks_*temp1*temp2;
 	return color;
 }
 

@@ -71,5 +71,8 @@
     <ClInclude Include="Material.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="V2.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

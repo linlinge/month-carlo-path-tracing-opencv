@@ -1,4 +1,5 @@
 #pragma once
+#include "V2.hpp"
 #include "V3.hpp"
 #include "Intersection.hpp"
 #include "BasicGeometry.h"
@@ -11,6 +12,7 @@ public:
 	ObjectType type_;
 	V3 center_;
 	AABB box_;
+	V3 Le_;				// light source emission
 	virtual Intersection IsIntersect(Ray& ray) = 0;
 	
 };
@@ -19,7 +21,6 @@ class SphereLight :public Object
 {
 public:
 	float radius_;	// light source radius
-	V3 Le_;			// light source emission
 
 	SphereLight(V3 center, float radius, V3 Le)
 	{
@@ -30,6 +31,11 @@ public:
 
 		box_.top_left_ = center_ - radius_ / 2.0f;
 		box_.bottom_right_ = center_ + radius_ / 2.0f;
+	}
+	V3 Sampling()
+	{
+		V3 rst = center_ + GetRandom()*radius_;
+		return rst;
 	}
 
 	SphereLight& operator=(SphereLight& dat)
@@ -70,9 +76,9 @@ class QuadLight :public Object
 {
 public:
 	V3 normal_;			// light source normal
-	float size_[2];		// size 
+	V2 size_;		// size 
 	vector<V3*> pvertex_;
-	V3 Le_;				// light source emission
+	
 
 
 	QuadLight& operator=(QuadLight dat)
@@ -81,20 +87,24 @@ public:
 		center_ = dat.center_;
 		box_ = dat.box_;
 		normal_ = dat.normal_;
-		size_[0] = dat.size_[0];
-		size_[1] = dat.size_[1];
+		size_= dat.size_;
 		pvertex_.insert(pvertex_.begin(),dat.pvertex_.begin(),dat.pvertex_.end());
 		//pvertex_ = dat.pvertex_;
 		Le_ = dat.Le_;
 		return *this;
 	}
 
-	QuadLight(V3 center, V3 normal, float size[2], V3 Le)
+	V3 Sampling()
+	{
+
+	}
+
+	QuadLight(V3 center, V3 normal, V2 size, V3 Le)
 	{
 		type_ = QUAD_SOURCE;
 		center_ = center;
 		normal_ = normal;
-		size_[0] = size[0]; size_[1] = size[1];
+		size_ = size;
 		Le_ = Le;
 
 		pvertex_.push_back(&V3(center_.x , center_.y+ sqrt(2)/2.0f, center_.z));
