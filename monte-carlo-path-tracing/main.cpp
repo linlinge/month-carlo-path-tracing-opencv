@@ -52,8 +52,8 @@ int main()
 	scene.AddCamera(Camera(V3(0.0, 0.64, 0.52), V3(0.0, 0.40, 0.3), V3(0.0, 1.0, 0.0),
 		80, 1.0f, IMAGE_WIDTH, IMAGE_HEIGHT));
 	QuadLight quad_temp = QuadLight(V3(-2.758771896, 1.5246, 0), V3(1, 0, 0), V2(1,1), V3(40, 40, 40));
-	scene.AddQuadLight(quad_temp);
-	//scene.AddSphereLight(SphereLight(V3(0.0, 1.589, -1.274), 0.2, V3(50, 50, 40)));
+	//scene.AddQuadLight(quad_temp);
+	scene.AddSphereLight(SphereLight(V3(-2.758771896, 1.5246, 0), 0.2, V3(50, 50, 40)));
 
 	// Veach MIS
 	/*scene.LoadObjs("./dataset/Scene03/VeachMIS.obj");

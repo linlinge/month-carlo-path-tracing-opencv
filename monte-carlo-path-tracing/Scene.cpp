@@ -83,7 +83,7 @@ float Scene::ShadowTest(V3& intersection)
 {
 	SphereLight* pSphereLight=NULL;
 	QuadLight* pQuadLight = NULL;
-	float scale = 1.0f;
+	float scale = 0.0f;
 	for (int i=0;i< light_.size();i++)
 	{
 		switch (light_[i]->type_)
@@ -96,16 +96,15 @@ float Scene::ShadowTest(V3& intersection)
 				// Get random points from light
 				Ray shadow_ray(intersection, (pSphereLight->Sampling() - intersection).GetNorm());				
 				Intersection shadow_itsc = tree_.NearestSearchByLevel(shadow_ray);				
-				if (shadow_itsc.is_hit_ == true && shadow_itsc.type_ == PATCH && shadow_itsc.distance_<0.1f && shadow_itsc.distance_ > 0.02f)
+				if (shadow_itsc.is_hit_ == true && shadow_itsc.type_ == PATCH && shadow_itsc.distance_ < 0.1)// && shadow_itsc.distance_<0.1f && shadow_itsc.distance_ > 0.02f)
 				{
-					scale = 0;
+					scale = scale+1;
 				}
 			}		
 			break;
 
 		case QUAD_SOURCE:
-		/*	pQuadLight = (QuadLight*)&light_[i];
-			
+		/*	pQuadLight = (QuadLight*)&light_[i];			
 			detect_itsc = tree_.NearestSearchByLevel(detect_ray);
 			color = color + itsc.pMtl_->Kd_*pLight1->Le_*abs(Dot(itsc.normal_, detect_ray.direction_));
 			if (detect_itsc.is_hit_ == true && detect_itsc.type_ == PATCH && detect_itsc.distance_ < 0.1f && detect_itsc.distance_ > 0.01f)
@@ -113,6 +112,10 @@ float Scene::ShadowTest(V3& intersection)
 			break;
 		}
 	}
+	if(scale <0.5)
+		scale =1-scale / (NUMBER_OF_LIGHT_SAMPLES*1.0f);
+	
+
 	return scale;
 }
 
@@ -186,8 +189,8 @@ V3 Scene::BlinnPhong(Ray& exit_ray,int depth)
 
 	// Caculate color
 	V3 temp1 = BlinnPhong(incident_ray, depth + 1);
-	float temp2 = pow(MAX2(0, Dot(itsc.normal_, H)), itsc.pMtl_->Ns_);
-	color = itsc.pMtl_->Ns_*temp1*temp2;
+	float temp2 = pow(MAX2(0, Dot(itsc.normal_, H)), itsc.pMtl_->Ni_);
+	color = itsc.pMtl_->Ni_*temp1*temp2;
 	return color;
 }
 
