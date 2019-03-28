@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2018.12.3)  26 MAR 2019 16:30
+This is pdfTeX, Version 3.1415926-2.3-1.40.12 (MiKTeX 2.9) (preloaded format=pdflatex 2018.12.3)  28 MAR 2019 11:03
 entering extended mode
 **mento-carlo-path-tracing-report.tex
 
@@ -1133,20 +1133,20 @@ Package pdftex.def Info: chart_flow.png used on input line 302.
 <result1.png, id=232, 385.44pt x 385.44pt>
 File: result1.png Graphic file (type png)
  <use result1.png>
-Package pdftex.def Info: result1.png used on input line 310.
+Package pdftex.def Info: result1.png used on input line 311.
 (pdftex.def)             Requested size: 192.71953pt x 192.71953pt.
  [7 <D:/workspace/month-carlo-path-tracing-opencv/report/intersection_ray_spher
 e.png> <D:/workspace/month-carlo-path-tracing-opencv/report/chart_flow.png>]
-<result2.png, id=241, 385.44pt x 385.44pt>
+<result2.png, id=242, 385.44pt x 385.44pt>
 File: result2.png Graphic file (type png)
  <use result2.png>
-Package pdftex.def Info: result2.png used on input line 317.
+Package pdftex.def Info: result2.png used on input line 318.
 (pdftex.def)             Requested size: 192.71953pt x 192.71953pt.
 
-<result3.png, id=242, 385.44pt x 385.44pt>
+<result3.png, id=243, 385.44pt x 385.44pt>
 File: result3.png Graphic file (type png)
  <use result3.png>
-Package pdftex.def Info: result3.png used on input line 324.
+Package pdftex.def Info: result3.png used on input line 325.
 (pdftex.def)             Requested size: 192.71953pt x 192.71953pt.
  [8 <D:/workspace/month-carlo-path-tracing-opencv/report/result1.png> <D:/works
 pace/month-carlo-path-tracing-opencv/report/result2.png>]
@@ -1154,7 +1154,7 @@ pace/month-carlo-path-tracing-opencv/report/result2.png>]
 File: monte_carlo_sample.png Graphic file (type png)
 
 <use monte_carlo_sample.png>
-Package pdftex.def Info: monte_carlo_sample.png used on input line 341.
+Package pdftex.def Info: monte_carlo_sample.png used on input line 342.
 (pdftex.def)             Requested size: 142.53215pt x 80.55074pt.
  [9 <D:/workspace/month-carlo-path-tracing-opencv/report/result3.png> <D:/works
 pace/month-carlo-path-tracing-opencv/report/monte_carlo_sample.png>] [10]
@@ -1224,7 +1224,7 @@ sfonts/cm/cmmib10.pfb><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr10.pfb>
 <D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb><D:/CTEX/MiKTeX/fonts/
 type1/public/amsfonts/cm/cmr7.pfb><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/c
 m/cmr8.pfb><D:/CTEX/MiKTeX/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on mento-carlo-path-tracing-report.pdf (10 pages, 1076819 bytes)
+Output written on mento-carlo-path-tracing-report.pdf (10 pages, 1076755 bytes)
 .
 PDF statistics:
  693 PDF objects out of 1000 (max. 8388607)
