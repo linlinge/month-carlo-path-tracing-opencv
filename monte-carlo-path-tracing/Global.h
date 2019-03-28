@@ -11,8 +11,9 @@
 #include "V3.hpp"
 #include "Material.hpp"
 #define LAMBERTIAN_SAMPLE_NUMBER 4.0f
-#define NUMBER_OF_LIGHT_SAMPLES 4.0f
+#define NUMBER_OF_LIGHT_SAMPLES 10.0f
 #define PI 3.1415926535897f
+#define BLINN_PHONG_MAX_DEPTH 8
 
 // variables
 extern vector<V3> v_;		// vertex load from obj file

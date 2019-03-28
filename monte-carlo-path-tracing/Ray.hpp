@@ -11,4 +11,10 @@ public:
 		direction_ = dat.direction_;
 		return *this;
 	}
+	Ray(V3 origin, V3 direction)
+	{
+		origin_ = origin;
+		direction_ = direction;
+	}
+	Ray() {};
 };

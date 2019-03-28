@@ -17,7 +17,7 @@ class Scene
 {
 public:
 	Camera camera_;
-	vector<Object*> light_source_;
+	vector<Object*> light_;
 	ObjFile obj_file_;
 	vector<Object*> objs_;
 	KdTree tree_;
@@ -33,7 +33,8 @@ public:
 	Mat Rendering();
 	V3 RayTracing(Ray& exit_light);
 	V3 BlinnPhong(Ray& exit_light,int depth);
-	V3 Lambertian(Ray& exit_light);
+	V3 Lambertian(Intersection& itsc);
+	float ShadowTest(V3& intersection);
 
 private:
 	Ray& GetIncidentRay(Ray& exit_light, Intersection& itsc);

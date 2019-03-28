@@ -38,32 +38,32 @@ int main()
 	// example04
 	/*scene.LoadObjs("./dataset/Example04/example04.obj");
 	scene.AddCamera(Camera(V3(1.0, 3, 1), V3(1,0,0), V3(0.0, 0.0, 1.0),
-		150, 10.0f, IMAGE_WIDTH, IMAGE_HEIGHT));
+		160, 10.0f, IMAGE_WIDTH, IMAGE_HEIGHT));
 	scene.AddSphereLight(SphereLight(V3(-6.4301, 8.45732, 6), 1.41, V3(180, 180, 180)));*/
 
 	// room
-	scene.LoadObjs("./dataset/Scene01/room.obj");
+	/*scene.LoadObjs("./dataset/Scene01/room.obj");
 	scene.AddCamera(Camera(V3(0.0, 0.0, 4), V3(0.0, 0.0, 0.0), V3(0.0,1.0,0.0),
 		80, 10.0f, IMAGE_WIDTH, IMAGE_HEIGHT));
-	scene.AddSphereLight(SphereLight(V3(0.0, 1.589, -1.274),0.2,V3(50, 50, 40)));
+	scene.AddSphereLight(SphereLight(V3(0.0, 1.589, -1.274),0.2,V3(50, 50, 40)));*/
 
 	// cup
-	/*scene.LoadObjs("./dataset/Scene02/cup.obj");
+	scene.LoadObjs("./dataset/Scene02/cup.obj");
 	scene.AddCamera(Camera(V3(0.0, 0.64, 0.52), V3(0.0, 0.40, 0.3), V3(0.0, 1.0, 0.0),
 		80, 1.0f, IMAGE_WIDTH, IMAGE_HEIGHT));
 	QuadLight quad_temp = QuadLight(V3(-2.758771896, 1.5246, 0), V3(1, 0, 0), V2(1,1), V3(40, 40, 40));
-	scene.AddQuadLight(quad_temp);*/
-	
+	scene.AddQuadLight(quad_temp);
+	//scene.AddSphereLight(SphereLight(V3(0.0, 1.589, -1.274), 0.2, V3(50, 50, 40)));
 
 	// Veach MIS
-	//scene.LoadObjs("./dataset/Scene03/VeachMIS.obj");
-	//scene.AddCamera(Camera(V3(0.0, 2.0, 15.0), V3(0.0, 1.69521, 14.0476), V3(0.0, 0.952421, -0.304787),
-	//	50, 10.0f, IMAGE_WIDTH, IMAGE_HEIGHT));
-	//scene.AddSphereLight(SphereLight(V3(-10, 10, 4), 0.5, V3(800, 800, 800)));
-	//scene.AddSphereLight(SphereLight(V3(3.75, 0, 0), 0.033, V3(901.803, 901.803, 901.803)));
-	//scene.AddSphereLight(SphereLight(V3(1.25, 0, 0), 0.1, V3(100, 100, 100)));
-	//scene.AddSphereLight(SphereLight(V3(-1.25, 0, 0), 0.3, V3(11.1111, 11.1111, 11.1111)));
-	//scene.AddSphereLight(SphereLight(V3(-3.75, 0, 0), 0.9, V3(1.23457, 1.23457, 1.23457)));
+	/*scene.LoadObjs("./dataset/Scene03/VeachMIS.obj");
+	scene.AddCamera(Camera(V3(0.0, 2.0, 15.0), V3(0.0, 1.69521, 14.0476), V3(0.0, 0.952421, -0.304787),
+		50, 10.0f, IMAGE_WIDTH, IMAGE_HEIGHT));
+	scene.AddSphereLight(SphereLight(V3(-10, 10, 4), 0.5, V3(800, 800, 800)));
+	scene.AddSphereLight(SphereLight(V3(3.75, 0, 0), 0.033, V3(901.803, 901.803, 901.803)));
+	scene.AddSphereLight(SphereLight(V3(1.25, 0, 0), 0.1, V3(100, 100, 100)));
+	scene.AddSphereLight(SphereLight(V3(-1.25, 0, 0), 0.3, V3(11.1111, 11.1111, 11.1111)));
+	scene.AddSphereLight(SphereLight(V3(-3.75, 0, 0), 0.9, V3(1.23457, 1.23457, 1.23457)));*/
 
 
 	// establish kd-tree
