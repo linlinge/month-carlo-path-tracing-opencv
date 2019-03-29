@@ -1,8 +1,5 @@
 #include "Scene.h"
 
-int temp_count1 = 0;
-int temp_count2 = 0;
-int temp_count3 = 0;
 void Scene::AddCamera(Camera camera)
 {
 	camera_ = camera;
@@ -44,7 +41,9 @@ Mat Scene::Rendering()
 			Ray ray(camera_.position_,(pos-camera_.position_).GetNorm());
 
 			// ray tracing
-			color = RayTracing(ray);
+			color = RayTracing(ray,i,j);
+			//cout << i << " " << j << endl;
+			buf_temp[i*IMAGE_WIDTH + j] = color.r;
 			// store color
 			min_val= min(color.x, min(color.y, min(color.z, min_val)));
 			max_val = max(color.x, max(color.y, max(color.z, max_val)));			
@@ -61,61 +60,95 @@ Mat Scene::Rendering()
 			result.at<Vec3b>(i, j)[0] = (buffer_[i*camera_.image_pixel_width_ + j].z - min_val) / delta * 255;
 			result.at<Vec3b>(i, j)[1] = (buffer_[i*camera_.image_pixel_width_ + j].y - min_val) / delta * 255;
 			result.at<Vec3b>(i, j)[2] = (buffer_[i*camera_.image_pixel_width_ + j].x - min_val) / delta * 255; 
+
+			if (i == 100 || j == 200)
+			{
+				result.at<Vec3b>(i, j)[0] = 255;
+				result.at<Vec3b>(i, j)[1] = 0;
+				result.at<Vec3b>(i, j)[2] = 0;
+			}
 		}		
 	}
-
-	// output result
+	ofstream file("../output/distance.txt");
+	for (int i = 0; i < IMAGE_WIDTH; i++)
+	{
+		for (int j = 0; j < IMAGE_HEIGHT; j++)
+		{
+			file << buf_temp[i*IMAGE_WIDTH + j] << " ";
+		}
+		file << endl;
+	}
+	file.close();
+	// output result 
 	cout << max_val << endl;
 	return result;
 }
 
 // trace one ray 
-V3 Scene::RayTracing(Ray& ray)
+V3 Scene::RayTracing(Ray& ray,int a,int b)
 {
 	Intersection itsc = tree_.NearestSearchByLevel(ray);
-	float scale=ShadowTest(itsc.intersection_);
-	V3 color = scale * (Lambertian(itsc));// +BlinnPhong(ray, 0));
+	V3 color;
+	if (itsc.is_hit_ == true)
+	{
+		float scale = ShadowTest(itsc, a, b);
+		color = scale * (Lambertian(itsc));// +BlinnPhong(ray, 0));
+	}
+	else
+		color = V3(0, 0, 0);
+   	//V3 color = scale * V3(1,1,1);
 	return color;
 }
 
 // Shadow Test
-float Scene::ShadowTest(V3& intersection)
+float Scene::ShadowTest(Intersection& itsc,int a,int b)
 {
 	SphereLight* pSphereLight=NULL;
 	QuadLight* pQuadLight = NULL;
 	float scale = 0.0f;
+	if (a == 100 && b == 200)
+ 		a = 100;
+
 	for (int i=0;i< light_.size();i++)
 	{
-		switch (light_[i]->type_)
+		if (light_[i]->type_ == SPHERE_SOURCE)
 		{
-		case SPHERE_SOURCE:
-			pSphereLight = (SphereLight*)&light_[i];
-			// shadow check lines
-			for (int i = 0; i < NUMBER_OF_LIGHT_SAMPLES; i++)
+			//Object* light_temp = ;
+			pSphereLight = static_cast<SphereLight*>(light_[i]);
+			// Get random points from light
+			Ray shadow_ray(itsc.intersection_, (pSphereLight->center_ - itsc.intersection_).GetNorm());
+			Intersection shadow_itsc = tree_.NearestSearchByLevel(shadow_ray);
+			if (shadow_itsc.is_hit_ == true && shadow_itsc.type_ == PATCH && (itsc.intersection_-shadow_itsc.intersection_).GetLength()>0.1)
 			{
-				// Get random points from light
-				Ray shadow_ray(intersection, (pSphereLight->Sampling() - intersection).GetNorm());				
-				Intersection shadow_itsc = tree_.NearestSearchByLevel(shadow_ray);				
-				if (shadow_itsc.is_hit_ == true && shadow_itsc.type_ == PATCH && shadow_itsc.distance_ < 0.1)// && shadow_itsc.distance_<0.1f && shadow_itsc.distance_ > 0.02f)
-				{
-					scale = scale+1;
-				}
-			}		
-			break;
-
-		case QUAD_SOURCE:
-		/*	pQuadLight = (QuadLight*)&light_[i];			
-			detect_itsc = tree_.NearestSearchByLevel(detect_ray);
-			color = color + itsc.pMtl_->Kd_*pLight1->Le_*abs(Dot(itsc.normal_, detect_ray.direction_));
-			if (detect_itsc.is_hit_ == true && detect_itsc.type_ == PATCH && detect_itsc.distance_ < 0.1f && detect_itsc.distance_ > 0.01f)
-				color = V3(0,0,0);*/
-			break;
+				scale = 0.1f;
+			}
+			else if (shadow_itsc.is_hit_ == true && shadow_itsc.type_ == QUAD_SOURCE )
+			{
+				scale = 1.0f;
+			}
+			else
+			{
+				scale = 0;
+			}
+				
+		}
+		else if(light_[i]->type_==QUAD_SOURCE)
+		{
+			pQuadLight = static_cast<QuadLight*>(light_[i]);
+			Ray shadow_ray(itsc.intersection_, (pQuadLight->center_ - itsc.intersection_).GetNorm());
+			Intersection shadow_itsc = tree_.NearestSearchByLevel(shadow_ray);			
+			if (shadow_itsc.is_hit_ == true && shadow_itsc.type_ == PATCH && shadow_itsc.id_!=itsc.id_)
+			{
+				scale = 0.1f;
+			}
+			else if (shadow_itsc.is_hit_ == true && shadow_itsc.type_ == QUAD_SOURCE && shadow_itsc.id_ != itsc.id_)
+			{
+				scale = 1.0f;
+			}
+			else
+				scale = 0;
 		}
 	}
-	if(scale <0.5)
-		scale =1-scale / (NUMBER_OF_LIGHT_SAMPLES*1.0f);
-	
-
 	return scale;
 }
 
@@ -127,17 +160,18 @@ V3 Scene::Lambertian(Intersection& itsc)
 		/// not hit 
 	{
 		return background;
-	}		
-	else if (itsc.pMtl_ == NULL)
+	}	
+	if (itsc.type_ == SPHERE_SOURCE || itsc.type_ == QUAD_SOURCE)
+		/// abnormal situation1: hit light source
+	{
+		return *itsc.pLe_;
+	}
+	if (itsc.pMtl_ == NULL)
 		/// no material
 	{
 		cout << "Error: no coresponding material file" << endl;
 	}		
-	else if (itsc.type_ == SPHERE_SOURCE || itsc.type_ == QUAD_SOURCE)
-		/// abnormal situation1: hit light source
-	{		
-		return *itsc.pLe_;
-	}
+	
 
 	//itsc.intersection_ = itsc.intersection_ + V3(0.001, 0, 0);
 	// diffuse light
@@ -159,7 +193,6 @@ V3 Scene::BlinnPhong(Ray& exit_ray,int depth)
 	// Condition
 	if (itsc.is_hit_ == false)
 	{
-		temp_count1++;
 		//return background;
 		return V3(255,0,0);
 	}
@@ -168,14 +201,12 @@ V3 Scene::BlinnPhong(Ray& exit_ray,int depth)
 	if (itsc.type_ == SPHERE_SOURCE || itsc.type_ == QUAD_SOURCE)
 		/// Light
 	{
-		temp_count2++;
 		return *itsc.pLe_;
 	}
 
 	if (depth > BLINN_PHONG_MAX_DEPTH)
 		/// Out of maximum depth
 	{
-		temp_count3++;
 		return light_[0]->Le_;
 	}
 

@@ -129,13 +129,14 @@ Intersection KdTree::NearestSearchByLevel(Ray& ray)
 						/// leaf node
 					{
 						Intersection itsc;
+						itsc.id_ = v[i].id_;
 						switch (v[i].leaf_val_[0].type_)
 						{
 						case PATCH:
-							itsc=((Patch*) &v[i].leaf_val_[0])->IsIntersect(ray);
+							itsc=((Patch*) &v[i].leaf_val_[0])->IsIntersect(ray);							
 							break;
 						case SPHERE_SOURCE:
-							itsc = ((SphereLight*)&v[i].leaf_val_[0])->IsIntersect(ray);
+							itsc = ((SphereLight*)&v[i].leaf_val_[0])->IsIntersect(ray);							
 							break;
 						case QUAD_SOURCE:
 							itsc = ((QuadLight*)&v[i].leaf_val_[0])->IsIntersect(ray);
@@ -251,7 +252,7 @@ float  KdTree::GetMean(vector<Object*>& dat, int axis)
 		return INT_MAX;
 	else
 	{
-		avr = avr / dat.size();
+		avr = avr / (float)dat.size();
 		return avr;
 	}	
 }

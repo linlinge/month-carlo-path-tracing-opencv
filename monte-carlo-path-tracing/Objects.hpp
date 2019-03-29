@@ -77,9 +77,7 @@ class QuadLight :public Object
 public:
 	V3 normal_;			// light source normal
 	V2 size_;		// size 
-	vector<V3*> pvertex_;
-	
-
+	vector<V3*> pvertex_;	
 
 	QuadLight& operator=(QuadLight dat)
 	{
@@ -94,10 +92,10 @@ public:
 		return *this;
 	}
 
-	V3 Sampling()
-	{
-
-	}
+	//V3 Sampling()
+	//{
+	//	return V3(0, 0, 0);
+	//}
 
 	QuadLight(V3 center, V3 normal, V2 size, V3 Le)
 	{
@@ -124,7 +122,7 @@ public:
 		// step1: Solve for the intersection between ray and plane
 		Plane plane1(*pvertex_[0], *pvertex_[1], *pvertex_[2]);
 		Line line1(ray.origin_, ray.direction_);
-		itsc.intersection_ = plane1.IsIntersect(line1);
+		itsc.intersection_ = plane1.IsIntersect(line1);		 
 		float is_same_direction = Dot(itsc.intersection_ - ray.origin_, (ray.direction_));
 		if (is_same_direction < 0)
 		{
@@ -166,7 +164,6 @@ public:
 	int obj_name_id_;
 	Material* pMtl_;
 	
-
 	Patch& operator=(Patch dat)
 	{
 		type_ = dat.type_;
@@ -197,6 +194,7 @@ public:
 		if (is_same_direction <= 0)
 		{
 			itsc.is_hit_ = false;
+			return itsc;
 		}
 
 		// Accumulate arc
@@ -211,7 +209,7 @@ public:
 
 		if (abs(accumulator - 2 * PI) < 0.01)
 		{
-			itsc.is_hit_ = true;
+			itsc.is_hit_ = true;			
 			itsc.distance_ = Distance(ray.origin_, itsc.intersection_);			
 			itsc.pMtl_ = pMtl_;
 
@@ -231,7 +229,7 @@ public:
 		else
 		{
 			itsc.is_hit_ = false;
-
+			return itsc;
 		}
 		return itsc;
 	}

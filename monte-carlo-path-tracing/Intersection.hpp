@@ -10,6 +10,7 @@ class Intersection
 public:
 	bool is_hit_;
 	ObjectType type_;
+	int id_;
 	float distance_;
 	V3 intersection_;
 	V3 normal_;
@@ -23,11 +24,13 @@ public:
 		distance_ = INT_MAX;
 		pMtl_ = NULL;
 		pPatch_ = NULL;
+		id_ = INT_MAX;
 	}
 
 	Intersection& operator =(Intersection dat)
 	{			
 		is_hit_ = dat.is_hit_;
+		id_ = dat.id_;
 		type_ = dat.type_;
 		distance_ = dat.distance_;
 		intersection_ = dat.intersection_;

@@ -8,9 +8,7 @@
 #include <ostream>
 using namespace std;
 using namespace cv;
-// image size
-#define IMAGE_WIDTH	512
-#define IMAGE_HEIGHT 512
+
 
 int main()
 {	
@@ -24,10 +22,10 @@ int main()
 	scene.AddSphereLight(SphereLight(V3(5.0, 4.589, -4.274), 0.2, V3(30, 30, 30)));*/
 
 	// example02
-	/*scene.LoadObjs("./dataset/Example02/example02.obj");
-	scene.AddCamera(Camera(V3(1.0, 2, 1), V3(-5.09809, -5.6217, 4.08914), V3(1.0, 0.0, 0.0),
-		130, 10.0f, IMAGE_WIDTH, IMAGE_HEIGHT));
-	scene.AddSphereLight(SphereLight(V3(1.0, 1.589, 1.274), 0.2, V3(180, 180, 180)));*/
+	scene.LoadObjs("./dataset/Example02/example02.obj");
+	scene.AddCamera(Camera(V3(4.0, 4, 4), V3(0,0,0.5), V3(0.0, 0.0, 1.0),
+		50, 10.0f, IMAGE_WIDTH, IMAGE_HEIGHT));
+	scene.AddSphereLight(SphereLight(V3(0, 0, 5), 0.2, V3(50, 50, 50)));
 	
 	// example03
 	/*scene.LoadObjs("./dataset/Example03/example03.obj");
@@ -42,18 +40,18 @@ int main()
 	scene.AddSphereLight(SphereLight(V3(-6.4301, 8.45732, 6), 1.41, V3(180, 180, 180)));*/
 
 	// room
-	/*scene.LoadObjs("./dataset/Scene01/room.obj");
-	scene.AddCamera(Camera(V3(0.0, 0.0, 4), V3(0.0, 0.0, 0.0), V3(0.0,1.0,0.0),
-		80, 10.0f, IMAGE_WIDTH, IMAGE_HEIGHT));
-	scene.AddSphereLight(SphereLight(V3(0.0, 1.589, -1.274),0.2,V3(50, 50, 40)));*/
+	//scene.LoadObjs("./dataset/Scene01/room.obj");
+	//scene.AddCamera(Camera(V3(0.0, 0.0, 4), V3(0.0, 0.0, 0.0), V3(0.0,1.0,0.0),
+	//	80, 10.0f, IMAGE_WIDTH, IMAGE_HEIGHT));
+	//scene.AddSphereLight(SphereLight(V3(0.0, 1.589, -1.274),0.2,V3(50, 50, 40)));
 
 	// cup
-	scene.LoadObjs("./dataset/Scene02/cup.obj");
+	/*scene.LoadObjs("./dataset/Scene02/cup.obj");
 	scene.AddCamera(Camera(V3(0.0, 0.64, 0.52), V3(0.0, 0.40, 0.3), V3(0.0, 1.0, 0.0),
 		80, 1.0f, IMAGE_WIDTH, IMAGE_HEIGHT));
-	QuadLight quad_temp = QuadLight(V3(-2.758771896, 1.5246, 0), V3(1, 0, 0), V2(1,1), V3(40, 40, 40));
-	//scene.AddQuadLight(quad_temp);
-	scene.AddSphereLight(SphereLight(V3(-2.758771896, 1.5246, 0), 0.2, V3(50, 50, 40)));
+	QuadLight quad_temp = QuadLight(V3(-5.758771896, 1.5246, 0), V3(1, 0, 0), V2(1,1), V3(40, 40, 40));
+	scene.AddQuadLight(quad_temp);*/
+	//scene.AddSphereLight(SphereLight(V3(0.0, 1.589, -1.274), 0.2, V3(50, 50, 40)));
 
 	// Veach MIS
 	/*scene.LoadObjs("./dataset/Scene03/VeachMIS.obj");

@@ -31,10 +31,10 @@ public:
 	void AddQuadLight(QuadLight& dat);
 
 	Mat Rendering();
-	V3 RayTracing(Ray& exit_light);
+	V3 RayTracing(Ray& exit_light,int i,int j);
 	V3 BlinnPhong(Ray& exit_light,int depth);
 	V3 Lambertian(Intersection& itsc);
-	float ShadowTest(V3& intersection);
+	float ShadowTest(Intersection& itsc,int i,int j);
 
 private:
 	Ray& GetIncidentRay(Ray& exit_light, Intersection& itsc);
