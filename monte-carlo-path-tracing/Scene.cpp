@@ -61,12 +61,12 @@ Mat Scene::Rendering()
 			result.at<Vec3b>(i, j)[1] = (buffer_[i*camera_.image_pixel_width_ + j].y - min_val) / delta * 255;
 			result.at<Vec3b>(i, j)[2] = (buffer_[i*camera_.image_pixel_width_ + j].x - min_val) / delta * 255; 
 
-			if (i == 100 || j == 200)
+			/*if (i == 160 || j == 200)
 			{
 				result.at<Vec3b>(i, j)[0] = 255;
 				result.at<Vec3b>(i, j)[1] = 0;
 				result.at<Vec3b>(i, j)[2] = 0;
-			}
+			}*/
 		}		
 	}
 	ofstream file("../output/distance.txt");
@@ -89,10 +89,16 @@ V3 Scene::RayTracing(Ray& ray,int a,int b)
 {
 	Intersection itsc = tree_.NearestSearchByLevel(ray);
 	V3 color;
+	if (a == 160 && b == 220)
+		a = 160;
+
+	if (a == 160 && b == 200)
+		a = 160;
+
 	if (itsc.is_hit_ == true)
 	{
 		float scale = ShadowTest(itsc, a, b);
-		color = scale * (Lambertian(itsc));// +BlinnPhong(ray, 0));
+		color = scale * (Lambertian(itsc,a,b));// +BlinnPhong(ray, 0));
 	}
 	else
 		color = V3(0, 0, 0);
@@ -106,8 +112,8 @@ float Scene::ShadowTest(Intersection& itsc,int a,int b)
 	SphereLight* pSphereLight=NULL;
 	QuadLight* pQuadLight = NULL;
 	float scale = 0.0f;
-	if (a == 100 && b == 200)
- 		a = 100;
+	if (a == 410 && b == 255)
+ 		a = 410;
 
 	for (int i=0;i< light_.size();i++)
 	{
@@ -118,11 +124,11 @@ float Scene::ShadowTest(Intersection& itsc,int a,int b)
 			// Get random points from light
 			Ray shadow_ray(itsc.intersection_, (pSphereLight->center_ - itsc.intersection_).GetNorm());
 			Intersection shadow_itsc = tree_.NearestSearchByLevel(shadow_ray);
-			if (shadow_itsc.is_hit_ == true && shadow_itsc.type_ == PATCH && (itsc.intersection_-shadow_itsc.intersection_).GetLength()>0.1)
+			if (shadow_itsc.is_hit_ == true && shadow_itsc.type_ == PATCH )
 			{
-				scale = 0.1f;
+				scale = 0.7f;
 			}
-			else if (shadow_itsc.is_hit_ == true && shadow_itsc.type_ == QUAD_SOURCE )
+			else if (shadow_itsc.is_hit_ == true && shadow_itsc.type_ == SPHERE_SOURCE)
 			{
 				scale = 1.0f;
 			}
@@ -137,11 +143,11 @@ float Scene::ShadowTest(Intersection& itsc,int a,int b)
 			pQuadLight = static_cast<QuadLight*>(light_[i]);
 			Ray shadow_ray(itsc.intersection_, (pQuadLight->center_ - itsc.intersection_).GetNorm());
 			Intersection shadow_itsc = tree_.NearestSearchByLevel(shadow_ray);			
-			if (shadow_itsc.is_hit_ == true && shadow_itsc.type_ == PATCH && shadow_itsc.id_!=itsc.id_)
+			if (shadow_itsc.is_hit_ == true && shadow_itsc.type_ == PATCH )
 			{
-				scale = 0.1f;
+				scale = 0.9f;
 			}
-			else if (shadow_itsc.is_hit_ == true && shadow_itsc.type_ == QUAD_SOURCE && shadow_itsc.id_ != itsc.id_)
+			else if (shadow_itsc.is_hit_ == true && shadow_itsc.type_ == QUAD_SOURCE )
 			{
 				scale = 1.0f;
 			}
@@ -153,7 +159,7 @@ float Scene::ShadowTest(Intersection& itsc,int a,int b)
 }
 
 // Difuss model
-V3 Scene::Lambertian(Intersection& itsc)
+V3 Scene::Lambertian(Intersection& itsc,int a,int b)
 {
 	V3 color;	
 	if (itsc.is_hit_ == false)
@@ -161,6 +167,8 @@ V3 Scene::Lambertian(Intersection& itsc)
 	{
 		return background;
 	}	
+
+
 	if (itsc.type_ == SPHERE_SOURCE || itsc.type_ == QUAD_SOURCE)
 		/// abnormal situation1: hit light source
 	{
@@ -172,7 +180,6 @@ V3 Scene::Lambertian(Intersection& itsc)
 		cout << "Error: no coresponding material file" << endl;
 	}		
 	
-
 	//itsc.intersection_ = itsc.intersection_ + V3(0.001, 0, 0);
 	// diffuse light
 	for (int i = 0; i < light_.size(); i++)
@@ -197,7 +204,6 @@ V3 Scene::BlinnPhong(Ray& exit_ray,int depth)
 		return V3(255,0,0);
 	}
 		
-
 	if (itsc.type_ == SPHERE_SOURCE || itsc.type_ == QUAD_SOURCE)
 		/// Light
 	{

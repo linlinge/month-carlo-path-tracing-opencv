@@ -54,8 +54,20 @@ public:
 		itsc.type_ = SPHERE_SOURCE;
 		
 		V3 L1_vector = center_ - ray.origin_;
+		V3 L1_norm = L1_vector.GetNorm();
 		float L1 = L1_vector.GetLength();
-		float theta1 = acos(Dot(ray.direction_.GetNorm(), L1_vector.GetNorm()));
+		float arc_temp = Dot(ray.direction_, L1_norm);
+		if (abs(arc_temp - 1.0f) < 0.001)
+			arc_temp = 1.0f;
+		float theta1 = acos(arc_temp);
+		if (theta1 < 0.0001f)
+		{
+			itsc.is_hit_ = true;
+			itsc.intersection_ = center_ - radius_ * ray.direction_;
+			itsc.distance_ = L1 - radius_;
+			itsc.pLe_ = &Le_;
+			return itsc;
+		}
 		float D = L1 * sin(theta1);
 		if (D <= radius_)
 		{
@@ -92,11 +104,6 @@ public:
 		return *this;
 	}
 
-	//V3 Sampling()
-	//{
-	//	return V3(0, 0, 0);
-	//}
-
 	QuadLight(V3 center, V3 normal, V2 size, V3 Le)
 	{
 		type_ = QUAD_SOURCE;
@@ -118,6 +125,22 @@ public:
 	{
 		Intersection itsc;
 		itsc.type_ = QUAD_SOURCE;
+
+		V3 L1_vector = center_ - ray.origin_;
+		V3 L1_norm = L1_vector.GetNorm();
+		float L1 = L1_vector.GetLength();
+		float arc_temp = Dot(ray.direction_, L1_norm);
+		if (abs(arc_temp - 1.0f) < 0.001)
+			arc_temp = 1.0f;
+		float theta1 = acos(arc_temp);
+		if (theta1 < 0.0001f)
+		{
+			itsc.is_hit_ = true;
+			itsc.intersection_ = center_ ;
+			itsc.distance_ = L1 ;
+			itsc.pLe_ = &Le_;
+			return itsc;
+		}
 
 		// step1: Solve for the intersection between ray and plane
 		Plane plane1(*pvertex_[0], *pvertex_[1], *pvertex_[2]);
