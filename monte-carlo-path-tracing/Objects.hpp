@@ -60,7 +60,7 @@ public:
 		if (abs(arc_temp - 1.0f) < 0.001)
 			arc_temp = 1.0f;
 		float theta1 = acos(arc_temp);
-		if (theta1 < 0.0001f)
+		if (theta1 < 0.001f)
 		{
 			itsc.is_hit_ = true;
 			itsc.intersection_ = center_ - radius_ * ray.direction_;

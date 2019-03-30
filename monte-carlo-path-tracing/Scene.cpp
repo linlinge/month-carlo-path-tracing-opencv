@@ -92,13 +92,12 @@ V3 Scene::RayTracing(Ray& ray,int a,int b)
 	if (a == 160 && b == 220)
 		a = 160;
 
-	if (a == 160 && b == 200)
-		a = 160;
-
 	if (itsc.is_hit_ == true)
 	{
-		float scale = ShadowTest(itsc, a, b);
-		color = scale * (Lambertian(itsc,a,b));// +BlinnPhong(ray, 0));
+		//float scale = ShadowTest(itsc, a, b);
+		float scale = 1.0f;
+		V3 BlinnPhong_temp = BlinnPhong(ray, 0);
+		color = scale * (Lambertian(itsc, a, b))+ BlinnPhong_temp;// +BlinnPhong(ray, 0));
 	}
 	else
 		color = V3(0, 0, 0);
@@ -126,7 +125,7 @@ float Scene::ShadowTest(Intersection& itsc,int a,int b)
 			Intersection shadow_itsc = tree_.NearestSearchByLevel(shadow_ray);
 			if (shadow_itsc.is_hit_ == true && shadow_itsc.type_ == PATCH )
 			{
-				scale = 0.7f;
+				scale = 0.1f;
 			}
 			else if (shadow_itsc.is_hit_ == true && shadow_itsc.type_ == SPHERE_SOURCE)
 			{
@@ -145,7 +144,7 @@ float Scene::ShadowTest(Intersection& itsc,int a,int b)
 			Intersection shadow_itsc = tree_.NearestSearchByLevel(shadow_ray);			
 			if (shadow_itsc.is_hit_ == true && shadow_itsc.type_ == PATCH )
 			{
-				scale = 0.9f;
+				scale = 0.1f;
 			}
 			else if (shadow_itsc.is_hit_ == true && shadow_itsc.type_ == QUAD_SOURCE )
 			{
@@ -167,7 +166,6 @@ V3 Scene::Lambertian(Intersection& itsc,int a,int b)
 	{
 		return background;
 	}	
-
 
 	if (itsc.type_ == SPHERE_SOURCE || itsc.type_ == QUAD_SOURCE)
 		/// abnormal situation1: hit light source
@@ -220,7 +218,7 @@ V3 Scene::BlinnPhong(Ray& exit_ray,int depth)
 	V3 color;
 	// Get incident light
 	Ray incident_ray = GetIncidentRay(exit_ray, itsc);
-	V3 L = incident_ray.direction_;
+	V3 L = -1.0f*incident_ray.direction_;
 	V3 V = (camera_.position_ - itsc.intersection_).GetNorm();
 	V3 H = (L + V) / (L + V).GetLength();
 

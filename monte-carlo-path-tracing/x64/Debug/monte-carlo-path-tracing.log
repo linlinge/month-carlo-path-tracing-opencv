@@ -26,5 +26,5 @@ d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\scene.cpp(
           [
               _Tp=uchar
           ]
-d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\scene.cpp(258): warning C4172: returning address of local variable or temporary: incident_ray
+d:\workspace\month-carlo-path-tracing-opencv\monte-carlo-path-tracing\scene.cpp(256): warning C4172: returning address of local variable or temporary: incident_ray
   monte-carlo-path-tracing.vcxproj -> D:\workspace\month-carlo-path-tracing-opencv\x64\Debug\monte-carlo-path-tracing.exe
