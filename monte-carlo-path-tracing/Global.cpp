@@ -3,10 +3,8 @@ vector<V3> v_;
 vector<V3> vt_;
 vector<V3> vn_;
 vector<Material> mtls_;
-V3 background(0,0,0);
+V3 background(50,50,50);
 float buf_temp[IMAGE_WIDTH*IMAGE_HEIGHT];
-
-ofstream global_file("../output/hit_patch.txt");
 
 // get random normlized vector in hemisphere
 V3 GetRandom()
@@ -15,7 +13,7 @@ V3 GetRandom()
 	float xxyy_temp = INT_MAX;
 	while (xxyy_temp > 1)
 	{
-		srand((unsigned)time(NULL));
+		//srand((unsigned)time(NULL));
 		x_temp = rand() / double(RAND_MAX);
 		y_temp = rand() / double(RAND_MAX);
 		xxyy_temp = pow(x_temp, 2) + pow(y_temp, 2);
@@ -24,7 +22,13 @@ V3 GetRandom()
 
 	return V3(x_temp, y_temp, z_temp);
 }
-
+float GetRandomFloat()
+{
+	float rst = 0;
+	//srand((unsigned)time(NULL));
+	rst = rand() / double(RAND_MAX);
+	return rst;
+}
 
 // remove adjacent duplicate substring in string
 void remove_adjacent_duplicate(string& dat1, string dat2)

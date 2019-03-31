@@ -16,5 +16,10 @@ public:
 		origin_ = origin;
 		direction_ = direction;
 	}
+	void Init(V3 origin, V3 direction)
+	{
+		origin_ = origin;
+		direction_ = direction;
+	}
 	Ray() {};
 };

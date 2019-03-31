@@ -13,8 +13,9 @@
 #define LAMBERTIAN_SAMPLE_NUMBER 4.0f
 #define NUMBER_OF_LIGHT_SAMPLES 4.0f
 #define PI 3.1415926535897f
-#define BLINN_PHONG_MAX_DEPTH 2
-// image size
+#define BLINN_PHONG_SAMPLE_NUMBER 10.0f
+#define BLINN_PHONG_MAX_DEPTH 6
+// image size 
 #define IMAGE_WIDTH	512
 #define IMAGE_HEIGHT 512
 
@@ -30,6 +31,7 @@ extern float buf_temp[IMAGE_WIDTH*IMAGE_HEIGHT];
 
 // function
 V3 GetRandom();
+float GetRandomFloat();
 void remove_adjacent_duplicate(string& dat1, string dat2);
 vector<string> split(string dat, string separator);
 

@@ -1,5 +1,5 @@
 #include "Scene.h"
-
+int count_temp = 0;
 void Scene::AddCamera(Camera camera)
 {
 	camera_ = camera;
@@ -36,12 +36,9 @@ Mat Scene::Rendering()
 		for (int j = 0; j < camera_.image_pixel_height_; j++)
 		{
 			// Define
-			V3 color;
-			V3 pos = camera_.GetPosition(i, j);
-			Ray ray(camera_.position_,(pos-camera_.position_).GetNorm());
-
+			V3 color;			
 			// ray tracing
-			color = RayTracing(ray,i,j);
+			color = RayTracing(i,j);
 			//cout << i << " " << j << endl;
 			buf_temp[i*IMAGE_WIDTH + j] = color.r;
 			// store color
@@ -61,15 +58,21 @@ Mat Scene::Rendering()
 			result.at<Vec3b>(i, j)[1] = (buffer_[i*camera_.image_pixel_width_ + j].y - min_val) / delta * 255;
 			result.at<Vec3b>(i, j)[2] = (buffer_[i*camera_.image_pixel_width_ + j].x - min_val) / delta * 255; 
 
-			/*if (i == 160 || j == 200)
+			/*if (i == 295 || j == 450)
 			{
 				result.at<Vec3b>(i, j)[0] = 255;
 				result.at<Vec3b>(i, j)[1] = 0;
 				result.at<Vec3b>(i, j)[2] = 0;
+			}
+			if (i == 78)
+			{
+				result.at<Vec3b>(i, j)[0] = 0;
+				result.at<Vec3b>(i, j)[1] = 255;
+				result.at<Vec3b>(i, j)[2] = 0;
 			}*/
 		}		
 	}
-	ofstream file("../output/distance.txt");
+	/*ofstream file("../output/distance.txt");
 	for (int i = 0; i < IMAGE_WIDTH; i++)
 	{
 		for (int j = 0; j < IMAGE_HEIGHT; j++)
@@ -78,30 +81,57 @@ Mat Scene::Rendering()
 		}
 		file << endl;
 	}
-	file.close();
+	file.close();*/
 	// output result 
 	cout << max_val << endl;
+	cout << count_temp << endl;
 	return result;
 }
 
 // trace one ray 
-V3 Scene::RayTracing(Ray& ray,int a,int b)
+V3 Scene::RayTracing(int a,int b)
 {
-	Intersection itsc = tree_.NearestSearchByLevel(ray);
-	V3 color;
-	if (a == 160 && b == 220)
-		a = 160;
+	// Define
+	V3 color,pos;
+	Ray ray;
+	Intersection itsc;
+	float scale = 0;
+	V3 Lambertian_temp;
+	V3 BlinnPhong_temp;
+
+	// position
+	pos = camera_.GetPosition(a, b);
+	ray.Init(camera_.position_, (pos - camera_.position_).GetNorm());
+	itsc = tree_.NearestSearchByLevel(ray);
 
 	if (itsc.is_hit_ == true)
 	{
-		//float scale = ShadowTest(itsc, a, b);
-		float scale = 1.0f;
-		V3 BlinnPhong_temp = BlinnPhong(ray, 0);
-		color = scale * (Lambertian(itsc, a, b))+ BlinnPhong_temp;// +BlinnPhong(ray, 0));
+		// shadow
+		scale = ShadowTest(itsc, a, b);
+		//scale = 1.0f;
+
+		// Lambertain
+		Lambertian_temp = Lambertian(itsc, a, b);		
 	}
-	else
-		color = V3(0, 0, 0);
-   	//V3 color = scale * V3(1,1,1);
+	
+	// Blinn Phong
+	for (int i = 0; i < BLINN_PHONG_SAMPLE_NUMBER; i++)
+	{
+		float x = a + GetRandomFloat() - 0.5f;
+		float y = b + GetRandomFloat() - 0.5f;
+		pos= camera_.GetPosition(x, y);
+		ray.Init(camera_.position_, (pos - camera_.position_).GetNorm());
+		itsc = tree_.NearestSearchByLevel(ray);
+		if (itsc.is_hit_ == true)
+		{
+			BlinnPhong_temp = BlinnPhong_temp + BlinnPhong(ray, 0);
+		}
+	}
+	BlinnPhong_temp = BlinnPhong_temp / (float)BLINN_PHONG_SAMPLE_NUMBER;
+	// BlinnPhong_temp = V3(0, 0, 0);
+
+	// merge
+	color = scale * (0.5*BlinnPhong_temp +Lambertian_temp);
 	return color;
 }
 
@@ -111,9 +141,12 @@ float Scene::ShadowTest(Intersection& itsc,int a,int b)
 	SphereLight* pSphereLight=NULL;
 	QuadLight* pQuadLight = NULL;
 	float scale = 0.0f;
-	if (a == 410 && b == 255)
- 		a = 410;
-
+	//if (a == 295 || b == 450)
+	//	a = 295;
+	//if (a == 79)
+	//{
+	//	a = 79;
+	//}
 	for (int i=0;i< light_.size();i++)
 	{
 		if (light_[i]->type_ == SPHERE_SOURCE)
@@ -123,26 +156,28 @@ float Scene::ShadowTest(Intersection& itsc,int a,int b)
 			// Get random points from light
 			Ray shadow_ray(itsc.intersection_, (pSphereLight->center_ - itsc.intersection_).GetNorm());
 			Intersection shadow_itsc = tree_.NearestSearchByLevel(shadow_ray);
-			if (shadow_itsc.is_hit_ == true && shadow_itsc.type_ == PATCH )
+			if (shadow_itsc.is_hit_ == true && shadow_itsc.type_ == PATCH && shadow_itsc.distance_ > 0.0001f)
+			// if (shadow_itsc.is_hit_ == true && shadow_itsc.type_ == PATCH && shadow_itsc.distance_ > 0.0001f)
 			{
-				scale = 0.1f;
+				scale = 0.4f;
 			}
 			else if (shadow_itsc.is_hit_ == true && shadow_itsc.type_ == SPHERE_SOURCE)
 			{
 				scale = 1.0f;
 			}
 			else
-			{
-				scale = 0;
-			}
-				
+			{				
+				/*cout << "Error" << endl;
+				return 0;*/
+				scale = 1.0f;
+			}				
 		}
 		else if(light_[i]->type_==QUAD_SOURCE)
 		{
 			pQuadLight = static_cast<QuadLight*>(light_[i]);
 			Ray shadow_ray(itsc.intersection_, (pQuadLight->center_ - itsc.intersection_).GetNorm());
 			Intersection shadow_itsc = tree_.NearestSearchByLevel(shadow_ray);			
-			if (shadow_itsc.is_hit_ == true && shadow_itsc.type_ == PATCH )
+			if (shadow_itsc.is_hit_ == true && shadow_itsc.type_ == PATCH)// && shadow_itsc.distance_>0.0001f)
 			{
 				scale = 0.1f;
 			}
@@ -151,7 +186,9 @@ float Scene::ShadowTest(Intersection& itsc,int a,int b)
 				scale = 1.0f;
 			}
 			else
-				scale = 0;
+			{
+				scale = 1.0f;
+			}
 		}
 	}
 	return scale;
@@ -170,6 +207,7 @@ V3 Scene::Lambertian(Intersection& itsc,int a,int b)
 	if (itsc.type_ == SPHERE_SOURCE || itsc.type_ == QUAD_SOURCE)
 		/// abnormal situation1: hit light source
 	{
+		count_temp++;
 		return *itsc.pLe_;
 	}
 	if (itsc.pMtl_ == NULL)
@@ -189,6 +227,7 @@ V3 Scene::Lambertian(Intersection& itsc,int a,int b)
 	return color;
 }
 
+
 // specular model
 V3 Scene::BlinnPhong(Ray& exit_ray,int depth)
 {
@@ -198,8 +237,7 @@ V3 Scene::BlinnPhong(Ray& exit_ray,int depth)
 	// Condition
 	if (itsc.is_hit_ == false)
 	{
-		//return background;
-		return V3(255,0,0);
+		return background;		
 	}
 		
 	if (itsc.type_ == SPHERE_SOURCE || itsc.type_ == QUAD_SOURCE)
@@ -211,21 +249,26 @@ V3 Scene::BlinnPhong(Ray& exit_ray,int depth)
 	if (depth > BLINN_PHONG_MAX_DEPTH)
 		/// Out of maximum depth
 	{
-		return light_[0]->Le_;
+		return background;
 	}
 
 	// Define 
 	V3 color;
-	// Get incident light
-	Ray incident_ray = GetIncidentRay(exit_ray, itsc);
-	V3 L = -1.0f*incident_ray.direction_;
+	// Get incident light	
+	V3 L = (light_[0]->center_- itsc.intersection_).GetNorm();
 	V3 V = (camera_.position_ - itsc.intersection_).GetNorm();
-	V3 H = (L + V) / (L + V).GetLength();
+	V3 H = (L + V).GetNorm();
 
 	// Caculate color
+	Ray incident_ray = GetIncidentRay(exit_ray, itsc);
 	V3 temp1 = BlinnPhong(incident_ray, depth + 1);
-	float temp2 = pow(MAX2(0, Dot(itsc.normal_, H)), itsc.pMtl_->Ni_);
-	color = itsc.pMtl_->Ni_*temp1*temp2;
+	//V3 temp1 = light_[0]->Le_;
+	float temp2 = pow(MAX2(0, Dot(itsc.normal_, H)), itsc.pMtl_->Ns_);
+
+	if (itsc.pMtl_->Ks_.x > 1.0f)
+		itsc.pMtl_->Ks_ = V3(0.1f, 0.1f, 0.1f);
+
+	color = itsc.pMtl_->Ks_*temp1*temp2;
 	return color;
 }
 

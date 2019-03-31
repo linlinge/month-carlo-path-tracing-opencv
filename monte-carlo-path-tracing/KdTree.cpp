@@ -34,6 +34,7 @@ KdNode* KdTree::Build(vector<Object*>& objs,int depth)
 			objs[0]->type_ = QUAD_SOURCE;
 
 		node->leaf_val_ = objs[0];
+		node->id_ = leaf_num_;
 		leaf_num_++;
 		return node;
 	}
@@ -104,12 +105,14 @@ KdNode* KdTree::Build(vector<Object*>& objs,int depth)
 Intersection KdTree::NearestSearchByLevel(Ray& ray)
 {
 	vector<KdNode> v;
-	float min_dist = INT_MAX;
-	int min_id = INT_MAX;
+	//float min_dist = INT_MAX;
+	//int min_id = INT_MAX;
 	v.push_back(*root_);
 	int current_level_num = 0;
 	int current_depth = 0;
 	Intersection nearest_itsc;
+	nearest_itsc.id_ = INT_MAX;
+	nearest_itsc.distance_ = INT_MAX;
 
 	if (root_->box_.IsIntersect(ray) == true)
 	{
@@ -128,8 +131,7 @@ Intersection KdTree::NearestSearchByLevel(Ray& ray)
 					if (v[i].left_ == NULL && v[i].right_ == NULL)
 						/// leaf node
 					{
-						Intersection itsc;
-						itsc.id_ = v[i].id_;
+						Intersection itsc;						
 						switch (v[i].leaf_val_[0].type_)
 						{
 						case PATCH:
@@ -143,10 +145,14 @@ Intersection KdTree::NearestSearchByLevel(Ray& ray)
 							break;
 						}												
 						
-						if (itsc.distance_>0 && itsc.distance_ < min_dist)
+						if (itsc.distance_>0.1 && itsc.distance_ < nearest_itsc.distance_)
 						{	
-							min_id = v[i].id_;
+							/*
+							itsc.id_ = v[i].id_;
+							min_id = itsc.id_;
 							min_dist = itsc.distance_;
+							*/
+							itsc.id_ = v[i].id_;
 							nearest_itsc = itsc;						
 						}
 					}
@@ -166,7 +172,7 @@ Intersection KdTree::NearestSearchByLevel(Ray& ray)
 		}
 	}
 		
-	if (min_id != INT_MAX)
+	if (nearest_itsc.id_ != INT_MAX)
 	{
 		nearest_itsc.is_hit_ = true;
 	}		
@@ -174,7 +180,6 @@ Intersection KdTree::NearestSearchByLevel(Ray& ray)
 	{
 		nearest_itsc.is_hit_ = false;
 	}
-
 	return nearest_itsc;
 }
 

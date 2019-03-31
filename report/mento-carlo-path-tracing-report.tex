@@ -182,7 +182,7 @@ kd-tree在构造时满足一下任意条件则截止：
 \begin{figure}[H]
 \begin{center}
 \includegraphics[scale=0.5]{kd-tree-structure.png}
-\caption{kd-tree第一层和第二层示意图}
+\caption{Kd-tree与AABB包围盒相结合的示意图}
 \end{center}
 \end{figure}
 \end{itemize}
@@ -305,27 +305,97 @@ $$L_2=\frac{D}{tan(\theta_1)}-\frac{D}{tan(\theta_2)}$$
 \end{figure}
 
 \section{实验结果}
-如下图所示是只考虑Lambertian模型时得到的场景效果图：
-\begin{figure}[H]
+\subsection{环境参数}
+本报告中实验所使用的开发环境如下所示：
+\begin{table}[H]
+\caption{环境参数}
 \begin{center}
-\includegraphics[scale=0.5]{result1.png}
+\begin{tabular}{ll}
+\toprule  %添加表格头部粗线
+参数& 描述\\
+\midrule  %添加表格中横线
+System& Windows 10 64bit \\
+CPU& Intel(R) Core(TM) i5-2410M CPU @2.30GHz 2.3GHz（4核）\\
+RAM& 6GB\\
+IDE& Visual Studio 2017 \\
+\bottomrule %添加表格底部粗线
+\end{tabular}
 \end{center}
-\caption{Lambertian仿真漫反射的场景1效果图}
+\end{table}
+\subsection{效果图片}
+本实验中分别展示了利用Lambertain算法的漫反射仿真结果，以及利用阴影测试线得到的阴影仿真结果，以及利用Blinn Phong算法得到的高光仿真结果图。由于场景obj文件中包含了光源的三角片，因此场景中出现多余的阴影。
+% cup
+\begin{figure}[H]
+\centering
+\subfigure[]{
+\includegraphics[width=6cm]{Scene01_diffuse.png}
+}
+\quad
+\subfigure[]{
+\includegraphics[width=6cm]{Scene01_shadow.png}
+}
+\quad
+\subfigure[]{
+\includegraphics[width=6cm]{Scene01_specular.png}
+}
+\caption{（a）cup场景漫反射仿真结果图（b）cup场景阴影仿真结果图（c）cup场景高光仿真结果图}
 \end{figure}
 
+
+% room
 \begin{figure}[H]
-\begin{center}
-\includegraphics[scale=0.5]{result2.png}
-\end{center}
-\caption{Lambertian仿真漫反射的场景2效果图}
+\centering
+\subfigure[]{
+\includegraphics[width=6cm]{Scene02_diffuse.png}
+}
+\quad
+\subfigure[]{
+\includegraphics[width=6cm]{Scene02_shadow.png}
+}
+\quad
+\subfigure[]{
+\includegraphics[width=6cm]{Scene02_specular.png}
+}
+\caption{（a）room场景漫反射仿真结果图（b）room场景阴影仿真结果图（c）room场景高光仿真结果图}
 \end{figure}
 
+
+% Veach MIS
 \begin{figure}[H]
-\begin{center}
-\includegraphics[scale=0.5]{result3.png}
-\end{center}
-\caption{Lambertian仿真漫反射的场景3效果图}
+\centering
+\subfigure[]{
+\includegraphics[width=6cm]{Scene03_diffuse.png}
+}
+\quad
+\subfigure[]{
+\includegraphics[width=6cm]{Scene03_shadow.png}
+}
+\quad
+\subfigure[]{
+\includegraphics[width=6cm]{Scene03_specular.png}
+}
+\caption{（a）Veach MIS场景漫反射仿真结果图（b）Veach MIS场景阴影仿真结果图（c）Veach MIS场景高光仿真结果图}
 \end{figure}
+
+% Cube
+\begin{figure}[H]
+\centering
+\subfigure[]{
+\includegraphics[width=6cm]{Cube_diffuse.png}
+}
+\quad
+\subfigure[]{
+\includegraphics[width=6cm]{Cube_shadow.png}
+}
+\quad
+\subfigure[]{
+\includegraphics[width=6cm]{Cube_specular.png}
+}
+\caption{（a）Veach MIS场景漫反射仿真结果图（b）Veach MIS场景阴影仿真结果图（c）Veach MIS场景高光仿真结果图}
+\end{figure}
+
+\subsection{仿真结果总结}
+本文中涉及的三个场景，其中cup场景效果相对较好，但是整体场景的结果图整体偏暗有些参数有待调整。room场景中阴影效果较好，然而由于多余面片的存在因此桌面会有额外的阴影。三个场景中Veach MIS场景效果最差运行耗时很长，因此结果显示的是低分辨率的结果。Figure 10图片的仿真结果是自己设计的一个显示正方体场景，效果一般。
 
 \section{问题汇总}
 \subsection{关于光线的疑问}
@@ -343,12 +413,10 @@ $$\bm{R}(t)=\bm{O}+t\bm{D}$$
 \caption{蒙特卡洛采样示意图}
 \end{center}
 \end{figure}
+
 由于来自该半球方向的光线理论上有无线多条，因此采用蒙特卡洛方法随机的对方向进行采样。蒙特卡洛的结果可以看成是该半球光线积分的估计值。
 \subsection{Kd-tree面对三角片如何构建？}
 由于kd-tree分割的对象是点坐标，因此对于三角片可以用其中点代替三角片本身的位置，这样就可以很方便的确定kd-tree中心轴的位置。
 \subsection{Kd-tree是如何与包围盒结合使用的？}
 kd-tree的每一个节点都包含一个包围盒，该包围盒包括了该节点下的所有子节点空间。
-
-
-
 \end{document}
